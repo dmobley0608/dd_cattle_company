@@ -17,7 +17,22 @@ app.use(bodyParser.json())
 //Routes
 app.use('/horses', horsesRouter)
 
-
+app.param('/horses/:id', (req, res, next, id)=>{
+    console.log('fetching horse')
+    let horseId = Number(id)
+    index = 1    
+    if(index !== -1){
+        console.log('valid id')
+        req.horseIndex = 1
+        console.log(req.horseIndex)
+        next();
+    }else{
+        let error = new Error("Horse Not Found")
+        error.status = 404
+        error.message = "Horse Not Found"
+       next(error)
+    }
+})
 
 //Error Handler
 app.use((err, req, res, next)=>{
@@ -36,3 +51,4 @@ app.use((err, req, res, next)=>{
 app.listen(PORT, ()=>{
     console.log(`Listening on port ${PORT}`)
 })
+

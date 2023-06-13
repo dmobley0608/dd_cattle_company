@@ -1,38 +1,45 @@
 const express = require('express')
+const { getHorses } = require('../provider/postgres')
+const { pool } = require('../provider/postgres')
+const { SelectHorses } = require('../provider/postgres')
+const { SelectHorseByID } = require('../provider/postgres')
 
 const horsesRouter = express.Router()
-//TEMP DATA
-const horses = [{id:'1', name:"Dancer"}, {id:'2', name:'Titus'}, {id:'3', name:'Henry'}]
 
 //Middleware
-horsesRouter.param ('id', (req, res, next, id)=>{
-    console.log('fetching horse')
+horsesRouter.param ('id', async(req, res, next, id)=>{
+    console.log('Rounding up horse by id')
     let horseId = id   
-    index = horses.findIndex(horse=> horse.id === horseId)  
-    if(index !== -1){       
-        req.horseIndex = index
+    await pool.query(SelectHorseByID, [horseId], (error, results)=>{
+        if(results.rows.length < 1){
+            let error = new Error();
+            error.status = 404
+            error.message = "Horse Not Found"
+           next(error)
         
-        next();
-    }else{
-        let error = new Error("Horse Not Found")
-        error.status = 404
-        error.message = "Horse Not Found"
-       next(error)
-    }
-    
+        }else if(error){
+            next(error);
+        }else{
+            req.horse = results.rows[0];            
+            next();
+        }
+    })        
+            
 });
 
 
 
 //Get all Horses
-horsesRouter.get('/', (req, res,next)=>{
-    res.send(horses)
+horsesRouter.get('/', async(req, res,next)=>{
+  pool.query(SelectHorses, (error, results)=>{
+    if(error){throw error}
+    res.status(200).json(results.rows)
+  })
 }) 
 
 //Get Horse By Id
-horsesRouter.get('/:id', (req, res, next)=>{   
-        console.log('sending horse')
-        res.send(horses[req.horseIndex])  
+horsesRouter.get('/:id', (req, res, next)=>{       
+        res.status(200).json(req.horse);
 })
 
 //Add Horse

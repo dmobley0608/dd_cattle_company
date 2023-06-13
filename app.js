@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require ('morgan')
+const session = require('express-session')
 const bodyParser = require('body-parser')
 const colors = require('colors')
 const { horsesRouter } = require('./routes/horsesRouter')
@@ -13,9 +14,21 @@ const PORT = process.env.PORT || 5000
 app.use(morgan('tiny'))
     //Body Parser
 app.use(bodyParser.json())
-
-//Routes
-app.use('/horses', horsesRouter)
+    //Sessions
+const store = new session.MemoryStore()
+app.use(session({
+    secret:'DJ56987Jkl!@568',
+    resave: false,
+    saveUninitialized:false,
+    store,
+    cookie:{
+        maxAge:86400000,
+        secure:true,
+        sameSite:"none"
+      }
+}))
+//Routes   
+app.use('/horses', horsesRouter)   
 
 
 

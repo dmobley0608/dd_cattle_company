@@ -1,8 +1,8 @@
 const express = require('express')
-const { getHorses } = require('../provider/postgres')
-const { pool } = require('../provider/postgres')
-const { SelectHorses } = require('../provider/postgres')
-const { SelectHorseByID } = require('../provider/postgres')
+const { getHorses } = require('../model/postgres')
+const { pool } = require('../model/postgres')
+const { SelectHorses } = require('../model/postgres')
+const { SelectHorseByID } = require('../model/postgres')
 
 const horsesRouter = express.Router()
 

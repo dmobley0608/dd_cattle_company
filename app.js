@@ -1,23 +1,34 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require ('morgan')
 const session = require('express-session')
-const bodyParser = require('body-parser')
 const colors = require('colors')
 const { horsesRouter } = require('./routes/horsesRouter')
-
+const medicalRouter = require('./routes/medicalRecordsRouter') 
+const cors = require('cors');
+const multer = require('multer')
+const upload = multer();
 //App Config
-const app = express()
+const app = express() 
 const PORT = process.env.PORT || 5000
 
-//Middleware
+//Middleware 
+    //CORS
+    app.use(cors({
+        origin: '*'
+    })) 
     //Morgan
 app.use(morgan('tiny'))
     //Body Parser
-app.use(bodyParser.json())
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+    //MULTER
+app.use(upload.array())
+
     //Sessions
 const store = new session.MemoryStore()
 app.use(session({
-    secret:'DJ56987Jkl!@568',
+    secret:process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized:false,
     store,
@@ -29,7 +40,7 @@ app.use(session({
 }))
 //Routes   
 app.use('/horses', horsesRouter)   
-
+app.use('/medical-records', medicalRouter )
 
 
 //Error Handler

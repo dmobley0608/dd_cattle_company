@@ -10,7 +10,7 @@ exports.getMedicalRecordByHorseId = async (req, res, next) => {
     try { 
         // GET RECORDS
         const records = await pool.query('SELECT * FROM medical_records WHERE horse_id = $1', [id])
-        pool.end()
+       
         req.medical_records = records.rows;
         return next();
     } catch (err) {
@@ -29,7 +29,7 @@ exports.create = async (req, res,) => {
         const newRecord = await pool.query('INSERT INTO medical_records ' +
             '(horse_id, wormed, coggins, rabies, yearly_vaccines, notes, height, weight, veterinarian, date, description)' +
             'VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)', medicalRecordValidator(req))
-        pool.end();
+        
         return res.status(201).send(`New Record Added: ${newRecord.rows}`)
 
     } catch (err) {

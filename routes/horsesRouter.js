@@ -3,11 +3,12 @@ const { getHorses } = require('../model/postgres')
 const { pool } = require('../model/postgres')
 const { SelectHorses } = require('../model/postgres')
 const { SelectHorseByID } = require('../model/postgres')
+const { getAllHorses } = require('../controllers/horse')
 
-const horsesRouter = express.Router()
+const router = express.Router()
 
 //Middleware
-horsesRouter.param ('id', async(req, res, next, id)=>{
+router.param ('id', async(req, res, next, id)=>{
     console.log('Rounding up horse by id')
     let horseId = id   
     await pool.query(SelectHorseByID, [horseId], (error, results)=>{
@@ -30,20 +31,15 @@ horsesRouter.param ('id', async(req, res, next, id)=>{
 
 
 //Get all Horses
-horsesRouter.get('/', async(req, res,next)=>{
-  pool.query(SelectHorses, (error, results)=>{
-    if(error){throw error}
-    res.status(200).json(results.rows)
-  })
-}) 
+router.get('/', getAllHorses) 
 
 //Get Horse By Id
-horsesRouter.get('/:id', (req, res, next)=>{       
+router.get('/:id', (req, res, next)=>{       
         res.status(200).json(req.horse);
 })
 
 //Add Horse
-horsesRouter.post('/', (req, res,next)=>{
+router.post('/', (req, res,next)=>{
     const {name, id} = req.body  
     const horse = {id, name} 
     if(horse.name && horse.id){
@@ -55,16 +51,16 @@ horsesRouter.post('/', (req, res,next)=>{
 })
 
 //Update Horse
-horsesRouter.put('/:id', (req, res, next)=>{            
+router.put('/:id', (req, res, next)=>{            
         horses[req.horseIndex] = {id:horses[req.horseIndex].id, ...req.body}
         res.send(horses)    
 })
 
 //Delete Horse
-horsesRouter.delete('/:id', (req, res, next)=>{    
+router.delete('/:id', (req, res, next)=>{    
         horses.splice(req.horseIndex, 1)       
         res.status(204).send()   
 })
 
 
-module.exports.horsesRouter = horsesRouter  
+module.exports = router  

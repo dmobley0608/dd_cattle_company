@@ -1,6 +1,5 @@
 const express = require('express');
 const { pool } = require('../model/postgres');
-const { SelectMedicalRecordsByHorseId } = require('../model/postgres');
 const { getMedicalRecordByHorseId, read, create, update, remove } = require('../controllers/medical_records');
 
 const router = express.Router();

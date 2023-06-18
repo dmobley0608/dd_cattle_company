@@ -5,6 +5,7 @@ const session = require('express-session')
 const colors = require('colors')
 const  horsesRouter = require('./routes/horsesRouter')
 const medicalRouter = require('./routes/medicalRecordsRouter') 
+const mediaRouter = require('./routes/mediaRouter')
 const cors = require('cors');
 const multer = require('multer')
 const upload = multer();
@@ -41,6 +42,7 @@ app.use(session({
 //Routes   
 app.use('/horses', horsesRouter)   
 app.use('/medical-records', medicalRouter )
+app.use('/media', mediaRouter)
 
 
 //Error Handler

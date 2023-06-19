@@ -126,18 +126,19 @@ export default function Horse() {
                   <th>Weight</th>
                   <th>Height</th>
                   <th>Wormed</th>
-                  <th>Vacinated</th>
+                  <th>Description</th>
                 </tr>
               </thead>
               <tbody>
                 {horse.records.map(record =>
-                  <tr key={record.id}>
-                    <td>{record.date}</td>
-                    <td>{record.blackTape > 0 ? record.blackTape + "lbs" : ""}</td>
+                  <tr key={record.id}>     
+                             
+                    <td>{new Date(record.date).toDateString()}</td>
+                    <td>{record.weight ? record.weight + "lbs" : ""}</td>
                     <td>{record.height ? record.height + " hands" : ""}</td>
-                    <td>{record.wasWormed ? "X" : ""}</td>
-                    <td>{record.wasVaccinated ? "X" : ""}</td>
-                  </tr>
+                    <td>{record.wormed ? "X" : ""}</td>
+                    <td>{record.description ? record.description : ""}</td>
+                  </tr>                  
                 )}
               </tbody>
             </table>

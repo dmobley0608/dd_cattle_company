@@ -10,3 +10,5 @@ export const getHorses = async () => await apiClient.get('horses');
 export const getHorseById = async (id) => await apiClient.get(`horses/${id}`)
 export const getHorseMedia = async (id) => await apiClient.get(`media/${id}`)
 export const getMedicalRecordsByHorseId = async (id)=>await apiClient.get(`medical-records/${id}`)
+
+export const uploadImage = async()=>await apiClient.post('/media/Titus')

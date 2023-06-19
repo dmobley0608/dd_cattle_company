@@ -7,8 +7,7 @@ const  horsesRouter = require('./routes/horsesRouter')
 const medicalRouter = require('./routes/medicalRecordsRouter') 
 const mediaRouter = require('./routes/mediaRouter')
 const cors = require('cors');
-const multer = require('multer')
-const upload = multer();
+
 //App Config
 const app = express() 
 const PORT = process.env.PORT || 5000
@@ -23,8 +22,8 @@ app.use(morgan('tiny'))
     //Body Parser
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-    //MULTER
-app.use(upload.array())
+    
+
 
     //Sessions
 const store = new session.MemoryStore()

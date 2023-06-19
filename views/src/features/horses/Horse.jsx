@@ -148,7 +148,7 @@ export default function Horse() {
 
 
       }
-
+      
     </div>
 
 

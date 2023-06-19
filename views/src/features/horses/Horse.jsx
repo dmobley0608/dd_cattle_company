@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getHorseImagesByName, getHorseMedicalRecordsById, selectImageLoading, selectIsLoading } from './horsesSlice'
+import { getHorseMediaById, getHorseMedicalRecordsById, selectImageLoading, selectIsLoading } from './horsesSlice'
 import { useParams } from 'react-router-dom'
 import styles from './Horse.module.css'
 import ImageModal from '../../components/imageModal/ImageModal'
@@ -16,21 +16,23 @@ export default function Horse() {
   const [images, setImages] = useState(null)
   const [videos, setVideos] = useState(null)
   const [activeImage, setActiveImage] = useState("")
-  const thumbnailUrl = 'https://res.cloudinary.com/dmobley0608/image/upload/c_thumb,w_400/double_d_ranch/';
+  const thumbnailUrl = 'https://res.cloudinary.com/dmobley0608/image/upload/c_thumb,w_400';
+  const baseUrl = 'https://res.cloudinary.com/dmobley0608'
+
 
 
   //Random Image 
   const getRandomImage = () => {
     if (images.length >= 1) {
       const randomNumber = Math.floor(Math.random() * images.length)
-      return <img className={styles['main-horse-image']} src={`${thumbnailUrl}${horse.name}/${images[randomNumber].filename}.${images[randomNumber].format}`} alt="horse" />    
+      return <img className={styles['main-horse-image']} src={`${thumbnailUrl}/${images[randomNumber].public_id}.${images[randomNumber].format}`} alt="horse" />    
     }
     return <h3>Image Coming Soon</h3>
   }
 
   //Image Click
-  const imageClick = (target) => {
-    setActiveImage(target.src)
+  const imageClick = (image) => {
+    setActiveImage(image)
     document.querySelector('#modal').classList.add('visible')
   }
 
@@ -38,7 +40,7 @@ export default function Horse() {
   useEffect(() => {
     if (!isLoading && horse) {
       dispatch(getHorseMedicalRecordsById(horse.id))
-      dispatch(getHorseImagesByName(horse.name))     
+      dispatch(getHorseMediaById(horse.id))     
     }
      // eslint-disable-next-line react-hooks/exhaustive-deps
   },[isLoading])
@@ -46,8 +48,8 @@ export default function Horse() {
   //Set Images
   useEffect(() => {
     if (!imagesLoading && horse.images.length > 0) {
-      let imgs = horse.images.images.filter(image => image.format !== "mp4")
-      let vids = horse.images.images.filter(image => image.format === "mp4")
+      let imgs = horse.images.filter(image => image.format !== "mp4")
+      let vids = horse.images.filter(image => image.format === "mp4")
       setImages(imgs.sort((a, b) => a.filename - b.filename))
       setVideos(vids.sort((a, b) => a.created_at - b.created_at))
       
@@ -97,14 +99,14 @@ export default function Horse() {
               <h2>Gallery For {horse.name}</h2>
               <h3>Images</h3>
               <div id="images" className={styles['gallery']}>
-                {images.map(image => <img key={image.secure_url} src={`${thumbnailUrl}${horseName}/${image.filename}.${image.format}`} alt={horse.name}
-                  onClick={({ target }) => { imageClick(target) }} />)}
+                {images.map(image => <img  key={image.asset_id} src={`${thumbnailUrl}/${image.public_id}.${image.format}`} alt={image.asset_id}
+                  onClick={() => { imageClick(image) }} />)}
               </div>
               <h3>Videos</h3>
               <div id="videos" className={styles["gallery"]}>
                 {videos.map(vid =>
                   <video controls key={vid.asset_id} width="350px">
-                    <source src={vid.secure_url} />
+                    <source src={`${baseUrl}/video/upload/${vid.public_id}.${vid.format}`} />
                   </video>)}
               </div>
               <ImageModal images={images} activeImage={activeImage} setActiveImage={setActiveImage} />

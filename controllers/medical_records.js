@@ -9,7 +9,7 @@ exports.getMedicalRecordByHorseId = async (req, res, next) => {
     const id = Number(req.params.horse_id)   
     try { 
         // GET RECORDS
-        const records = await pool.query('SELECT * FROM medical_records WHERE horse_id = $1', [id])
+        const records = await pool.query('SELECT medical_records.*, horses.name FROM medical_records JOIN horses ON medical_records.horse_id = horses.id WHERE medical_records.horse_id = $1 ORDER BY date DESC', [id])
        
         req.medical_records = records.rows;
         return next();

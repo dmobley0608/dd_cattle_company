@@ -11,7 +11,7 @@ cloudinary.config({
 exports.getMediaByHorseId = async (req, res) => {
     try {
         const id = Number(req.params.id)
-        const media = await pool.query('SELECT * FROM media WHERE horse_id = $1', [id])
+        const media = await pool.query('SELECT media.*, horses.name FROM media JOIN horses ON media.horse_id=horses.id WHERE horse_id = $1', [id])
         return res.status(200).json(media.rows)
     } catch (err) {
         res.status(400).json({ error: err.message })

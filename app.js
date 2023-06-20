@@ -7,11 +7,9 @@ const horsesRouter = require('./routes/horsesRouter')
 const medicalRouter = require('./routes/medicalRecordsRouter')
 const mediaRouter = require('./routes/mediaRouter')
 const cors = require('cors');
-const authRouter = require('./routes/authenticationRouter')
-const passport = require('passport')
-const pool = require('./model/postgres')
+const userRouter = require('./routes/userRouter')
 const multer = require('multer')
-const { getUser } = require('./controllers/authentication')
+
 
 //App Config
 const app = express()
@@ -37,6 +35,7 @@ const upload = multer();
 //Sessions
 const store = new session.MemoryStore()
 app.use(session({
+   
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -45,17 +44,16 @@ app.use(session({
         maxAge: 86400000,
         secure: true,
         sameSite: "none"
-    }
+    },
+    role:''
 }))
 
-app.use(passport.initialize())
-app.use(passport.session())
-app.use(passport.authenticate('session'))
+
 //Routes   
 app.use('/horses',upload.none(), horsesRouter)
 app.use('/medical-records',upload.none(), medicalRouter)
 app.use('/media', mediaRouter)
-app.use('/user', upload.none(), authRouter)
+app.use('/user', upload.none(), userRouter)
 
 
 //Error Handler

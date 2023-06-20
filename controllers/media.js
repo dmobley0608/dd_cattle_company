@@ -8,7 +8,7 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET 
 })
 
-exports.getMediaByHorseId = async (req, res) => {    
+exports.getMediaByHorseId = async (req, res) => {      
     try {
         const id = Number(req.params.id)
         const media = await pool.query('SELECT media.*, horses.name FROM media JOIN horses ON media.horse_id=horses.id WHERE horse_id = $1', [id])

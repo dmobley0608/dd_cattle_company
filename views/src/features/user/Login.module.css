@@ -1,0 +1,42 @@
+form{
+   
+    max-width: 1144px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    margin:5em auto;
+    text-align: center;
+    padding: 2em;
+    border-radius: 5px;
+}
+
+h1{
+    font-size: 50px;
+    letter-spacing: 5px;
+}
+
+input{
+    width: 600px;
+    min-height: 25px;
+    margin:10px auto;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    padding:5px
+}
+input:focus{
+    outline: none;
+}
+
+input[type='submit']{
+    background-color: green;
+    color:white;
+    padding:10px;
+    transition: transform .25s;
+}
+
+input[type='submit']:hover{
+    cursor: pointer;
+    transform: translate(0,3px);
+}

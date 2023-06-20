@@ -9,12 +9,15 @@ import { useDispatch } from 'react-redux';
 import { loadHorses } from './features/horses/horsesSlice';
 import ScrollTop from './components/scrollTop/ScrollTop';
 import ErrorHandler from './components/error-handler/ErrorHandler';
+import Login from './features/user/Login';
+
 
 //Create Router
 const router = createBrowserRouter(createRoutesFromElements(
 
   <Route path="/" element={<Root />} errorElement={<ErrorHandler message={"OH NO!"}/>}>
     <Route path="/" element={<Homepage />} />
+    <Route path="/login" element={<Login />} />
     <Route path="/horses" element={<Horses />} />
     <Route path='/horses/:horseName' element={<Horse />} errorElement={<ErrorHandler message="Horse Not Found"  />}/>   
     <Route path='/*' element={<ErrorHandler message="This Page is currently under construction"/>} />  

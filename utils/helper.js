@@ -1,13 +1,13 @@
 const bcrypt = require('bcryptjs');
 const pool = require('../model/postgres');
+const { Users } = require('../model/user');
 
 
-exports.create = async (email, password)=>{   
-    const hashPassword = await this.hashPassword(password);    
-    const result = await pool.query('INSERT INTO USERS (email,password) VALUES($1,$2) RETURNING id, email, password, role', [email, hashPassword]);
-    if(result.rowCount == 0) return false;
+exports.create = async (email, password)=>{          
+    const result = await Users.create({email:email, password:password});
+   if(!result) return false
     console.log('New User Create'.bgBlue)
-    return result.rows[0]
+    return result
 }
 
 exports.hashPassword=async(phrase)=>{

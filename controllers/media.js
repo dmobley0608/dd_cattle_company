@@ -5,22 +5,22 @@ const cloudinary = require('cloudinary').v2
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUD_API_KEY,
-    api_secret: process.env.CLOUD_API_SECRET
+    api_secret: process.env.CLOUD_API_SECRET 
 })
 
-exports.getMediaByHorseId = async (req, res) => {
+exports.getMediaByHorseId = async (req, res) => {    
     try {
         const id = Number(req.params.id)
         const media = await pool.query('SELECT media.*, horses.name FROM media JOIN horses ON media.horse_id=horses.id WHERE horse_id = $1', [id])
         return res.status(200).json(media.rows)
-    } catch (err) {
+    } catch (err) {        
         res.status(400).json({ error: err.message })
     }
 }
 
 exports.uploadMedia = async (req, res) => {
     const {horse_id,horse_name} = req.params
-    try {
+    try {        
         for (let media of req.files) {
             await cloudinary.uploader.upload(media.path, { public_id: `double_d_ranch/${horse_name}/${media.originalname}` })
                 .then(async (res) => {
@@ -30,6 +30,7 @@ exports.uploadMedia = async (req, res) => {
         res.status(200).send("Media Uploaded Successfully")
 
     } catch (err) {
+        console.log(err)
         res.status(400).json({ error: err.message })
     }
 }

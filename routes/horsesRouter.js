@@ -1,9 +1,6 @@
 const express = require('express')
-const { getHorses } = require('../model/postgres')
-const { pool } = require('../model/postgres')
-const { SelectHorses } = require('../model/postgres')
-const { SelectHorseByID } = require('../model/postgres')
-const { getAllHorses } = require('../controllers/horse')
+const { getAllHorses } = require('../controllers/horse');
+const pool = require('../model/postgres');
 
 const router = express.Router()
 
@@ -11,7 +8,7 @@ const router = express.Router()
 router.param ('id', async(req, res, next, id)=>{
     console.log('Rounding up horse by id')
     let horseId = id   
-    await pool.query(SelectHorseByID, [horseId], (error, results)=>{
+    await pool.query('SELECT * FROM horses WHERE id = $1', [horseId], (error, results)=>{
         if(results.rows.length < 1){
             let error = new Error();
             error.status = 404

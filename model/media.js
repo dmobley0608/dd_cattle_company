@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 
-const { sequelize } = require("./sequelize");
+const { sequelize } = require("../utils/sequelize");
 const { Horses } = require("./horses");
 
 exports.Media = sequelize.define('Media', {

@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const pool = require('../model/postgres');
+const pool = require('./postgres');
 const { Users } = require('../model/user');
 
 

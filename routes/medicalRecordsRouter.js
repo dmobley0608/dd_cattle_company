@@ -1,5 +1,5 @@
 const express = require('express');
-const { pool } = require('../model/postgres');
+const { pool } = require('../utils/postgres');
 const { getMedicalRecordByHorseId, read, create, update, remove } = require('../controllers/medical_records');
 const multer = require('multer')
 const upload = multer();

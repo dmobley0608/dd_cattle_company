@@ -1,4 +1,4 @@
-const pool = require('../model/postgres')
+const pool = require('../utils/postgres')
 const { medicalRecordValidator } = require('../utils/validators')
 
 //READ 

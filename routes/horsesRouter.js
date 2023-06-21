@@ -1,14 +1,8 @@
 const express = require('express')
 const { getAllHorses, getHorseById, updateHorseById, createHorse, removeHorse } = require('../controllers/horse');
-const pool = require('../model/postgres');
 const { auth } = require('../controllers/authentication');
 
 const router = express.Router()
-
-
-
-
-
 
 //Get all Horses
 router.get('/',  getAllHorses) 

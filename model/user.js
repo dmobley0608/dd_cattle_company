@@ -1,6 +1,4 @@
 const { DataTypes } = require("sequelize");
-
-const { hashPassword } = require("../utils/helper");
 const { sequelize } = require("./sequelize");
 
 exports.Users = sequelize.define('User', {

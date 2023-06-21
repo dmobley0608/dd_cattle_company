@@ -1,63 +1,29 @@
 const express = require('express')
-const { getAllHorses } = require('../controllers/horse');
+const { getAllHorses, getHorseById, updateHorseById, createHorse, removeHorse } = require('../controllers/horse');
 const pool = require('../model/postgres');
+const { auth } = require('../controllers/authentication');
 
 const router = express.Router()
 
-//Middleware
-router.param ('id', async(req, res, next, id)=>{
-    console.log('Rounding up horse by id')
-    let horseId = id   
-    await pool.query('SELECT * FROM horses WHERE id = $1', [horseId], (error, results)=>{
-        if(results.rows.length < 1){
-            let error = new Error();
-            error.status = 404
-            error.message = "Horse Not Found"
-           next(error)
-        
-        }else if(error){
-            next(error);
-        }else{
-            req.horse = results.rows[0];            
-            next();
-        }
-    })        
-            
-});
+
+
 
 
 
 //Get all Horses
-router.get('/', getAllHorses) 
+router.get('/',  getAllHorses) 
 
 //Get Horse By Id
-router.get('/:id', (req, res, next)=>{       
-        res.status(200).json(req.horse);
-})
+router.get('/:id', getHorseById)
 
 //Add Horse
-router.post('/', (req, res,next)=>{
-    const {name, id} = req.body  
-    const horse = {id, name} 
-    if(horse.name && horse.id){
-        horses.push(horse)
-        res.status(201).send(horses)
-    }else{
-        throw new Error("Invalid Horse Format")
-    }
-})
+router.post('/', auth, createHorse)
 
 //Update Horse
-router.put('/:id', (req, res, next)=>{            
-        horses[req.horseIndex] = {id:horses[req.horseIndex].id, ...req.body}
-        res.send(horses)    
-})
+router.put('/:id', auth, updateHorseById)
 
 //Delete Horse
-router.delete('/:id', (req, res, next)=>{    
-        horses.splice(req.horseIndex, 1)       
-        res.status(204).send()   
-})
+router.delete('/:id',auth, removeHorse)
 
 
 module.exports = router  

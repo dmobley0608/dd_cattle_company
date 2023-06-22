@@ -5,9 +5,9 @@ const multer = require('multer')
 const upload = multer();
 const router = express.Router();
 
-router.get('/:horse_id', getMedicalRecordByHorseId, read)
+router.get('/:horse_id', getMedicalRecordByHorseId)
 
-router.post('/', upload.none(),create)
+router.post('/', upload.none(), create)
 
 router.put('/:id',upload.none(), update)
 

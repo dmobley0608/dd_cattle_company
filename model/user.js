@@ -7,6 +7,8 @@ exports.Users = sequelize.define('User', {
         primaryKey: true,
         autoIncrement: true
     },
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -18,13 +20,13 @@ exports.Users = sequelize.define('User', {
     },
     role: {
         type: DataTypes.STRING
-    },
+    }
+ 
 
 },
     {
         tableName: 'users',
-        createdAt: false,
-        updatedAt: false,
+       
         
     },
     

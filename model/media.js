@@ -28,6 +28,8 @@ exports.Media = sequelize.define('Media', {
     asset_id: {
         type: DataTypes.STRING
     },
+    
+   
     url: {
         type: DataTypes.VIRTUAL,
         get() {
@@ -54,8 +56,7 @@ exports.Media = sequelize.define('Media', {
 },
     {
         tableName: 'media',
-        createdAt: false,
-        updatedAt: false,
+      
 
     },
 

@@ -35,10 +35,10 @@ exports.Horses = sequelize.define('Horses',{
     price:{
         type:DataTypes.DECIMAL
     }
+  
 },{    
         tableName: 'horses',
-        createdAt: false,
-        updatedAt: false,
+       
         
     }
 )

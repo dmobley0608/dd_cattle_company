@@ -11,6 +11,7 @@ const userRouter = require('./routes/userRouter')
 const multer = require('multer')
 const passport = require('passport')
 const { passportConfig } = require('./utils/passport')
+const { sequelizeSync } = require('./utils/sequelize')
 
 
 //App Config
@@ -50,7 +51,8 @@ app.use(session({
 passportConfig(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
+//Sequelize
+sequelizeSync();
 
                                         //Routes   
 app.use('/horses', upload.none(), horsesRouter)

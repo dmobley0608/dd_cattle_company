@@ -3,12 +3,12 @@ const { Horses } = require("../model/horses")
 
 exports.getAllHorses = async(req, res)=>{
     try{
-
+        const horses = await Horses.findAll({order:[['name', 'ASC']]})
+        return res.status(200).json(horses)
     }catch(err){
         res.status(500).json(err.message)
     }
-    const horses = await Horses.findAll()
-    return res.status(200).json(horses)
+   
 }
 
 exports.getHorseById = async(req, res)=>{

@@ -1,6 +1,7 @@
 const express = require('express')
 const { getAllHorses, getHorseById, updateHorseById, createHorse, removeHorse } = require('../controllers/horse');
 const { auth } = require('../controllers/authentication');
+const passport = require('passport');
 
 const router = express.Router()
 
@@ -14,7 +15,7 @@ router.get('/:id', getHorseById)
 router.post('/', auth, createHorse)
 
 //Update Horse
-router.put('/:id', auth, updateHorseById)
+router.put('/:id', updateHorseById)
 
 //Delete Horse
 router.delete('/:id',auth, removeHorse)

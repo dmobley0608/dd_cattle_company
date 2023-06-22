@@ -28,6 +28,7 @@ exports.login = async(req, res)=>{
         // if(!match) return res.status(403).json('Invalid Username or Password')    
         // const session = req.session
         // session.role = user.role
+       
         res.status(200).json({email:req.user.email, role:req.user.role})
 
     }catch(err){

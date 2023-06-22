@@ -1,0 +1,29 @@
+#admin{
+    display: flex;
+    flex-direction: row;
+}
+
+#admin textarea{
+    height:150px;
+}
+.sideMenu{
+    margin:0 auto 0 0;
+}
+
+.sideMenu li{
+    text-decoration: none;
+    list-style: none;
+    margin:12px 0;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.sideMenu li:hover{
+    cursor: pointer;
+}
+
+.subMenu li{
+    font-weight: bold;
+    font-size: 15px;
+    margin:8px 0;
+}

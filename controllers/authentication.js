@@ -10,6 +10,7 @@ exports.getUser=(req, res)=>{
 }
 
 exports.auth = (req, res, next)=>{
+    console.log(req)   
     if(!req.user){
         return res.status(403).send('access denied')    
     }

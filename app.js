@@ -22,7 +22,8 @@ const PORT = process.env.PORT || 5000
                                         //Middleware 
 //CORS
 app.use(cors({
-    origin: '*'
+    origin: '*',
+    credentials:true,
 }))
 //Morgan
 app.use(morgan('tiny'))
@@ -32,11 +33,11 @@ app.use(express.urlencoded({ extended: true }))
 //Multer
 const upload = multer();
 //Sessions
-const store = new session.MemoryStore()
+const store =new session.MemoryStore()
 app.use(session({
 
     secret: 'kitycat',
-    resave: false,
+    resave: false, 
     saveUninitialized: false,
     store,
     cookie: {
@@ -53,6 +54,11 @@ app.use(passport.initialize())
 app.use(passport.session())
 //Sequelize
 sequelizeSync();
+
+app.use((req, res, next)=>{
+    console.log(req.user)
+    next()
+})
 
                                         //Routes   
 app.use('/horses', upload.none(), horsesRouter)

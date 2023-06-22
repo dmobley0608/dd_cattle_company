@@ -4,8 +4,7 @@ import { emailLogin } from "./userApi";
 
 //Login
 export const login = createAsyncThunk('login', 
-async (user)=>{
-    
+async (user)=>{    
     const {data} = await emailLogin(user.email, user.password);    
     return data;
 })

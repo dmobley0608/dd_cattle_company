@@ -25,7 +25,9 @@ exports.getHorseById = async(req, res)=>{
 }
 
 exports.updateHorseById = async(req,res)=>{
-    try{        
+    console.log(req.isAuthenticated())
+    try{
+         
         await Horses.update({...req.body},{where:{id:req.params.id}})
         res.status(200).json("Update successful")
 

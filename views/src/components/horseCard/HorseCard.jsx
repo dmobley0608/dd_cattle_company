@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import styles from './HorseCard.module.css'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { getHorseMediaById, selectIsLoading } from '../../features/horses/horsesSlice'
+import { useSelector } from 'react-redux'
+import { selectIsLoading } from '../../features/horses/horsesSlice'
+
 export default function HorseCard({ horse }) {
   const [image, setImage] = useState(null)
   const isLoading = useSelector(selectIsLoading)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (!isLoading) {
-      dispatch(getHorseMediaById(horse.id))
-    }
-  }, [dispatch, isLoading, horse.id])
+ 
 
   //Display random image
   useEffect(() => {    
-      if (horse.images.length > 0) {
-        let randNum = Math.floor(Math.random() * horse.images.length)
-       let public_id =horse.images[randNum].public_id
-        let url = `https://res.cloudinary.com/dmobley0608/image/upload/w_400/${public_id}.jpg`
-        setImage(url)       
+      if (!isLoading && horse.Media.length > 0) {
+        let randNum = Math.floor(Math.random() * horse.Media.length)      
+        setImage(horse.Media[0].thumb)
+             
       }
 
     
-  }, [horse.images])
+  }, [isLoading])
 
   return (
     <Link className={styles['horse-card']} to={`/horses/${horse.name}`}>

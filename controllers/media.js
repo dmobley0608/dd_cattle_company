@@ -1,5 +1,7 @@
 
 
+
+const { Horses } = require('../model/horses');
 const { Media } = require('../model/media');
 
 const cloudinary = require('cloudinary').v2
@@ -12,8 +14,12 @@ cloudinary.config({
 
 exports.getMediaByHorseId = async (req, res) => {  
     try {
-        const id = Number(req.params.id)
-        const media = await Media.findAll({where:{horse_id: id}})
+        const id = Number(req.params.id)        
+        Horses.hasMany(Media, {
+            foreignKey: 'horse_id'
+        })
+       
+        const media = await Media.findAll({where:{horse_id: id}, include:{model:Horses, required:true}, })
         return res.status(200).json(media)
     } catch (err) {        
         res.status(400).json({ error: err.message })
@@ -52,14 +58,4 @@ exports.removeMedia = async (req, res) => {
         res.status(400).json({ error: err.message })
     }
 }
-// asset_id: 'df4ec0f559facfb3361b4eabaf84604a',
-// public_id: 'double_d_ranch/Titus/20230423_141705.jpg',
-// version: 1687173454,
-// version_id: 'f5ebe2cf5eea9ff0c29723cc0d4ddac2',
-// signature: '77923c6acb2edd93c68b551bb26bd5323c0b3671',
-// width: 2992,
-// height: 2992,
-// format: 'jpg',
-// resource_type: 'image',
-// created_at: '2023-06-19T11:17:34Z',
-// tags: [],
+

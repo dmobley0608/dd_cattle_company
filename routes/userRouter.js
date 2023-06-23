@@ -7,7 +7,7 @@ const upload = multer();
 const router = express();
 
 router.post('/register',register)
-router.post('/login',upload.none(),passport.authenticate('local'), login) 
+router.post('/login', upload.none(), login) 
 
 
 module.exports = router

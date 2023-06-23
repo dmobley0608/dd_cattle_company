@@ -1,16 +1,16 @@
 const express = require('express');
-const { pool } = require('../utils/postgres');
-const { getMedicalRecordByHorseId, read, create, update, remove } = require('../controllers/medical_records');
-const multer = require('multer')
+const { getMedicalRecordByHorseId, create, update, remove } = require('../controllers/medical_records');
+const multer = require('multer');
+const { auth } = require('../controllers/authentication');
 const upload = multer();
 const router = express.Router();
 
 router.get('/:horse_id', getMedicalRecordByHorseId)
 
-router.post('/', upload.none(), create)
+router.post('/', upload.none(),auth, create)
 
-router.put('/:id',upload.none(), update)
+router.put('/:id',upload.none(), auth, update)
 
-router.delete('/:id', remove)
+router.delete('/:id', auth, remove)
 
 module.exports = router; 

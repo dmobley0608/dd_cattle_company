@@ -11,13 +11,18 @@ exports.Media = sequelize.define('Media', {
         autoIncrement: true
     },
     horse_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model:Horses,
-            key:'id'
+        type:DataTypes.INTEGER,
+        references:{
+            model:Horses
         }
-    },
+    }, 
+    HorseId: {
+        type:DataTypes.INTEGER,
+        references:{
+            model:Horses
+        }
+    },     
+    
     format: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -36,8 +41,9 @@ exports.Media = sequelize.define('Media', {
             let type;
             if (this.format === 'mp4') {
                 type = 'video'
-            }
+            }else{
             type = 'image'
+            }
             return `https://res.cloudinary.com/dmobley0608/${type}/upload/${this.public_id}`
         }
     },
@@ -47,17 +53,22 @@ exports.Media = sequelize.define('Media', {
             let type;
             if (this.format === 'mp4') {
                 type = 'video'
-            }
+            }else{
             type = 'image'
+            }
             return `https://res.cloudinary.com/dmobley0608/${type}/upload/w_200/${this.public_id}`
         }
     }
+   
+    
+
 
 },
     {
         tableName: 'media',
       
 
-    },
-
+    },   
+    
 ) 
+

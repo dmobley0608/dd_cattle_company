@@ -1,9 +1,18 @@
 const { Horses } = require("../model/horses")
+const { Media } = require("../model/media")
+const { MedicalRecord } = require("../model/medical_record")
 
 
 exports.getAllHorses = async(req, res)=>{
     try{
-        const horses = await Horses.findAll({order:[['name', 'ASC']]})
+        Horses.hasMany(Media, {
+            foreignKey:'horse_id'
+        })
+        Horses.hasMany(MedicalRecord, {
+            foreignKey:'horse_id'
+        })
+        const horses = await Horses.findAll({order:[['name', 'ASC']], include:[Media, MedicalRecord]})
+        
         return res.status(200).json(horses)
     }catch(err){
         res.status(500).json(err.message)
@@ -25,7 +34,7 @@ exports.getHorseById = async(req, res)=>{
 }
 
 exports.updateHorseById = async(req,res)=>{
-    console.log(req.isAuthenticated())
+  
     try{
          
         await Horses.update({...req.body},{where:{id:req.params.id}})

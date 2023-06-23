@@ -1,21 +1,21 @@
 const express = require('express');
 const { getMediaByHorseId, uploadMedia, removeMedia } = require('../controllers/media');
-
+const { auth } = require('../controllers/authentication');
 const router = express();
 
 //Multer For Upload Handling
 const multer = require('multer');
-const { auth } = require('../controllers/authentication');
+
 
 
 
 const upload = multer({dest:'uploads/'})
 
-router.get('/:id',auth, getMediaByHorseId)
+router.get('/:id', getMediaByHorseId)
 
-router.post('/:horse_id/:horse_name', upload.array('media', 12), uploadMedia)
+router.post('/:horse_id/:horse_name', upload.array('media', 12), auth,uploadMedia)
 
-router.delete('/:asset_id', removeMedia) 
+router.delete('/:asset_id',auth, removeMedia) 
 
 module.exports = router;
 

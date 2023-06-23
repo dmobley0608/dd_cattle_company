@@ -5,7 +5,8 @@ import { emailLogin } from "./userApi";
 //Login
 export const login = createAsyncThunk('login', 
 async (user)=>{    
-    const {data} = await emailLogin(user.email, user.password);    
+    const {data} = await emailLogin(user.email, user.password); 
+    console.log(data)   
     return data;
 })
 
@@ -24,7 +25,7 @@ export const userSlice=createSlice({
     extraReducers:(builder)=>{
         builder
         .addCase(login.pending, (state)=>{state.isLoading=true; state.hasError=false})
-        .addCase(login.fulfilled, (state, {payload})=>{state.email=payload.email; state.role=payload.role; state.isLoading=false})
+        .addCase(login.fulfilled, (state, {payload})=>{state.email=payload.email; state.role=payload.role; state.token=payload.token; state.isLoading=false})
         .addCase(login.rejected, (state)=>{state.isLoading=false; state.hasError=true;})
     }
 })

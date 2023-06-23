@@ -9,10 +9,8 @@ const mediaRouter = require('./routes/mediaRouter')
 const cors = require('cors');
 const userRouter = require('./routes/userRouter')
 const multer = require('multer')
-const passport = require('passport')
-const { passportConfig } = require('./utils/passport')
 const { sequelizeSync } = require('./utils/sequelize')
-
+const {expressjwt} = require('express-jwt')
 
 //App Config
 const app = express()
@@ -22,7 +20,7 @@ const PORT = process.env.PORT || 5000
                                         //Middleware 
 //CORS
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     credentials:true,
 }))
 //Morgan
@@ -48,17 +46,11 @@ app.use(session({
     role: ''
 }))
 
-//PASSPORT
-passportConfig(passport)
-app.use(passport.initialize())
-app.use(passport.session())
+//JWT
+
 //Sequelize
 sequelizeSync();
 
-app.use((req, res, next)=>{
-    console.log(req.user)
-    next()
-})
 
                                         //Routes   
 app.use('/horses', upload.none(), horsesRouter)

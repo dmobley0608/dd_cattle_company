@@ -5,15 +5,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { loadHorses, selectAllHorses, selectIsLoading } from '../../features/horses/horsesSlice'
 import {Field, Form, Formik, useFormik} from 'formik'
 import {  updateHorseById } from '../../features/horses/horsesAPI'
+import { selectUser } from '../../features/user/userSlice'
 
 export default function Admin() {
+    const user = useSelector(selectUser)
     const horses = useSelector(selectAllHorses);
     const [horse, setHorse] = useState({})
     const dispatch = useDispatch()
     const isLoading = useSelector(selectIsLoading)
 
     const handleSubmit = async(e)=>{
-       const res = await updateHorseById(horse.id, e)
+       const res = await updateHorseById(horse.id, e, user.token)
        if(res.status === 200){
         dispatch(loadHorses()) 
        }else{

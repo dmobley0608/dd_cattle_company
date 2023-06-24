@@ -1,29 +1,69 @@
 #admin{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+#admin form{
+    width:100%;
+    display: flex;
+    flex-direction: column;   
+    justify-content: start;
+    align-items: start;
 }
 
-#admin textarea{
-    height:150px;
-}
 .sideMenu{
     margin:0 auto 0 0;
 }
 
-.sideMenu li{
-    text-decoration: none;
+.topMenu{
+    display: flex;
+}
+.topMenu li{
     list-style: none;
-    margin:12px 0;
-    font-weight: bolder;
+    margin:0 12px;
     font-size: 20px;
+    font-weight: bold;
 }
 
-.sideMenu li:hover{
+.topMenu li:hover{
     cursor: pointer;
 }
 
-.subMenu li{
+#adminMedia .mediaContainer{
+ height: 300px;
+ width:300px;
+ 
+}
+
+#adminMedia form{
+    border:1px solid black;
+    margin-bottom: 12px;
+}
+#adminMedia .mediaContainer img{
+    height: 200px;
+}
+#adminMedia .mediaContainer button{
+    background-color: red;
+    font-size: 20px;
+    border: none;
+    margin-top: 2px;
+}
+#adminMedia .mediaContainer button:hover{
+    cursor: pointer;
+}
+
+.record{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.record p{
     font-weight: bold;
-    font-size: 15px;
-    margin:8px 0;
+}
+
+@media only screen and (max-width:750px){
+   #admin{
+    flex-direction: column;
+   }
 }

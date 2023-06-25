@@ -18,10 +18,11 @@ exports.Horses = sequelize.define('Horses',{
         type:DataTypes.DATEONLY
     },
     bio:{
-        type:DataTypes.STRING
+        type:DataTypes.TEXT
     },
     brand:{
-        type:DataTypes.INTEGER
+        type:DataTypes.STRING,
+        
     },
     breed:{
         type:DataTypes.STRING

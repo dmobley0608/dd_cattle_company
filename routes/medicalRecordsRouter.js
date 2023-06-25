@@ -11,6 +11,6 @@ router.post('/', upload.none(),auth, create)
 
 router.put('/:id',upload.none(), auth, update)
 
-router.delete('/:id', auth, remove)
+router.delete('/:id',upload.none(), auth, remove)
 
 module.exports = router; 

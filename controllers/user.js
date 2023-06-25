@@ -30,7 +30,7 @@ exports.login = async (req, res) => {
         if (!match) return res.status(403).json("access denied")
         //Create Token
         const payload = { email: user[0].email, role: user[0].role }
-        const token = jwt.sign(payload, process.env.SESSION_SECRET)
+        const token = jwt.sign(payload, process.env.SESSION_SECRET, {expiresIn:".5h"})
         res.status(200).json({ email: user[0].email, role: user[0].role, token: `Bearer ${token}` })
     } catch (err) {
         console.log(err)

@@ -12,7 +12,7 @@ export default function AdminMedia({ user, setHorse }) {
   const [loading, setLoading] = useState(false) 
   const horse = useSelector(selectHorse)
 
-  console.log(horse)
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

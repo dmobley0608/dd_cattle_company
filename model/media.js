@@ -66,6 +66,8 @@ exports.Media = sequelize.define('Media', {
 },
     {
         tableName: 'media',
+        createdAt: false,
+        updatedAt: false,
       
 
     },   

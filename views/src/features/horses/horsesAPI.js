@@ -2,11 +2,16 @@ import axios from "axios";
 
 export const apiClient = axios.create(
     {
-    baseURL: 'http://localhost:5000/'
+    baseURL: 'https://api.ddcattle.company/'
    
     }
 );
-
+const headers =(token)=>{
+    return {
+    'Authorization': `${token}`,
+    
+    }
+}
 export const getHorses = async () => await apiClient.get('horses');
 export const getHorseById = async (id) => await apiClient.get(`horses/${id}`)
 export const getHorseMedia = async (id) => await apiClient.get(`media/${id}`)

@@ -20,9 +20,11 @@ const PORT = process.env.PORT || 5000
                                         //Middleware 
 //CORS
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000','https://ddcattle.company'],
+    
     credentials:true,
 }))
+
 //Morgan
 app.use(morgan('tiny'))
 //Body Parser

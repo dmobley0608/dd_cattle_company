@@ -23,8 +23,17 @@ body{
   display: flex;
   flex-direction: column;
   max-width: 1144px;
+  
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
+}
+.container form{
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  justify-content: center;  
+  text-align: center;
 }
 
 /* Fade In Animation */

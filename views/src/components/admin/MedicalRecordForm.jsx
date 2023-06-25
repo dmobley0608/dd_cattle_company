@@ -96,8 +96,7 @@ export default function MedicalRecordForm({ record, setRecord }) {
 
 
                     <Field id="notes" name="notes" placeholder="Notes" as="textarea" />
-                    {record && record.id ? <Field type="submit" value="Update" />:
-                    <Field type="submit" value="Submit" />}
+                    <button type="submit">Submit</button>
 
                 </Form>
             </Formik>

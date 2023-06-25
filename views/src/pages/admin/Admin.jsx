@@ -1,13 +1,13 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './Admin.module.css'
 import SideMenu from '../../components/admin/side-menu/SideMenu'
 import HorseForm from '../../components/admin/HorseForm'
 import AdminMedia from '../../components/admin/AdminMedia'
 import AdminRecords from '../../components/admin/AdminRecords'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
-import { selectHorse } from '../../features/horses/horsesSlice'
+import { loadHorses, selectHorse } from '../../features/horses/horsesSlice'
 
 
 
@@ -15,11 +15,13 @@ export default function Admin() {
     const horse = useSelector(selectHorse)
     const [activeScreen, setActiveScreen] = useState('horse')
     const user = useSelector(selectUser)
-
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(loadHorses())
+    },[])
     return (
 
-        <div id={`${styles.admin}`} className={`container`}>
-            
+        <div id={`${styles.admin}`} className={`container`}>            
             {/* Side Menu */}
             <SideMenu  />
             {/* Horse Information */}

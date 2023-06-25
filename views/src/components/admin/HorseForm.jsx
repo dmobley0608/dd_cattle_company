@@ -5,38 +5,47 @@ import { loadHorses, selectHorse } from '../../features/horses/horsesSlice'
 
 import { updateHorseById } from '../../features/horses/horsesAPI'
 import { selectUser } from '../../features/user/userSlice'
-
+import { useNavigate } from 'react-router-dom'
 
 
 export default function HorseForm() {
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
     const horse = useSelector(selectHorse)
-
+    const nav = useNavigate()
 
     const handleSubmit = async (e) => {
-        const res = await updateHorseById(horse.id, e, user.token)
-        if (res.status === 200) {
-            alert(`${horse.name} updated successfully`)
-            dispatch(loadHorses())
-        } else {
-            alert("Error updating Horse")
-        }
+        try {
+            const res = await updateHorseById(horse.id, e, user.token)
+            if (res.status === 200) {
+                alert(`${horse.name} updated successfully`)
+                dispatch(loadHorses())
 
-        console.log(res)
+            } else {
+                alert("Error updating Horse")
+            }
+        } catch (err) {
+            if(err.response.status === 401){
+                alert(`${err.response.data}\n PLEASE LOGIN TO REFRESH YOUR TOKEN`)
+                nav("/login")
+            }
+        }
     }
+    const verifyValue = (value) => { if (value === null) { return "" } return value }
     const initialValues = {
+
         name: horse ? horse.name : "",
         birth_date: horse ? horse.birth_date : "",
-        brand: horse ? horse.brand : "",
+        brand: horse ? horse.brand ? horse.brand : "" : "",
         color: horse ? horse.color : "",
         bio: horse ? horse.bio : "",
         breed: horse ? horse.breed : "",
-        hma: horse ? horse.hma : "",
-       
+        hma: horse ? verifyValue(horse.hma) : "",
         sex: horse ? horse.sex : ""
 
     }
+
+
 
 
     useEffect(() => {
@@ -59,13 +68,13 @@ export default function HorseForm() {
                     </div>
 
                     <div className='row'>
-                    <Field id="hma" name="hma" placeholder="HMA" type="text" />
-                    <Field id="brand" name="brand" placeholder="Brand" type="number" />
+                        <Field id="hma" name="hma" placeholder="HMA" type="text" />
+                        <Field id="brand" name="brand" placeholder="Brand" type="text" />
                     </div>
 
-                    <Field id="brand" name="brand" placeholder="Brand" type="number" />
-                    <Field id="bio" name="bio" placeholder="Biography" as="textarea" />
-                    <Field type="submit" value="Submit"/>
+
+                    <Field id="bio" name="bio" placeholder="Biography" as="textarea"></Field>
+                    <button type="submit">Submit</button>
 
                 </Form>
             </Formik>

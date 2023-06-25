@@ -24,11 +24,14 @@ export default function Login() {
     }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='container'>
+       <form onSubmit={handleSubmit}>
       <h1>Login</h1>
         <input name='email' onChange={(e)=>setEmail(e.target.value)} placeholder='Email' required/>
         <input name='password' type='password' onChange={(e)=>setPassword(e.target.value)} placeholder='Password' required/>
         <input type="submit" />
     </form>
+    </div>
+   
   )
 }

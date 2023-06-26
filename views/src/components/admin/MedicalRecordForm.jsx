@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { addMedicalRecord, updateMedicalRecord } from '../../features/horses/horsesAPI'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,20 +9,9 @@ export default function MedicalRecordForm({ record, setRecord }) {
     const horse = useSelector(selectHorse)
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
+    const [initialValues, setInitialValues] = useState({})
 
-
-    const initialValues = {
-        "wormed": false,
-        "coggins": false,
-        "rabies": false,
-        "yearly_vaccines": false,
-        "notes": "",
-        "height":"",
-        "weight": "",
-        "veterinarian": "",
-        "date": "",
-        "description": ""
-    }
+   
 
     const handleSubmit = async (e) => {
         if (e.height === 0) { e.height = null }
@@ -55,11 +44,26 @@ export default function MedicalRecordForm({ record, setRecord }) {
             })
     }
 
+    useEffect(()=>{
+        setInitialValues( {
+            wormed:record? record.wormed : false,
+            coggins:record? record.coggins : false,
+            rabies:record? record.rabies : false,
+            yearly_vaccines:record? record.yearly_vaccines : false,
+            notes:record? record.notes ? record.notes : "" : "",
+            height:record? record.height :"",
+            weight:record? record.weight : "",
+            veterinarian:record ? record.veterinarian ? record.veterinarian : "" : "",
+            date:record? record.date : "",
+            description:record? record.description ? record.description : "" : ""
+        })
+    },[record])
+
 
     return (
         <div>
-            <p onClick={() => setRecord(initialValues)}>Clear Form</p>
-            <Formik initialValues={{ ...record }} onSubmit={handleSubmit} enableReinitialize={true}>
+            <h3 onClick={()=>{setRecord(()=>{})}}>Clear Form</h3>
+            <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize={true}>
 
                 <Form>
                     <div className='row'>
@@ -95,7 +99,7 @@ export default function MedicalRecordForm({ record, setRecord }) {
                     </div>
 
 
-                    <Field id="notes" name="notes" placeholder="Notes" as="textarea" />
+                    <Field id="notes" name="notes" placeholder="Notes" as="textarea" ></Field>
                     <button type="submit">Submit</button>
 
                 </Form>

@@ -34,7 +34,7 @@ export default function AdminRecords({ user }) {
         <div key={record.id} className={`${styles.record}`}>
           <p>{record.date}</p>
           <p>{record.description}</p>
-          <p className={`${styles.viewRecordBtn}`} onClick={() => setRecord(record)}>Load</p>
+          <p className={`${styles.viewRecordBtn}`} onClick={() => setRecord(()=>record)}>Load</p>
           <p className={`${styles.viewRecordBtn}`} onClick={() => handleDelete(record.id)}>X</p>
         </div>
       ))}

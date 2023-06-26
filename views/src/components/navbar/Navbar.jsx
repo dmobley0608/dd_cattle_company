@@ -23,7 +23,7 @@ export default function Navbar() {
             <li><NavLink className={activeStyle} to="/horses" onClick={()=>{dispatch(toggle())}}>Horses</NavLink></li>   
             {user.role === 'admin' && <li><NavLink className={activeStyle} to="/admin" onClick={()=>{dispatch(toggle())}}>Admin</NavLink></li>}         
             {!user.email &&<li><NavLink className={activeStyle} to="/login" onClick={()=>{dispatch(toggle())}}>Sign In</NavLink></li>}
-            {user.email && <li><NavLink className={activeStyle} onClick={()=>{dispatch(logout())}}>Sign Out</NavLink></li>}
+            {user.email && <li><NavLink className={styles['nav-link']} onClick={()=>{dispatch(logout())}}>Sign Out</NavLink></li>}
         </ul>
         <div className={styles['hamburger']} onClick={()=>dispatch(toggle())}>
           <div className={showNavbar ?styles['top-rotate']: ''}></div>

@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
+    padding:5px;
 }
 #admin form{
     width:100%;
@@ -65,5 +66,8 @@
 @media only screen and (max-width:750px){
    #admin{
     flex-direction: column;
+   }
+   .topMenu{
+    padding: 0;
    }
 }

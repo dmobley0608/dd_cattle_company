@@ -62,7 +62,7 @@
 }
 
 .active{
-    border-bottom: 2px solid white;
+    font-weight:bolder;
 }
 @media only screen and (max-width:600px){    
     .navbar ul{        
@@ -103,6 +103,15 @@
     }
     .hamburger div{
         transition: transform .25s;
+    }
+    .brand{
+        width: 100%;
+       
+    }
+    .brand img{
+        content: url('../../static/images/brand.png');
+       
+        width:150px;
     }
 }
 

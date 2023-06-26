@@ -26,7 +26,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 
   <Route path="/" element={<Root />} errorElement={<ErrorHandler message={"OH NO!"}/>}>
     <Route path="/" element={<Homepage />} />
-    <Route path="/admin" element={<Admin/>}/>
+    <Route path="/admin" element={<Authenticater><Admin/></Authenticater>}/>
     <Route path="/login" element={<Login />} />
     <Route path="/horses" element={<Horses />} />
     <Route path='/horses/:horseName' element={<Horse />} errorElement={<ErrorHandler message="Horse Not Found"  />}/>   

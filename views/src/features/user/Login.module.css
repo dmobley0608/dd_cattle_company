@@ -1,7 +1,16 @@
 
 
-h1{
+#loginForm h1{
     font-size: 50px;
     letter-spacing: 5px;
+}
+
+#loginForm form{
+    padding: 5px;
+}
+
+#loginForm form input{
+    max-width: 100%;
+   
 }
 

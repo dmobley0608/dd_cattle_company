@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadHorses, selectHorse } from '../../features/horses/horsesSlice'
@@ -13,7 +13,7 @@ export default function HorseForm() {
     const dispatch = useDispatch()
     const horse = useSelector(selectHorse)
     const nav = useNavigate()
-
+    const [initialValues, setInitialValues] = useState()
     const handleSubmit = async (e) => {
         try {
             const res = await updateHorseById(horse.id, e, user.token)
@@ -32,28 +32,30 @@ export default function HorseForm() {
         }
     }
     const verifyValue = (value) => { if (value === null) { return "" } return value }
-    const initialValues = {
-
-        name: horse ? horse.name : "",
-        birth_date: horse ? horse.birth_date : "",
-        brand: horse ? horse.brand ? horse.brand : "" : "",
-        color: horse ? horse.color : "",
-        bio: horse ? horse.bio : "",
-        breed: horse ? horse.breed : "",
-        hma: horse ? verifyValue(horse.hma) : "",
-        sex: horse ? horse.sex : ""
-
-    }
+   
 
 
 
 
     useEffect(() => {
+        setInitialValues(  {
 
+            name: horse ? horse.name : "",
+            birth_date: horse ? horse.birth_date : "",
+            brand: horse ? horse.brand ? horse.brand : "" : "",
+            color: horse ? horse.color : "",
+            bio: horse ? !horse.bio ? " " :horse.bio : " ",
+            breed: horse ? horse.breed : "",
+            hma: horse ? verifyValue(horse.hma) : "",
+            sex: horse ? horse.sex : ""
+    
+        })
+       
     }, [horse])
 
     return (
         <div >
+           
             <Formik initialValues={initialValues} onSubmit={handleSubmit} enableReinitialize={true}>
                 <Form>
                     <div className='row'>

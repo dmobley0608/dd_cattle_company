@@ -15,6 +15,7 @@ export const loadHorses = createAsyncThunk("allHorses/getAllHorses",
 
 export const getHorseById = createAsyncThunk("getHorseById", 
 async(id)=>{
+    if(id === -1) return {}
     const horse = await ghbid(id)
     return horse.data;
 })

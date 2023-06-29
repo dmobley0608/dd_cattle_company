@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from 'react'
-import styles from './Admin.module.css'
 import SideMenu from '../../components/admin/side-menu/SideMenu'
 import HorseForm from '../../components/admin/HorseForm'
 import AdminMedia from '../../components/admin/AdminMedia'
@@ -8,45 +7,54 @@ import AdminRecords from '../../components/admin/AdminRecords'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
 import { loadHorses, selectHorse } from '../../features/horses/horsesSlice'
+import './admin.styles.css'
+import { Tab, Tabs, ThemeProvider } from '@mui/material'
+import { whiteBlack } from '../../components/themes/themes'
 
 
 
-export default function Admin() {
+export default function Admin() {    
     const horse = useSelector(selectHorse)
-    const [activeScreen, setActiveScreen] = useState('horse')
+    const [activeScreen, setActiveScreen] = useState('about')
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
 
-    const activeStyle = (e, className)=> {
-        const elements = document.querySelectorAll(className);          
-        for(let element of elements){                        
-         element.classList.remove('isActive')
+    const activeStyle = (e, className) => {
+        const elements = document.querySelectorAll(className);
+        for (let element of elements) {
+            element.classList.remove('isActive')
         }
         e.target.classList.add('isActive')
-      }
+    }
 
-    useEffect(()=>{
-        dispatch(loadHorses())
-    },[])
+    const handleChange = (event, newValue) => {
+        setActiveScreen(newValue);
+    };
+
+  
 
     return (
 
-        <div id={`${styles.admin}`} className={``}>            
-            {/* Side Menu */}
-            <SideMenu activeStyle={activeStyle} />
+        <ThemeProvider theme={whiteBlack} >
+            <div id="admin">
+                 {/* Side Menu */}
+            <SideMenu id="side-menu" activeStyle={activeStyle} />
             {/* Horse Information */}
-           
-            <div className='w_100 center'>          
-                {horse.name && <ul className={`${styles.topMenu}`}>
-                    <li className='submenu' onClick={(e) => {setActiveScreen('horse'); activeStyle(e, '.submenu')}}>About</li>
-                    <li className='submenu' onClick={(e) => {setActiveScreen('records');activeStyle(e, '.submenu')}}>Medical Records</li>
-                    <li className='submenu' onClick={(e) => {setActiveScreen('media');activeStyle(e, '.submenu')}}>Media</li>
-                </ul>}
-                {activeScreen === 'horse' && <HorseForm  />}
-                {activeScreen === 'media' && <AdminMedia user={user}/>}
+
+            <div className='w_100 center'>
+                {!horse.name && <h2>New Horse Form</h2>}
+                {horse.name && <Tabs value={activeScreen} onChange={handleChange}  indicatorColor='primary'  sx={{mb:2, mt:5}}>
+                    <Tab value='about' label="About" >About</Tab>
+                    <Tab value='records' label="Records" >Medical Records</Tab>
+                    <Tab value='media' label="Media">Media</Tab>
+                </Tabs>}
+                {activeScreen === 'about' && <HorseForm />}
+                {activeScreen === 'media' && <AdminMedia user={user} />}
                 {activeScreen === 'records' && <AdminRecords user={user} />}
             </div>
+            </div>
+           
 
-        </div>
+        </ThemeProvider>
     )
 }

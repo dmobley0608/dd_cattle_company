@@ -1,26 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getHorseById, loadHorses, selectAllHorses, selectIsLoading } from '../../../features/horses/horsesSlice'
-import styles from './SideMenu.module.css'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
+import { useDispatch, useSelector, } from 'react-redux'
+import { getHorseById, selectAllHorses, selectHorse } from '../../../features/horses/horsesSlice'
+
+import './SideMenu.styles.css'
+import { Tab, Tabs } from '@mui/material'
 
 
-export default function SideMenu({activeStyle}) {  
-  const dispatch = useDispatch()
-  const isLoading = useSelector(selectIsLoading)
+import { ThemeProvider } from '@mui/material/styles';
+import { whiteBlack } from '../../themes/themes'
+
+
+export default function SideMenu({activeStyle}) {    
+
+  
+  const dispatch = useDispatch()  
   const horses = useSelector(selectAllHorses)
+  const horse = useSelector(selectHorse)
+ 
 
 
 
   return (
-    <div className={`${styles.horseMenu}`}>
-      <select className={`${styles.dropdown}`} onChange={(e)=>dispatch(getHorseById(e.target.value))}>
+    <div >
+      <select className="dropdown" onChange={(e)=>dispatch(getHorseById(e.target.value))}>
         <option>Select Horse</option>
         {Object.values(horses).map(horse => <option key={horse.id} value={horse.id}>{horse.name}</option>)}
       </select>
-      <ul className={`${styles.sideMenu}`}>
-        {Object.values(horses).map(horse => <li className='menu'  key={horse.id}  onClick={(e) => {  dispatch(getHorseById(horse.id));activeStyle(e, '.menu') }}>{horse.name}</li>)}
-      </ul>
+      <Tabs id='side-menu' orientation='vertical' value={horse.id? horse.id : -1} onChange={(e, value)=>{dispatch(getHorseById(value))}}  indicatorColor='secondary'  sx={{m:5, borderRight:1, padding:2}}>
+      <Tab className='menu' value={-1}  label="+ Add Horse"  />
+        {Object.values(horses).map(horse => <Tab className='menu' value={horse.id} key={horse.id} label={horse.name}  />)}
+      </Tabs>
     </div>
   )
 }

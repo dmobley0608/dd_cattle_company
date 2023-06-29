@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import styles from '../../pages/admin/Admin.module.css'
+
 import { deleteImage, uploadImage } from '../../features/horses/horsesAPI';
 import { useDispatch, useSelector } from 'react-redux';
 import { getHorseById, selectHorse } from '../../features/horses/horsesSlice';
-
-
+import LoadingButton from '@mui/lab/LoadingButton';
+import UploadIcon from '@mui/icons-material/Upload';
+import { TextField } from '@mui/material';
 
 export default function AdminMedia({ user, setHorse }) {
   const [media, setMedia] = useState([])
@@ -45,24 +46,22 @@ export default function AdminMedia({ user, setHorse }) {
 
 
   return (
-    <div id={`${styles.adminMedia}`} className='flex-column'>
+    <div id="admin-media" >
       {loading ? "loading" :
         <form onSubmit={handleSubmit} encType="multipart/form-data" accept="image/png, image/jpg, video/mp4">
-          <input type='file' name='media' multiple='multiple' />
-          <button type='submit'>Upload</button>
+          <TextField type='file' name='media' multiple='multiple' required/>
+          <LoadingButton variant='contained' loading={loading} color='secondary' type='submit'><UploadIcon/>Upload</LoadingButton>
         </form>
       }
-      <div className='flex space-evenly'>
-
-
+      <div  id='media-container' >
         {horse.Media && media.map(img =>
-          <div className={`flex-column ${styles.mediaContainer}`} key={img.id}>
+          <div className='media-card' key={img.id}>
             {img.format !== "mp4" && <img src={img.thumb} alt="horse" />}
             {img.format === "mp4" &&
               <video controls width='300px' height={200}>
                 <source src={`${img.url}.mp4`} />
               </video>}
-            <button type="submit" onClick={() => handleDelete(img.asset_id)}>DELETE</button>
+            <LoadingButton loading={loading} variant='contained' color='warning' type="submit" onClick={() => handleDelete(img.asset_id)}>DELETE</LoadingButton>
           </div>
 
         )}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHorseById, selectHorse } from '../../features/horses/horsesSlice'
-import styles from '../../pages/admin/Admin.module.css'
+import './admin-components.styles.css'
 
 import { deleteRecordById, } from '../../features/horses/horsesAPI'
 import MedicalRecordForm from './MedicalRecordForm'
-
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 export default function AdminRecords({ user }) {
   const horse = useSelector(selectHorse)
@@ -28,16 +29,29 @@ export default function AdminRecords({ user }) {
 
 
   return (
-    <div>
+    <div id="admin-record" className='flex'>
       <MedicalRecordForm record={record} setRecord={setRecord} />
-      {horse.MedicalRecords.map(record => (
-        <div key={record.id} className={`${styles.record}`}>
-          <p>{record.date}</p>
-          <p>{record.description}</p>
-          <p className={`${styles.viewRecordBtn}`} onClick={() => setRecord(()=>record)}>Load</p>
-          <p className={`${styles.viewRecordBtn}`} onClick={() => handleDelete(record.id)}>X</p>
-        </div>
-      ))}
+      <div className='record-list' >
+        {horse.MedicalRecords && horse.MedicalRecords.map(record => (
+
+          <div key={record.id} className='record'>
+            <div className='cell'>
+              <p>{record.date}</p>
+            </div>
+            <div className='cell'>
+              <p>{record.description}</p>
+            </div>
+            <div className='cell'>
+              <p onClick={() => setRecord(() => record)}><EditIcon className='icon'/></p>
+            </div>
+            <div className='cell'>
+              <p onClick={() => handleDelete(record.id)}><DeleteForeverIcon className='icon'/></p>
+            </div>
+
+          </div>
+
+        ))}
+      </div>
 
     </div>
   )

@@ -13,25 +13,25 @@ import Login from './features/user/Login';
 import { selectUser } from './features/user/userSlice';
 import Admin from './pages/admin/Admin';
 
-const Authenticater = ({children})=>{
-    const user = useSelector(selectUser)
-    if(user.role === 'admin'){
-      return children
-    }else{
-      return <ErrorHandler message={"You are not supposed to be here!"}/>
-    }
+const Authenticater = ({ children }) => {
+  const user = useSelector(selectUser)
+  if (user.role === 'admin') {
+    return children
+  } else {
+    return <ErrorHandler message={"You are not supposed to be here!"} />
+  }
 }
 //Create Router
 const router = createBrowserRouter(createRoutesFromElements(
 
-  <Route path="/" element={<Root />} errorElement={<ErrorHandler message={"OH NO!"}/>}>
+  <Route path="/" element={<Root />} errorElement={<ErrorHandler message={"OH NO!"} />}>
     <Route path="/" element={<Homepage />} />
-    <Route path="/admin" element={<Authenticater><Admin/></Authenticater>}/>
+    <Route path="/admin" element={<Authenticater><Admin /></Authenticater>} />
     <Route path="/login" element={<Login />} />
     <Route path="/horses" element={<Horses />} />
-    <Route path='/horses/:horseName' element={<Horse />} errorElement={<ErrorHandler message="Horse Not Found"  />}/>   
-    <Route path='/*' element={<ErrorHandler message="This Page is currently under construction"/>} />  
- </Route>
+    <Route path='/horses/:horseName' element={<Horse />} errorElement={<ErrorHandler message="Horse Not Found" />} />
+    <Route path='/*' element={<ErrorHandler message="This Page is currently under construction" />} />
+  </Route>
 
 
 ))
@@ -43,9 +43,12 @@ function App() {
   }, [dispatch])
 
   return (
-    <ScrollTop>
-      <RouterProvider router={router} />
-    </ScrollTop>
+    <div className="App">
+      <ScrollTop >
+        <RouterProvider router={router} />
+      </ScrollTop>
+
+    </div>
 
   );
 }

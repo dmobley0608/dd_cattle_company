@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import { useFormik, Formik, Form, Field } from 'formik'
+import React, {  useState } from 'react'
+
+import { useFormik } from 'formik'
 import { addMedicalRecord, updateMedicalRecord } from '../../features/horses/horsesAPI'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHorseById, selectHorse } from '../../features/horses/horsesSlice'
 import { selectUser } from '../../features/user/userSlice'
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField, ThemeProvider } from '@mui/material'
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import LoadingButton from '@mui/lab/LoadingButton';
+import BackspaceIcon from '@mui/icons-material/Backspace';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import { CheckBoxSlider, TextArea, TextField } from '../forms/inputs'
+import LoadingButton from '@mui/lab/LoadingButton/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
-import { checkbox } from '../themes/themes'
-import BackspaceIcon from '@mui/icons-material/Backspace'; 
+import { Button } from '@mui/material'
 
-export default function MedicalRecordForm({ record, setRecord }) {
+
+
+export default function MedicalRecordForm({ record, setRecord, setOpen }) {
     const horse = useSelector(selectHorse)
     const user = useSelector(selectUser)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
-    const [initialValues, setInitialValues] = useState({})
+
 
 
 
@@ -39,7 +36,7 @@ export default function MedicalRecordForm({ record, setRecord }) {
                     if (res.status === 201) {
                         alert('Record Successflly Added')
                         dispatch(getHorseById(horse.id))
-                        setRecord(initialValues)
+                        setRecord({})
                     } else {
                         alert('Error Adding Record')
                     }
@@ -57,6 +54,7 @@ export default function MedicalRecordForm({ record, setRecord }) {
     })
 
     const updateRecord = async (e) => {
+        setLoading(true)
         await updateMedicalRecord(record.id, e, user.token)
             .then(res => {
                 if (res.status === 200) {
@@ -65,6 +63,7 @@ export default function MedicalRecordForm({ record, setRecord }) {
                     alert('Error Updating Record')
                 }
             })
+        setLoading(false)
     }
 
 
@@ -72,45 +71,37 @@ export default function MedicalRecordForm({ record, setRecord }) {
 
     return (
         <div>
-            <div className='flex pointer' onClick={() => { setRecord(() => null) }}><BackspaceIcon /> <h4>Clear Form</h4></div>
-
-
-            <form onSubmit={formik.handleSubmit}>
-                <div className='row'>
-                    <LocalizationProvider dateAdapter={AdapterDayjs} sx={{ m: 1, minWidth: '30%' }} >
-                        <DatePicker label="Date" type='date' value={record ? dayjs(formik.values.date) : null} onChange={() => formik.handleChange} />
-                    </LocalizationProvider>
-                    <TextField label="Description" name="description" value={record ? formik.values.description : null} type="text" sx={{ m: 1, minWidth: '30%' }}
-                        defaultValue={record ? formik.values.description : " "} onChange={formik.handleChange} />
+            <form onSubmit={formik.handleSubmit} className='form' >
+                <div className='flex j-between mb-1'>
+                    <Button  variant='contained' onClick={() => { setRecord(() => null) }}><BackspaceIcon />Clear Form</Button>
+                    <Button  variant='contained' onClick={() => { setOpen(true) }}><NewspaperIcon />View Records</Button>
                 </div>
-                <div className='row'>
-                    <TextField label="Weight" name="weight" type="number" sx={{ m: 1, minWidth: '30%' }}
-                        value={record ? formik.values.weight : null} onChange={formik.handleChange} />
-                    <TextField label="Height" name="height" type="float" sx={{ m: 1, minWidth: '30%' }}
-                        value={record ? formik.values.height : null} onChange={formik.handleChange} />
-                </div>
-                <div className='row' >
-                    <ThemeProvider theme={checkbox}>
-                        <FormControlLabel control={<Switch name="wormed" checked={record ? formik.values.wormed : null} onChange={formik.handleChange} />} label="Wormed" />
-                        <FormControlLabel control={<Switch name="coggins" checked={record ? formik.values.coggins : null} onChange={formik.handleChange} />} label="Coggins" />
-                        <FormControlLabel control={<Switch name="rabies" checked={record ? formik.values.rabies : null} onChange={formik.handleChange} />} label="Rabies" />
-                        <FormControlLabel control={<Switch name="yearly_vaccines" checked={record ? formik.values.yearly_vaccines : null}
-                            onChange={formik.handleChange} />} label="Yearly Vaccines" />
-                    </ThemeProvider>
-                </div>
-
 
                 <div className='row'>
-                    <TextField label="Veterinarian" name="veterinarian" sx={{ m: 1, minWidth: '30%' }}
-                        value={record ? formik.values.veterinarian : ""} onChange={formik.handleChange} type="text" />
+                    <TextField type="date" label="Date" name="date" value={formik.values.date || ""} onChange={formik.handleChange} />
+                    <TextField label="Description" name="description" value={formik.values.description || ""} onChange={formik.handleChange} />
+                    <TextField label="Veterinarian" name="veterinarian" value={formik.values.veterinarian || ""} onChange={formik.handleChange} />
+                    <TextField label="Height" name="height" value={formik.values.height || ""} onChange={formik.handleChange} />
+                    <TextField label="Weight" name="weight" value={formik.values.weight || ""} onChange={formik.handleChange} />
                 </div>
+                <div className='row'>
+                    <div className="column jc align-start">
+                        <CheckBoxSlider label='Wormed' name='wormed' value={formik.values.wormed || ''} onChange={formik.handleChange} />
+                        <CheckBoxSlider label='Coggins' name='coggins' value={formik.values.coggins || ''} onChange={formik.handleChange} />
+                    </div>
+                    <div className="column jc align-start">
+                        <CheckBoxSlider label='Yearly Vaccines' name='yearly_vaccines' value={formik.values.yearly_vaccines || ''} onChange={formik.handleChange} />
+                        <CheckBoxSlider label='rabies' name='rabies' value={formik.values.rabies || ''} onChange={formik.handleChange} />
+                    </div>
+                </div>
+                <TextArea label="Notes" name="notes" value={formik.values.notes} onChange={formik.handleChange} />
 
-
-                <TextField label="Notes" name="notes" value={record ? formik.values.notes : ""} sx={{ m: 1, minWidth: '30%' }}
-                    onChange={formik.handleChange} multiline rows={5} />
-                <LoadingButton type="submit" loading={loading} loadingPosition="start" startIcon={<SaveIcon />} variant="contained" sx={{ color: 'black' }} >Save </LoadingButton>
-
+                <LoadingButton loading={loading} loadingPosition='center' startIcon={<SaveIcon />} variant='contained' type="submit">Submit</LoadingButton>
             </form>
+
+
+            {/* New Form */}
+
 
         </div>
     )

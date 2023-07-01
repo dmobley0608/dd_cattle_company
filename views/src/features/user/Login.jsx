@@ -42,7 +42,7 @@ export default function Login() {
 
   return (
     <div id='loginPage'>
-      <Box component="form" onSubmit={handleSubmit}>
+      <Box component="form" onSubmit={handleSubmit} sx={{width:'100%'}}>
         <h1>Login</h1>
         {errors.map(error => <h4 key={error} className='error'>{error}</h4>)}
         <TextField id="email" label="Email" margin="normal" autoComplete='username' onChange={(e) => handleChange(e)} required />

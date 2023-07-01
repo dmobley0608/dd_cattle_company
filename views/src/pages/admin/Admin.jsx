@@ -1,12 +1,12 @@
 
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import SideMenu from '../../components/admin/side-menu/SideMenu'
 import HorseForm from '../../components/admin/HorseForm'
 import AdminMedia from '../../components/admin/AdminMedia'
 import AdminRecords from '../../components/admin/AdminRecords'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
-import { loadHorses, selectHorse } from '../../features/horses/horsesSlice'
+import {  selectHorse } from '../../features/horses/horsesSlice'
 import './admin.styles.css'
 import { Tab, Tabs, ThemeProvider } from '@mui/material'
 import { whiteBlack } from '../../components/themes/themes'
@@ -17,7 +17,7 @@ export default function Admin() {
     const horse = useSelector(selectHorse)
     const [activeScreen, setActiveScreen] = useState('about')
     const user = useSelector(selectUser)
-    const dispatch = useDispatch()
+
 
     const activeStyle = (e, className) => {
         const elements = document.querySelectorAll(className);

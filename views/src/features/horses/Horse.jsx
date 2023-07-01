@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectIsLoading } from './horsesSlice'
 import { useParams } from 'react-router-dom'
 import styles from './Horse.module.css'
@@ -33,10 +33,11 @@ export default function Horse() {
   }
 
   useEffect(()=>{
+    window.scrollTo(0,0)
     if(!isLoading){
       setImages(horse.Media.filter(media=> media.format !== "mp4"))    
       setVideos(horse.Media.filter(media=> media.format === "mp4"))
-      
+     
     }
   }, [isLoading, horse])
   //Catch horse undefined
@@ -55,7 +56,7 @@ export default function Horse() {
               {horse.hma && <p>Breed: {horse.breed}</p>}
               <p>Color: {horse.color}</p>
               <p>Sex: {horse.sex}</p>
-              <p>Age: {new Date().getFullYear() - horse.birthYear}</p>
+              <p>Age: {new Date().getFullYear() - horse.birth_date.split('-')[0]}</p>
               <p>MEDIA</p>
               <ul className={styles['mini-nav']}>
                 <li><a href="#images">Images</a></li>

@@ -27,12 +27,14 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
         setLoading(true)
         if (e.height === 0) { e.height = null }
         if (e.weight === 0) { e.weight = null }
-        if (record) {
-            updateRecord(e)
-        } else {
-
-            await addMedicalRecord({ ...e, horse_id: horse.id }, user.token)
+       
+            try{
+                if (record) {
+                    updateRecord(e)
+                } else {
+                await addMedicalRecord({ ...e, horse_id: horse.id }, user.token)
                 .then(res => {
+
                     if (res.status === 201) {
                         alert('Record Successflly Added')
                         dispatch(getHorseById(horse.id))
@@ -41,8 +43,15 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
                         alert('Error Adding Record')
                     }
                 })
+            }
 
-        }
+            }catch(err){
+                alert("You do not have valid permision to make or alter records!")
+                setLoading(false)
+            }
+
+           
+        
         setLoading(false)
     }
 
@@ -55,7 +64,8 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
 
     const updateRecord = async (e) => {
         setLoading(true)
-        await updateMedicalRecord(record.id, e, user.token)
+        try{
+            await updateMedicalRecord(record.id, e, user.token)
             .then(res => {
                 if (res.status === 200) {
                     alert('Record Successflly Updated')
@@ -63,6 +73,12 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
                     alert('Error Updating Record')
                 }
             })
+
+        }catch(err){
+            alert("You do not have valid permision to make or alter records!")
+            setLoading(false)
+        }
+       
         setLoading(false)
     }
 

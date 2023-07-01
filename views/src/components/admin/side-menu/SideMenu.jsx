@@ -6,10 +6,6 @@ import './SideMenu.styles.css'
 import { Tab, Tabs } from '@mui/material'
 
 
-import { ThemeProvider } from '@mui/material/styles';
-import { whiteBlack } from '../../themes/themes'
-
-
 export default function SideMenu({activeStyle}) {    
 
   

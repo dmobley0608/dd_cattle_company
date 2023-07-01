@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { checkbox } from '../themes/themes'
+
 import './inputs.styles.css'
 
 export const TextField =({label, name, value, type, onChange})=>(

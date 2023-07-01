@@ -7,7 +7,13 @@ html{
     max-width: 1144px;
     margin: 0 auto;
     padding: 0 12px;
-    margin-top: 5em;    
+    margin-top: 5em; 
+    height: 100vh;   
+    
+}
+
+.horse-page::-webkit-scrollbar{
+    opacity: 0;
 }
 
 .two-col {
@@ -129,9 +135,13 @@ html{
         display: flex;
         flex-direction: column;
         flex-flow: column-reverse;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
     .two-col .col{
         width: 100%;
+        justify-content: flex-start;
+        text-align: left;
     }
     .horse-page h1, .horse-page p{
         margin: 0;        

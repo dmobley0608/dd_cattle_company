@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styles from './ImageModal.module.css'
 export default function ImageModal({images, activeImage, setActiveImage}) {    
-    const [index, setIndex] = useState(0)
-    const image = document.querySelector("#set-image")
+ 
     const baseUrl = 'https://res.cloudinary.com/dmobley0608/image/upload'   
 
    

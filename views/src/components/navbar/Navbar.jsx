@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './Navbar.module.css'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectShowNavbar, toggle } from './navbarSlice'
 import brandImage from '../../static/images/ddc.png'
 import { logout, selectUser } from '../../features/user/userSlice'
 export default function Navbar() {
-  const [showNav, setShowNav] = useState(false)
+ 
   const showNavbar = useSelector(selectShowNavbar)
   const dispatch = useDispatch();  
   const activeStyle = ({isActive})=>isActive ? `${styles['active']} ${styles['nav-link']}` : styles['nav-link']

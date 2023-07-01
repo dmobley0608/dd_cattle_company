@@ -7,15 +7,15 @@ import Homepage from './pages/homepage/Homepage';
 import Horse from './features/horses/Horse';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadHorses } from './features/horses/horsesSlice';
-import ScrollTop from './components/scrollTop/ScrollTop';
 import ErrorHandler from './components/error-handler/ErrorHandler';
 import Login from './features/user/Login';
 import { selectUser } from './features/user/userSlice';
 import Admin from './pages/admin/Admin';
+import ScrollToTop from "react-scroll-to-top";
 
 const Authenticater = ({ children }) => {
   const user = useSelector(selectUser)
-  if (user.role === 'admin') {
+  if (user.role === 'admin' || user.role === 'guest') {
     return children
   } else {
     return <ErrorHandler message={"You are not supposed to be here!"} />
@@ -43,12 +43,16 @@ function App() {
   }, [dispatch])
 
   return (
+
     <div className="App">
-      <ScrollTop >
+      
         <RouterProvider router={router} />
-      </ScrollTop>
+      <ScrollToTop smooth/>
 
     </div>
+
+
+
 
   );
 }

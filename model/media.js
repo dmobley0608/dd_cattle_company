@@ -15,13 +15,7 @@ exports.Media = sequelize.define('Media', {
         references:{
             model:Horses
         }
-    }, 
-    HorseId: {
-        type:DataTypes.INTEGER,
-        references:{
-            model:Horses
-        }
-    },     
+    },       
     
     format: {
         type: DataTypes.STRING,

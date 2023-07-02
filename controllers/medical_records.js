@@ -10,7 +10,7 @@ exports.getMedicalRecordByHorseId = async (req, res, next) => {
     const id = Number(req.params.horse_id)   
     try { 
         // GET RECORDS
-        const records = await MedicalRecord.findAll({where:{horse_id:id}})       
+        const records = await MedicalRecord.findAll({where:{horse_id:id}, order:['id', 'DESC']})       
         return res.status(200).json(records)
     } catch (err) {
          //CHECK FOR VALID ID FORMAT

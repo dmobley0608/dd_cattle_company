@@ -39,8 +39,9 @@ export default function AdminRecords({ user }) {
          bgcolor:'background.paper', maxWidth:'600px', width:'100%', padding:'12px', borderRadius:'5px' }}>
           <h2 id="modal-modal-title">Records for {horse.name}</h2>
           <div className='record-list'>
+        
             {horse.MedicalRecords && horse.MedicalRecords.map(record => (
-
+            
               <div key={record.id} className='record'>
                 <div className='cell'>
                   <p>{record.date}</p>

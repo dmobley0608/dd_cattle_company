@@ -19,11 +19,21 @@ const PORT = process.env.PORT || 5000
 
                                         //Middleware 
 //CORS
-app.use(cors({
-    origin: ['http://localhost:3000','https://ddcattle.company'],
-    
-    credentials:true,
+const whitelist = ["localhost:3000", 'https://ddcattle.company', 'https://inspector.swagger.io','null']
+app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({    
+   
+    origin:(origin, callback)=>{
+        
+        if(whitelist.indexOf(origin) > -1){
+            callback(null, true)
+        }else{
+            callback(new Error(" Sorry You Do Not Have Permission To Access This Material"))
+        }
+       },
+    credentials:true, 
 }))
+
+
 
 //Morgan
 app.use(morgan('tiny'))
@@ -46,7 +56,7 @@ app.use(session({
         sameSite: "none"
     },
     role: ''
-}))
+}))  
 
 //JWT
 
@@ -63,7 +73,7 @@ app.use('/user', upload.none(), userRouter)
 
                                         //Error Handler
 app.use((err, req, res, next) => {
-
+console.log('error')
     if (!err.status) {
         err.status = 500
     }

@@ -5,6 +5,7 @@ const { MedicalRecord } = require("../model/medical_record")
 
 exports.getAllHorses = async(req, res)=>{
     try{
+         
         Horses.hasMany(Media, {
             foreignKey:'horse_id'
         })

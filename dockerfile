@@ -14,7 +14,8 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-#SERVER
+
+#SERVER ENV VARIABLES
 ENV SESSION_SECRET = 3fdf728b6febc924ab57c4e91da730d4f4f0dcb7efeffe5dc4538439f9fbc5c7
 
 #DATABASE

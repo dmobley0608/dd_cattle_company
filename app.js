@@ -14,7 +14,7 @@ const {expressjwt} = require('express-jwt')
 
 //App Config
 const app = express()
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000   
 
 
                                         //Middleware 
@@ -31,7 +31,7 @@ app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({
         }
        },
     credentials:true, 
-}))
+})) 
 
 
 

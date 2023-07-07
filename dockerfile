@@ -19,10 +19,10 @@ COPY . .
 ENV SESSION_SECRET = 3fdf728b6febc924ab57c4e91da730d4f4f0dcb7efeffe5dc4538439f9fbc5c7
 
 #DATABASE
-ENV DB_USER=admin
-ENV DB_NAME=ddcattle
-ENV DB_HOST=172.17.0.4
-ENV DB_PASSWORD=123
+ENV DB_USER=postgres
+ENV DB_NAME=postgres
+ENV DB_HOST=db.tgdqkumgqyptsqjmlwkf.supabase.co
+ENV DB_PASSWORD=thebigdawgisawesome!
 ENV DB_PORT=5432
 
 #CLOUDINARY

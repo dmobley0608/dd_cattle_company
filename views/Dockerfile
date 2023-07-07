@@ -15,7 +15,7 @@ RUN npm install
 
 # Copies everything over to Docker environment
 COPY . .
-
+EXPOSE 3000
 #Build Production
 RUN npm run build --production
 

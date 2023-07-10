@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const apiClient = axios.create(
     {
-    baseURL: 'https://api.ddcattle.company/'
+    baseURL: 'https://ddcattle-backend-9cb82b066a36.herokuapp.com/'
     }
 );
 

@@ -22,15 +22,14 @@ const PORT = process.env.PORT || 5000
 const whitelist = ["localhost:3000", 'https://ddcattle.company', 'https://inspector.swagger.io','null']
 app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({    
    
-    origin:(origin, callback)=>{
-        
+    "Access-Control-Allow-Origin":(origin, callback)=>{        
         if(whitelist.indexOf(origin) > -1){
             callback(null, true)
         }else{
             callback(new Error(" Sorry You Do Not Have Permission To Access This Material"))
         }
        },
-    credentials:true, 
+       'Access-Control-Allow-Credentials':true,   
 })) 
 
 

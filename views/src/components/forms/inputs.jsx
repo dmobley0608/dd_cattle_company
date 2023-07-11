@@ -10,7 +10,7 @@ export const TextField =({label, name, value, type, onChange})=>(
 
 export const TextArea = ( {label, name, value,  onChange})=>(
     <div className='textAreaContainer'>
-        <textarea id={name} name={name} onChange={onChange} placeholder=' '>{value}</textarea>
+        <textarea id={name} name={name} onChange={onChange} placeholder=' ' value={value}></textarea>
         <label htmlFor={name}>{label}</label>
     </div>
 )

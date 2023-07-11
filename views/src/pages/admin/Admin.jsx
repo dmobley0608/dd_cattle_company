@@ -1,5 +1,5 @@
 
-import React, {  useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import SideMenu from '../../components/admin/side-menu/SideMenu'
 import HorseForm from '../../components/admin/HorseForm'
 import AdminMedia from '../../components/admin/AdminMedia'
@@ -31,7 +31,9 @@ export default function Admin() {
         setActiveScreen(newValue);
     };
 
-  
+    useEffect(()=>{
+        setActiveScreen('about')
+    },[horse])
 
     return (
 

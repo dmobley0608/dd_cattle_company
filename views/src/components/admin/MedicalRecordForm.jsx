@@ -110,7 +110,7 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
                         <CheckBoxSlider label='rabies' name='rabies' value={formik.values.rabies || ''} onChange={formik.handleChange} />
                     </div>
                 </div>
-                <TextArea label="Notes" name="notes" value={formik.values.notes} onChange={formik.handleChange} />
+                <TextArea label="Notes" name="notes" value={formik.values.notes|| ''} onChange={formik.handleChange} />
 
                 <LoadingButton loading={loading} loadingPosition='center' startIcon={<SaveIcon />} variant='contained' type="submit">Submit</LoadingButton>
             </form>

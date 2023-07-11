@@ -3,6 +3,7 @@ import Navbar from '../navbar/Navbar'
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectIsLoading } from '../../features/horses/horsesSlice'
+import Loading from '../loading/Loading'
 
 
 export default function Root() {
@@ -10,7 +11,7 @@ export default function Root() {
   return (
     <>
       <Navbar />
-      {isLoading ? <h1>Loading</h1> :
+      {isLoading ? <Loading/> :
 
         <Outlet />
       }

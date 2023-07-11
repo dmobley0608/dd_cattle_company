@@ -12,9 +12,7 @@ html{
     
 }
 
-.horse-page::-webkit-scrollbar{
-    opacity: 0;
-}
+
 
 .two-col {
     display: flex;
@@ -29,6 +27,11 @@ html{
 .horse-container {
     padding-right: 10px;
     max-width: 100%;
+}
+
+.horse-container .two-col{
+    max-width: 800px;
+    text-align: left;
 }
 
 .main-horse-image {
@@ -50,17 +53,20 @@ html{
 .horse-page .gallery{
     display:flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     max-height: 650px;
     overflow-y: scroll;
 }
-.horse-page .gallery img {
-    max-width: 300px;
-    max-height: 300px;
-    margin: 12px;
+.horse-page .gallery .imgContainer {
+    width: 200px;
+    margin: 12px;   
+    transition: all .25s;
+}
+
+.imgContainer img{
     border: 5px solid white;
     cursor: pointer;
-    transition: all .25s;
+    width:100%;
 }
 
 .horse-page .gallery img:hover {

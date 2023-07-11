@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import {  useSelector } from 'react-redux'
-import {  selectIsLoading } from './horsesSlice'
+import { useSelector } from 'react-redux'
+import { selectIsLoading } from './horsesSlice'
 import { useParams } from 'react-router-dom'
 import styles from './Horse.module.css'
 import ImageModal from '../../components/imageModal/ImageModal'
 
 import Loading from '../../components/loading/Loading'
 
-export default function Horse() { 
-  let isLoading = useSelector(selectIsLoading)   
+export default function Horse() {
+  let isLoading = useSelector(selectIsLoading)
   const { horseName } = useParams('horseName')
-  const horse = useSelector(state => state.horses.horses[horseName])  
+  const horse = useSelector(state => state.horses.horses[horseName])
   const [images, setImages] = useState([])
   const [videos, setVideos] = useState([])
   const [activeImage, setActiveImage] = useState("")
- 
+
 
 
 
@@ -22,7 +22,7 @@ export default function Horse() {
   const getRandomImage = () => {
     if (images.length >= 1) {
       const randomNumber = Math.floor(Math.random() * images.length)
-      return <img className={styles['main-horse-image']} src={`${images[randomNumber].url}`} alt="horse" />    
+      return <img className={styles['main-horse-image']} src={`${images[randomNumber].url}`} alt="horse" />
     }
     return <h3>Image Coming Soon</h3>
   }
@@ -33,23 +33,23 @@ export default function Horse() {
     document.querySelector('#modal').classList.add('visible')
   }
 
-  useEffect(()=>{    
-    if(!isLoading && horse){
-      setImages(horse.Media.filter(media=> media.format !== "mp4"))    
-      setVideos(horse.Media.filter(media=> media.format === "mp4"))     
+  useEffect(() => {
+    if (!isLoading && horse) {
+      setImages(horse.Media.filter(media => media.format !== "mp4"))
+      setVideos(horse.Media.filter(media => media.format === "mp4"))
     }
-   
+
     console.log(horse)
   }, [isLoading, horse])
 
- 
- 
- 
+
+
+
 
   return (
     <div className={styles['horse-page'] + " fade-in"}>
       {!isLoading && horse ?
-        <div className={styles['horse-container']}>         
+        <div className={styles['horse-container']}>
           {/* General Information */}
           <div className={styles['two-col']}>
             <div className={styles['col']}>
@@ -81,11 +81,16 @@ export default function Horse() {
           <hr />
           {/* Gallery */}
           {!isLoading && horse ?
-            <div  className={styles['gallery-container']}>
+            <div className={styles['gallery-container']}>
               <h2>Gallery For {horse.name}</h2>
               <h3>Images</h3>
               <div id="images" className={styles['gallery']}>
-                {images.map(image => <img  key={image.asset_id} src={`${image.thumb}`} onClick={() => { imageClick(image) }} alt="horse" />)}
+
+                {images.map(image =>
+                  <div className={styles['imgContainer']}>
+                    <img key={image.asset_id} src={`${image.thumb}`} onClick={() => { imageClick(image) }} alt="horse" />
+                  </div>
+                )}
               </div>
               <h3>Videos</h3>
               <div id="videos" className={styles["gallery"]}>
@@ -116,24 +121,24 @@ export default function Horse() {
               </thead>
               <tbody>
                 {horse.MedicalRecords.map(record =>
-                  <tr key={record.id}>     
-                             
+                  <tr key={record.id}>
+
                     <td>{new Date(record.date).toDateString()}</td>
                     <td>{record.weight ? record.weight + "lbs" : ""}</td>
                     <td>{record.height ? record.height + " hands" : ""}</td>
                     <td>{record.wormed ? "X" : ""}</td>
                     <td>{record.description ? record.description : ""}</td>
-                  </tr>                  
+                  </tr>
                 )}
               </tbody>
             </table>
 
           </div>
         </div>
-        : <Loading/>
+        : <Loading />
 
       }
-      
+
     </div>
 
 

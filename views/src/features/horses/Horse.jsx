@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectIsLoading } from './horsesSlice'
+import {  useSelector } from 'react-redux'
+import {  selectIsLoading } from './horsesSlice'
 import { useParams } from 'react-router-dom'
 import styles from './Horse.module.css'
 import ImageModal from '../../components/imageModal/ImageModal'
-import ErrorHandler from '../../components/error-handler/ErrorHandler'
+
+import Loading from '../../components/loading/Loading'
 
 export default function Horse() { 
-  let isLoading = useSelector(selectIsLoading) 
+  let isLoading = useSelector(selectIsLoading)   
   const { horseName } = useParams('horseName')
-  const horse = useSelector(horses => horses.horses.horses[horseName])  
+  const horse = useSelector(state => state.horses.horses[horseName])  
   const [images, setImages] = useState([])
   const [videos, setVideos] = useState([])
   const [activeImage, setActiveImage] = useState("")
@@ -32,20 +33,22 @@ export default function Horse() {
     document.querySelector('#modal').classList.add('visible')
   }
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-    if(!isLoading){
+  useEffect(()=>{    
+    if(!isLoading && horse){
       setImages(horse.Media.filter(media=> media.format !== "mp4"))    
-      setVideos(horse.Media.filter(media=> media.format === "mp4"))
-     
+      setVideos(horse.Media.filter(media=> media.format === "mp4"))     
     }
+   
+    console.log(horse)
   }, [isLoading, horse])
-  //Catch horse undefined
-  if (!horse) return <ErrorHandler message={"Horse Not Found"} />
+
+ 
+ 
+ 
 
   return (
     <div className={styles['horse-page'] + " fade-in"}>
-      {isLoading ? <h1>Loading...</h1> :
+      {!isLoading && horse ?
         <div className={styles['horse-container']}>         
           {/* General Information */}
           <div className={styles['two-col']}>
@@ -77,7 +80,7 @@ export default function Horse() {
           </div>
           <hr />
           {/* Gallery */}
-          {!isLoading ?
+          {!isLoading && horse ?
             <div  className={styles['gallery-container']}>
               <h2>Gallery For {horse.name}</h2>
               <h3>Images</h3>
@@ -127,7 +130,7 @@ export default function Horse() {
 
           </div>
         </div>
-
+        : <Loading/>
 
       }
       

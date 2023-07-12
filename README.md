@@ -20,7 +20,7 @@
   3. Postgres
   4. Cloudinary --used to store images-- [More Info](https://cloudinary.com/)
   5. Sequelize [More Info ](https://sequelize.org/) 
-    <br/>**Used for ORM**
+    
 
   ## DOCKER
   This project includes a docker file. The following commands can be used to configure a docker container.

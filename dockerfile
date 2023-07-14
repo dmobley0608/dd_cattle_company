@@ -21,14 +21,14 @@ ENV SESSION_SECRET = 3fdf728b6febc924ab57c4e91da730d4f4f0dcb7efeffe5dc4538439f9f
 #DATABASE
 ENV DB_USER=postgres
 ENV DB_NAME=postgres
-ENV DB_HOST=db.tgdqkumgqyptsqjmlwkf.supabase.co
-ENV DB_PASSWORD=thebigdawgisawesome!
+ENV DB_HOST=[database host]
+ENV DB_PASSWORD=[database password]
 ENV DB_PORT=5432
 
 #CLOUDINARY
-ENV CLOUD_NAME=dmobley0608
-ENV CLOUD_API_KEY=172351854381963
-ENV CLOUD_API_SECRET=aHccAD-bj6FasCVv_m_xn2BSjxg
+ENV CLOUD_NAME=[cloudinary name]
+ENV CLOUD_API_KEY=[cloudinary api key]
+ENV CLOUD_API_SECRET=[cloudinary secret]
 
 EXPOSE 5000
 CMD [ "node", "app.js" ]

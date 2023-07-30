@@ -1,0 +1,15 @@
+.card-container{
+    margin:1em auto;
+    display:flex;
+    flex-wrap: wrap;   
+    justify-content: flex-start;
+    padding: 0 12px;
+    max-width: 1144px;
+    height: 100vh;
+    overflow-y: scroll;
+   
+}
+
+.card-container::-webkit-scrollbar{
+   opacity: 0;
+}

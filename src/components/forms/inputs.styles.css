@@ -1,0 +1,185 @@
+/* Text Fields */
+.textFieldContainer{
+    display: flex;
+    flex-direction: column;
+    position:relative;    
+    margin:10px 20px 10px 0;      
+}
+
+.textFieldContainer input{
+    border:none;
+    font-size: 20px;
+    height: 40px;
+    width:100%;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.137);
+    padding: 2px;
+    padding-left: 15px;      
+    
+}
+
+.textFieldContainer input:focus{
+    border:none;
+    outline: none;
+}
+
+.textFieldContainer label{
+    position:absolute;
+    top:10px;
+    width: 100%;
+    cursor: text;
+    font-weight: lighter;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    transition: transform .25s;
+}
+
+
+
+.textFieldContainer input:not(input:placeholder-shown) + label, .textFieldContainer input:focus + label {
+    font-size:15px;
+    font-weight:normal;
+    transform: translateY(-28px);
+    
+}
+
+
+/* TextArea */
+.textAreaContainer{
+    display: flex;
+    flex-direction: column;
+    position:relative;    
+    margin:10px 20px 10px 0;  
+}
+
+.textAreaContainer textarea{
+    height:150px;
+    border:none;
+    font-size: 15px;
+    width:100%;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.137);
+    padding: 2px;
+    
+}
+.textAreaContainer textarea:focus{
+    border:none;
+    outline: none;
+}
+
+.textAreaContainer label{
+    position:absolute;
+    top:22px;
+    width: 100%;
+    cursor: text;
+    font-weight: lighter;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    transition: transform .25s;
+}
+
+
+.textAreaContainer textarea:not(textarea:placeholder-shown) + label, .textAreaContainer textarea:focus + label {
+    font-size:15px;
+    font-weight:normal;
+    transform: translateY(-40px);
+    
+}
+/* Checkbox Slider */
+.toggleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:12px;
+    box-sizing: border-box;      
+}
+
+.toggle{
+    opacity: 0;
+    
+}
+.toggle + label{
+    position: relative;
+    padding-left: 5rem;
+    font-size: 15px;
+    font-weight:normal;
+    letter-spacing: .15rem;
+    cursor:pointer;
+    
+}
+.toggle + label::before{
+    content: "";
+    width: 50px;
+    height: 25px;
+    border-radius: 1.25rem;   
+    background-color: #c6d0cc;
+    position: absolute;
+    top:-3px;
+    left: 15px;  
+    transition: background-color .5s; 
+}
+
+.toggle +label::after{
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top:0px;
+    left:20px;
+    transition: transform .5s;
+}
+
+.toggle:checked + label::before{
+    background-color: #20b776;
+}
+
+.toggle:checked +label::after{
+    transform: translateX(100%);
+}
+
+
+/* Layout */
+.form{
+    width: 100%;
+    max-width: 600px;
+}
+.flex{
+    display: flex;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.jc{
+    justify-content: center;
+}
+
+.js{
+    justify-content: start;
+}
+.je{
+    justify-content: end;
+}
+.j-between{
+    justify-content: space-between;
+}
+
+.align-center{
+    align-items: center;
+}
+
+.align-start{
+    align-items: start;
+}
+
+.mb-1{
+    margin-bottom: 1em;
+}

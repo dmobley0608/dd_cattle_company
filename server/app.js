@@ -29,7 +29,7 @@ app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({
         }
        },
        'Access-Control-Allow-Credentials':true,   
-})) 
+}))  
 
 
 
@@ -62,10 +62,10 @@ sequelizeSync();
 
 
                                         //Routes   
-app.use('api/horses', upload.none(), horsesRouter)
-app.use('api/medical-records', upload.none(), medicalRouter)
-app.use('api/media', mediaRouter)
-app.use('api/user', upload.none(), userRouter)
+app.use('/api/horses', upload.none(), horsesRouter)
+app.use('/api/medical-records', upload.none(), medicalRouter)
+app.use('/api/media', mediaRouter)
+app.use('/api/user', upload.none(), userRouter)
 
 
                                         //Error Handler
@@ -79,6 +79,7 @@ console.log('error')
     }
     console.error(`${err.status}-${err.message}`)
     res.status(err.status).send(err.message)
+    res.redirect("/")
 })
 
 //Open Connection

@@ -37,7 +37,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 ))
 function App() {
   const dispatch = useDispatch()
-
+  console.log(process.env.REACT_APP_PORT)
   useEffect(() => {
     dispatch(loadHorses())
   }, [dispatch])

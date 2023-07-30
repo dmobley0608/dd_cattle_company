@@ -38,8 +38,7 @@ export default function Horse() {
       setImages(horse.Media.filter(media => media.format !== "mp4"))
       setVideos(horse.Media.filter(media => media.format === "mp4"))
     }
-
-    console.log(horse)
+   
   }, [isLoading, horse])
 
 

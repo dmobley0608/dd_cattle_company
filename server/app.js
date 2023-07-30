@@ -1,9 +1,7 @@
 const express = require('express')
 const path = require("path");
 require('dotenv').config();
-const morgan = require('morgan')
 const session = require('express-session')
-const colors = require('colors')
 const horsesRouter = require('./routes/horsesRouter')
 const medicalRouter = require('./routes/medicalRecordsRouter')
 const mediaRouter = require('./routes/mediaRouter')
@@ -35,8 +33,7 @@ app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({
 
 
 
-//Morgan
-app.use(morgan('tiny'))
+
 //Body Parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -46,7 +43,7 @@ const upload = multer();
 const store =new session.MemoryStore()
 app.use(session({
 
-    secret: 'kitycat',
+    secret: process.env.SESSION_SECRET,
     resave: false, 
     saveUninitialized: false,
     store,
@@ -80,7 +77,7 @@ console.log('error')
     if (!err.message) {
         err.message = "Oh No! You found a problem. Please try again."
     }
-    console.error(`${err.status}-${err.message}`.red)
+    console.error(`${err.status}-${err.message}`)
     res.status(err.status).send(err.message)
 })
 

@@ -19,7 +19,7 @@ app.use(express.static("public"));
                                         //Middleware 
 //CORS
 const whitelist = ["localhost:3000", 'https://ddcattle.company', 'https://inspector.swagger.io','null']
-app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({    
+app.use((req, res, next)=>{  next()   },cors({    
    
     "Access-Control-Allow-Origin":(origin, callback)=>{        
         if(whitelist.indexOf(origin) > -1){
@@ -66,7 +66,9 @@ app.use('/api/horses', upload.none(), horsesRouter)
 app.use('/api/medical-records', upload.none(), medicalRouter)
 app.use('/api/media', mediaRouter)
 app.use('/api/user', upload.none(), userRouter)
-
+app.use('/*', (req,res)=>{
+    res.redirect("/")
+})
 
                                         //Error Handler
 app.use((err, req, res, next) => {

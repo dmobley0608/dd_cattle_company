@@ -25,8 +25,9 @@
     "react-scroll-to-top": "^3.0.0"   
   },
   "scripts": {
+    "heroku-prebuild": "npm install && cd server && npm install",
     "start-client": "react-scripts start",
-    "start":"npm run build && cd server && npm install && npm start",
+    "start":"npm run build && cd server && npm start",
     "dev":"npm run build && cd server && npm install && nodemon app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

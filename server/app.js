@@ -66,8 +66,9 @@ app.use('/api/horses', upload.none(), horsesRouter)
 app.use('/api/medical-records', upload.none(), medicalRouter)
 app.use('/api/media', mediaRouter)
 app.use('/api/user', upload.none(), userRouter)
+
 app.use('/*', (req,res)=>{
-    res.redirect("/")
+    res.sendFile("index.html", {root: path.join(__dirname,"../build")})
 })
 
                                         //Error Handler

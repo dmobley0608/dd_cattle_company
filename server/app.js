@@ -62,10 +62,10 @@ sequelizeSync();
 
 
                                         //Routes   
-app.use('/horses', upload.none(), horsesRouter)
-app.use('/medical-records', upload.none(), medicalRouter)
-app.use('/media', mediaRouter)
-app.use('/user', upload.none(), userRouter)
+app.use('api/horses', upload.none(), horsesRouter)
+app.use('api/medical-records', upload.none(), medicalRouter)
+app.use('api/media', mediaRouter)
+app.use('api/user', upload.none(), userRouter)
 
 
                                         //Error Handler

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const apiClient = axios.create(
     {
-    baseURL: `http://localhost:${process.env.PORT}/`
+    baseURL: `http://localhost:${process.env.PORT}/api/`
         
     }
 );

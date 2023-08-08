@@ -14,7 +14,7 @@ export default function HorseCard({ horse }) {
   useEffect(() => {    
       if (!isLoading && horse.Media.length > 0) {
         let randNum = Math.floor(Math.random() * horse.Media.length)      
-        setImage(horse.Media[randNum].thumb)
+        setImage(horse.Media[randNum].thumbnail)
              
       }
 

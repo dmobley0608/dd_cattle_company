@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { selectIsLoading } from './horsesSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadHorses, selectIsLoading } from './horsesSlice'
 import { useParams } from 'react-router-dom'
 import styles from './Horse.module.css'
 import ImageModal from '../../components/imageModal/ImageModal'
 
 import Loading from '../../components/loading/Loading'
+import { getHorseByName } from './horsesAPI'
 
 export default function Horse() {
+ 
   let isLoading = useSelector(selectIsLoading)
   const { horseName } = useParams('horseName')
   const horse = useSelector(state => state.horses.horses[horseName])
@@ -34,11 +36,12 @@ export default function Horse() {
   }
 
   useEffect(() => {
-    if (!isLoading && horse) {
-      setImages(horse.Media.filter(media => media.format !== "mp4"))
-      setVideos(horse.Media.filter(media => media.format === "mp4"))
-    }
    
+    if (!isLoading && horse) {
+      setVideos(horse.Media.filter(media => media.fileType !== "image"))
+      setImages(horse.Media.filter(media => media.fileType === "image"))
+    }
+   console.log(horse)
   }, [isLoading, horse])
 
 
@@ -87,7 +90,7 @@ export default function Horse() {
 
                 {images.map(image =>
                   <div className={styles['imgContainer']}>
-                    <img key={image.asset_id} src={`${image.thumb}`} onClick={() => { imageClick(image) }} alt="horse" />
+                    <img key={image.fileId} src={`${image.thumbnail}`} onClick={() => { imageClick(image) }} alt="horse" />
                   </div>
                 )}
               </div>

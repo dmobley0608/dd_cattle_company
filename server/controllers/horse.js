@@ -40,6 +40,25 @@ exports.getHorseById = async(req, res)=>{
     }
 }
 
+exports.getHorseByName = async(req, res)=>{
+    try{
+        const name = req.params.name   
+        Horses.hasMany(Media, {
+            foreignKey:'horse_id'
+        })
+        Horses.hasMany(MedicalRecord, {
+            foreignKey:'horse_id'
+        })     
+        const horse = await Horses.find({where:{name:name}},{include:[Media, MedicalRecord], logging:false})
+        if(!horse)return res.status(404).json('Horse not found')
+        res.status(200).send(horse)
+
+    }catch(err){
+      
+        res.status(500).json(err.message)
+    }
+}
+
 exports.updateHorseById = async(req,res)=>{
   
     try{

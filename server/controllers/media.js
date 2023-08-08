@@ -1,4 +1,4 @@
-
+const ImageKit = require("imagekit");
 
 
 const { Horses } = require('../model/horses');
@@ -12,14 +12,23 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
+
+
+
+
+const ik = new ImageKit({
+    publicKey: process.env.IMAGE_KIT_PUBLIC_KEY,
+    privateKey: process.env.IMAGE_KIT_PRIVATE_KEY,
+    urlEndpoint: process.env.IMAGE_KIT_URL
+})
+
 exports.getMediaByHorseId = async (req, res) => {
     try {
         const id = Number(req.params.id)
         Horses.hasMany(Media, {
             foreignKey: 'horse_id'
         })
-
-        const media = await Media.findAll({ where: { horse_id: id }, include: { model: Horses, required: true }, })
+       const media = Media.findAll({where:{horse_id:id}})
         return res.status(200).json(media)
     } catch (err) {
         res.status(400).json({ error: err.message })
@@ -27,24 +36,24 @@ exports.getMediaByHorseId = async (req, res) => {
 }
 
 exports.uploadMedia = async (req, res) => {
-    const { horse_id, horse_name } = req.params
+    const { horse_id, horse_name } = req.params 
     try {
 
-        for (let media of req.files) {
-            await cloudinary.uploader.upload(media.path, { public_id: `double_d_ranch/${horse_name}/${media.filename}` })
-                .then(async (res) => {
-                    await Media.create({ ...res, horse_id: horse_id })
-                })
-        }
-        const fs = require('fs-extra')
-        fs.readdir('./uploads', (err, files)=>{
-            if(err) return res.send(err)
-            for(const file of files){
-                fs.rm(`./uploads/${file}`, ()=>{console.log(`Removing ${file}`)})
-            }
-        })
+        // for (let media of req.files) {
+        //     await cloudinary.uploader.upload(media.path, { public_id: `double_d_ranch/${horse_name}/${media.filename}` })
+        //         .then(async (res) => {
+        //             await Media.create({ ...res, horse_id: horse_id })
+        //         })
+        // }
+        // const fs = require('fs-extra')
+        // fs.readdir('./uploads', (err, files)=>{
+        //     if(err) return res.send(err)
+        //     for(const file of files){
+        //         fs.rm(`./uploads/${file}`, ()=>{console.log(`Removing ${file}`)})
+        //     }
+        // })
        
-        res.status(200).send("Media Uploaded Successfully")
+        res.status(200).send("Feature Being Migrated")
 
     } catch (err) {
         console.log(err)
@@ -55,11 +64,11 @@ exports.uploadMedia = async (req, res) => {
 exports.removeMedia = async (req, res) => {
     const asset_id = req.params.asset_id
     try {
-        const media = await Media.findOne({ where: { asset_id: asset_id }, raw: true })
-        await cloudinary.uploader.destroy(media.public_id).then(async (res) => {
-            await Media.destroy({ where: { public_id: media.public_id } })
-        })
-        res.status(203).send("Successfully Removed Media")
+        // const media = await Media.findOne({ where: { asset_id: asset_id }, raw: true })
+        // await cloudinary.uploader.destroy(media.public_id).then(async (res) => {
+        //     await Media.destroy({ where: { public_id: media.public_id } })
+        // })
+        res.status(203).send("Feature Being Migrated")
     } catch (err) {
         res.status(400).json({ error: err.message })
     }

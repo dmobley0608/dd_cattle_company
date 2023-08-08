@@ -1,5 +1,5 @@
 const express = require('express')
-const { getAllHorses, getHorseById, updateHorseById, createHorse, removeHorse } = require('../controllers/horse');
+const { getAllHorses, getHorseById, updateHorseById, createHorse, removeHorse, getHorseByName } = require('../controllers/horse');
 const { auth } = require('../controllers/authentication');
 
 
@@ -10,6 +10,8 @@ router.get('/',  getAllHorses)
 
 //Get Horse By Id
 router.get('/:id', getHorseById)
+//Get Horse By Name
+router.get('/:name', getHorseByName)
 
 //Add Horse
 router.post('/', auth, createHorse)

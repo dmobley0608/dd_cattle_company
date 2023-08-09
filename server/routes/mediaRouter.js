@@ -15,7 +15,7 @@ router.get('/:id', getMediaByHorseId)
 
 router.post('/:horse_id/:horse_name', upload.array('media'), auth,uploadMedia)
 
-router.delete('/:asset_id',auth, removeMedia) 
+router.delete('/:fileId',auth, removeMedia) 
 
 module.exports = router;
 

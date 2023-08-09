@@ -31,9 +31,9 @@ export default function AdminMedia({ user, setHorse }) {
     setLoading(false)
   }
 
-  const handleDelete = async (asset_id) => {
+  const handleDelete = async (fileId) => {
     setLoading(true)
-    await deleteImage(asset_id, user.token)
+    await deleteImage(fileId, user.token)
     dispatch(getHorseById(horse.id))
     setLoading(false)
     
@@ -55,13 +55,13 @@ export default function AdminMedia({ user, setHorse }) {
       }
       <div  id='media-container' >
         {horse.Media && media.map(img =>
-          <div className='media-card' key={img.id}>
-            {img.format !== "mp4" && <img src={img.thumb} alt="horse" />}
-            {img.format === "mp4" &&
+          <div className='media-card' key={img.fileId}>
+            {img.fileType === "image" && <img src={img.thumbnail} alt="horse" />}
+            {img.fileType !== "image" &&
               <video controls width='300px' height={200}>
                 <source src={`${img.url}.mp4`} />
               </video>}
-            <LoadingButton loading={loading} variant='contained' color='warning' type="submit" onClick={() => handleDelete(img.asset_id)}>DELETE</LoadingButton>
+            <LoadingButton loading={loading} variant='contained' color='warning' type="submit" onClick={() => handleDelete(img.fileId)}>DELETE</LoadingButton>
           </div>
 
         )}

@@ -49,14 +49,14 @@ app.use(session({
     store: new (require('connect-pg-simple')(session))({
         conString: process.env.DB_CONNECTION_STRING,
         tableName: 'session'
-    }),
-    proxy:true,
+    }),   
     secret: process.env.SESSION_SECRET,
     resave: false, 
     saveUninitialized: false,    
     cookie: {
         maxAge: 86400000,
-        secure: false,       
+        secure: false,  
+        httpOnly:true     
     },
     role: ''
 }))  

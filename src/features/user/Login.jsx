@@ -25,11 +25,10 @@ export default function Login() {
     setErrors([]);
     setIsLoading(true)
     e.preventDefault()
-    await dispatch(login(form))
+    await dispatch(login({username:form.email, ...form}))
       .then((res) => {
         if (res.type === "login/fulfilled") {
-
-          nav('/admin')
+          nav('/admin')      
         } else {
           setErrors(errors => [...errors, "Invalid Email or Password"])
         }

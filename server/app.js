@@ -9,7 +9,8 @@ const cors = require('cors');
 const userRouter = require('./routes/userRouter')
 const multer = require('multer')
 const { sequelizeSync } = require('./utils/sequelize')
-const {expressjwt} = require('express-jwt')
+const connectEnsureLogin = require('connect-ensure-login'); //authorization
+const passport = require('./utils/authentication');
 
 
 const app = express();
@@ -35,41 +36,58 @@ app.use((req, res, next)=>{  next()   },cors({
 
 
 //Body Parser
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 //Multer
 const upload = multer();
-//Sessions
-const store =new session.MemoryStore()
-app.use(session({
 
+
+//Sessions
+
+app.use(session({
+    store: new (require('connect-pg-simple')(session))({
+        conString: process.env.DB_CONNECTION_STRING,
+        tableName: 'session'
+    }),
+    proxy:true,
     secret: process.env.SESSION_SECRET,
     resave: false, 
-    saveUninitialized: false,
-    store,
+    saveUninitialized: false,    
     cookie: {
         maxAge: 86400000,
-        secure: false,
-        sameSite: "none"
+        secure: false,       
     },
     role: ''
 }))  
 
-//JWT
+app.use(passport.initialize())
+app.use(passport.authenticate('session')) 
 
 //Sequelize
 sequelizeSync();
-
 
                                         //Routes   
 app.use('/api/horses', upload.none(), horsesRouter)
 app.use('/api/medical-records', upload.none(), medicalRouter)
 app.use('/api/media', mediaRouter)
 app.use('/api/user', upload.none(), userRouter)
+app.get('/api/verify-user', (req, res, next) => {
+    const user = req.user
+    if (user) {
+        res.status(200).json(user);
+    } else {
+        res.redirect("/login")
+    }
+
+});
+
 
 app.use('/*', (req,res)=>{
     res.sendFile("index.html", {root: path.join(__dirname,"../build")})
 })
+
+
 
                                         //Error Handler
 app.use((err, req, res, next) => {

@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectShowNavbar, toggle } from './navbarSlice'
 import brandImage from '../../static/images/ddc.png'
-import { logout, selectUser } from '../../features/user/userSlice'
+import {  selectUser } from '../../features/user/userSlice'
+import { userLogout } from '../../features/user/userApi'
 export default function Navbar() {
  
   const showNavbar = useSelector(selectShowNavbar)
@@ -22,8 +23,8 @@ export default function Navbar() {
             <li><NavLink className={activeStyle} to="/cattle" onClick={()=>{dispatch(toggle())}}>Cattle</NavLink></li>           
             <li><NavLink className={activeStyle} to="/horses" onClick={()=>{dispatch(toggle())}}>Horses</NavLink></li>   
             {user.role === 'admin' && <li><NavLink className={activeStyle} to="/admin" onClick={()=>{dispatch(toggle())}}>Admin</NavLink></li>}         
-            {!user.email &&<li><NavLink className={activeStyle} to="/login" onClick={()=>{dispatch(toggle())}}>Sign In</NavLink></li>}
-            {user.email && <li><NavLink className={styles['nav-link']} onClick={()=>{dispatch(logout())}}>Sign Out</NavLink></li>}
+            {!user.username &&<li><NavLink className={activeStyle} to="/login" onClick={()=>{dispatch(toggle())}}>Sign In</NavLink></li>}
+            {user.username && <li><NavLink className={styles['nav-link']} onClick={()=>{dispatch(userLogout())}}>Sign Out</NavLink></li>}
         </ul>
         <div className={styles['hamburger']} onClick={()=>dispatch(toggle())}>
           <div className={showNavbar ?styles['top-rotate']: ''}></div>

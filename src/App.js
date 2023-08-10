@@ -9,11 +9,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadHorses } from './features/horses/horsesSlice';
 import ErrorHandler from './components/error-handler/ErrorHandler';
 import Login from './features/user/Login';
-import { selectUser } from './features/user/userSlice';
+import { checkSession, selectUser } from './features/user/userSlice';
 import Admin from './pages/admin/Admin';
 import ScrollToTop from "react-scroll-to-top";
 
-const Authenticater = ({ children }) => {
+const Authenticater =  ({ children }) => {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(checkSession())
+  },[])
+  
   const user = useSelector(selectUser)
   if (user.role === 'admin' || user.role === 'guest') {
     return children

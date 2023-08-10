@@ -101,7 +101,7 @@ console.log('error')
     }
     console.error(`${err.status}-${err.message}`)
     res.status(err.status).send(err.message)
-    res.redirect("/")
+   next()
 })
 
 //Open Connection

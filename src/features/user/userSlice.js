@@ -20,7 +20,7 @@ export const checkSession = createAsyncThunk('checkSession',
 export const logoutUser = createAsyncThunk('logout',
     async () => {
         console.log("loggin out")
-        const { data } = await userLogout();
+        const { data } = null;
         return data;
     })
 //UserSlice

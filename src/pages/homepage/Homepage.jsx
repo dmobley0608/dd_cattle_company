@@ -14,14 +14,14 @@ export default function Homepage() {
             {/* Two Column Image Layout */}
             <section id="profiles" className={styles['two-col']}>
                 <div className={styles['col']}>
-                    <img src="https://res.cloudinary.com/dmobley0608/image/upload/v1684455542/double_d_ranch/Henry/20220530_170520_1_efxk1g.gif" alt="david-img" />
+                    <img src="https://ik.imagekit.io/7a4ad0swj/ddc/Henry/20220219_150256_xufv0y.jpg" alt="david-img" />
                     <p className={styles['description']}>
                         David has had a passion for animals all of his life. He is pictured above desensitizing his newest mustang, Henry. 
                         More information on Henry can be found <Link to="/horses/Henry">Here</Link>
                     </p>
                 </div>
                 <div className={styles['col']}>
-                    <img src="https://res.cloudinary.com/dmobley0608/image/upload/v1657503017/double_d_ranch/Jet/jlsmeok2vcrcmsaglicg.jpg" alt="david-img" />
+                    <img src="https://ik.imagekit.io/7a4ad0swj/ddc/Jett/jlsmeok2vcrcmsaglicg.jpg" alt="dwight-img" />
                     <p className={styles['description']}>
                     Dwight has also had a passion for animals since a very early age. He can be seen above working with Jett. 
                     He is currently working with a new mustang, Titus. More information on Titus can be found <Link to="/horses/Titus">Here</Link>

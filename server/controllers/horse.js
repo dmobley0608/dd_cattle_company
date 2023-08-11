@@ -15,9 +15,9 @@ exports.getAllHorses = async(req, res)=>{
         const horses = await Horses.findAll({           
             include:[
                 Media, 
-                {model:MedicalRecord, order:[['date','DESC']]}
+                MedicalRecord
             ], 
-             order:[['name', 'ASC']], 
+             order:[['name', 'ASC'],[MedicalRecord, 'date', 'DESC']], 
             logging:false
         })
         

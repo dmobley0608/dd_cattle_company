@@ -37,7 +37,13 @@ exports.getHorseById = async(req, res)=>{
         Horses.hasMany(MedicalRecord, {
             foreignKey:'horse_id'
         })     
-        const horse = await Horses.findByPk(id,{include:[Media, MedicalRecord], logging:false})
+        const horse = await Horses.findByPk(id,{include:[
+                Media, 
+                MedicalRecord
+            ], 
+             order:[[MedicalRecord, 'date', 'DESC']], 
+            logging:false
+        })
         if(!horse)return res.status(404).json('Horse not found')
         res.status(200).send(horse)
 

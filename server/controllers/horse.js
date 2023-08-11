@@ -17,7 +17,7 @@ exports.getAllHorses = async(req, res)=>{
                 Media, 
                 {model:MedicalRecord, order:[['date','DESC']]}
             ], 
-             order:[['name', 'ACS']], 
+             order:[['name', 'ASC']], 
             logging:false
         })
         

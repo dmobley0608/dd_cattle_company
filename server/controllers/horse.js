@@ -12,7 +12,7 @@ exports.getAllHorses = async(req, res)=>{
         Horses.hasMany(MedicalRecord, {
             foreignKey:'horse_id'
         })
-        const horses = await Horses.findAll({order:[['name', 'ASC'],['medicalRecords', 'DESC']], include:[Media, MedicalRecord], logging:false})
+        const horses = await Horses.findAll({order:[['name', 'ASC'],['MedicalRecords.date', 'DESC']], include:[Media, MedicalRecord], logging:false})
         
         return res.status(200).json(horses)
     }catch(err){

@@ -46,7 +46,7 @@
      5. enter 9000 into Host port field
      6. Add variables listed below into environment variables section
 
-   ### Variables For Docker
+   ### ENV Variables
       1. DB_USER - the database user example... dmo      
       2. DB_NAME - name of database to be used
       3. DB_HOST - example localhost or 123.4.5.6

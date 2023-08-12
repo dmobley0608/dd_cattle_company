@@ -48,7 +48,7 @@ exports.uploadMedia = async (req, res) => {
         const results = []
         const pathUrl = path.join(__dirname, '../uploads')
         fs.readdir(pathUrl, async (err, files) => {
-            if (err) return res.send(err)
+            if (err) throw err
             for (const file of files) {
                 fs.readFile(`${pathUrl}/${file}`, async (err, data) => {
                     ik.upload({

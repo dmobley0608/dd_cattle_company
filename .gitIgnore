@@ -1,0 +1,7 @@
+#NODE
+node_modules/
+
+#dotenv variables
+.env
+
+dockerfile

@@ -1,0 +1,199 @@
+openapi: 3.0.3
+info:
+  title: DD Cattle Company
+  description: This is a simple API built for the DD Cattle Company
+  version: 1.0.11
+servers:
+  - url: https://api.ddcattle.company
+    variables: {}
+    description: >-
+      A Simple API used to fetch information regarding the animals owned by the
+      DD Cattle Company
+tags:
+  - name: Horses
+    description: Horses
+components:
+    schemas:
+      Horse:
+        type: object
+        properties:
+          name:
+            type: string
+            example: Titus
+          sex:
+            type: string
+            example: Gelding
+          birth_date:
+            type: string
+            format: date
+          bio:
+            type: string
+            description: Information about Horse
+          brand:
+            type: string
+            example: 21020761
+          breed:
+            type: string
+            example: Mustang
+          color:
+            type: string
+            example: Bay Roan
+          price:
+            type: integer
+            example: 2500
+     
+          
+
+paths:
+  /horses:
+    summary: Horses
+    description: Used for access horses of DD Cattle Company
+    get:
+      tags:
+        - Horses
+      summary: Returns all Horses along with their Medical Records and Media
+      description: >-
+        Returns all information regarding the horses along with their Medical
+        Records and Media
+      operationId: getHorses
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                Example Get Request for /horses:
+                  value: >-
+                    [ { "id": 9, "name": "Amigo", "sex": "Gelding",
+                    "birth_date": "2000-01-01", "bio": null, "brand": "",
+                    "breed": "Paint", "color": "Brown/White", "hma": "",
+                    "price": null, "Media": [ { "url":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/double_d_ranch/Amigo/oncsuxeyu8va7vf0r00n",
+                    "thumb":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/w_200/double_d_ranch/Amigo/oncsuxeyu8va7vf0r00n",
+                    "id": 3, "horse_id": 9, "HorseId": null, "format": "jpg",
+                    "public_id": "double_d_ranch/Amigo/oncsuxeyu8va7vf0r00n",
+                    "asset_id": "a27517c7dbbaaefe63e2a2bd4435dad7" } ],
+                    "MedicalRecords": [ { "id": 99, "horse_id": 9, "wormed":
+                    false, "coggins": false, "rabies": false, "yearly_vaccines":
+                    true, "notes": "Flue vacc inovator6", "height": 0, "weight":
+                    0, "veterinarian": null, "date": "2022-07-22",
+                    "description": "Vaccinated" }, { "id": 97, "horse_id": 9,
+                    "wormed": true, "coggins": false, "rabies": false,
+                    "yearly_vaccines": false, "notes": null, "height": 15.2,
+                    "weight": 1142, "veterinarian": null, "date": "2022-02-24",
+                    "description": "Weight/Height" }, { "id": 98, "horse_id": 9,
+                    "wormed": false, "coggins": false, "rabies": false,
+                    "yearly_vaccines": false, "notes": null, "height": 15.1,
+                    "weight": 1158, "veterinarian": null, "date": "2022-07-10",
+                    "description": "Weight Height" } ] } ]
+    post:
+      tags:
+      - Horses
+      summary: Add A Horse
+      description: Add A Horse JWT required
+      operationId: addHorse
+      requestBody:
+        description: Update an existent horse
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Horse'
+        required: true
+      responses:
+        200:
+          description: Update Successful
+        401:
+          description: Must be signed in
+        500:
+          description: Server Error
+
+  /horses/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: Numeric ID of the user to get
+    summary: Horse by id
+    description: Horse by id
+    get:
+      tags:
+      - Horses
+      summary: Returns Information for specific horse by id
+      description: Returns Information for specific horse by id
+      operationId: getHorse
+      responses:
+        default:
+          description: Default error sample response
+          content:
+            application/json:
+              examples:
+                Get Horse By Id:
+                  value: >-
+                    { "id": 5, "name": "Ty", "sex": "gelding", "birth_date":
+                    "2004-01-01", "bio": "Ty is a shy and timid horse. He likes
+                    his space but once he is caught is a super sweet guy. ",
+                    "brand": "04591559", "breed": "Mustang", "color": "Red Dun",
+                    "hma": "Antelope Valley, Nevada", "price": "300.00",
+                    "Media": [ { "url":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/double_d_ranch/Ty/j5rdw27xojxrpckximky",
+                    "thumb":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/w_200/double_d_ranch/Ty/j5rdw27xojxrpckximky",
+                    "id": 101, "horse_id": 5, "format": "jpg", "public_id":
+                    "double_d_ranch/Ty/j5rdw27xojxrpckximky", "asset_id":
+                    "5d9a7a33dd62feac840a27f7bfa7714f" }, { "url":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/double_d_ranch/Ty/yuyqlx44bns3jybdiiwb",
+                    "thumb":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/w_200/double_d_ranch/Ty/yuyqlx44bns3jybdiiwb",
+                    "id": 102, "horse_id": 5, "format": "jpg", "public_id":
+                    "double_d_ranch/Ty/yuyqlx44bns3jybdiiwb", "asset_id":
+                    "0905fd5ef85d5e978de86ec9de0d954b" }, { "url":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/double_d_ranch/Ty/lmxjxbwswubo2gvbdzhz",
+                    "thumb":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/w_200/double_d_ranch/Ty/lmxjxbwswubo2gvbdzhz",
+                    "id": 103, "horse_id": 5, "format": "jpg", "public_id":
+                    "double_d_ranch/Ty/lmxjxbwswubo2gvbdzhz", "asset_id":
+                    "a7712824b2a1974ae35aef89cc45b5c4" }, { "url":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/double_d_ranch/Ty/bo8hkvq46edzf9novave",
+                    "thumb":
+                    "https://res.cloudinary.com/dmobley0608/image/upload/w_200/double_d_ranch/Ty/bo8hkvq46edzf9novave",
+                    "id": 104, "horse_id": 5, "format": "jpg", "public_id":
+                    "double_d_ranch/Ty/bo8hkvq46edzf9novave", "asset_id":
+                    "b82d55469545842edffd5e6e30ea6261" } ], "MedicalRecords": [
+                    { "id": 86, "horse_id": 5, "wormed": false, "coggins":
+                    false, "rabies": false, "yearly_vaccines": false, "notes":
+                    null, "height": 14.1, "weight": 0, "veterinarian": null,
+                    "date": "2022-07-06", "description": "Height Check" }, {
+                    "id": 87, "horse_id": 5, "wormed": false, "coggins": true,
+                    "rabies": false, "yearly_vaccines": false, "notes": null,
+                    "height": 0, "weight": 0, "veterinarian": "Jarod Eddy
+                    (Equine Medical)", "date": "2021-08-18", "description":
+                    "Coggins" }, { "id": 88, "horse_id": 5, "wormed": false,
+                    "coggins": false, "rabies": false, "yearly_vaccines": true,
+                    "notes": "Flue vacc inovator6", "height": 0, "weight": 0,
+                    "veterinarian": null, "date": "2022-07-22", "description":
+                    "Vaccinated" } ] }
+    put:
+      tags:
+        - Horses
+      summary: Update Horse By Id
+      description: Update Horse By Id JWT required
+      operationId: updateHorseById
+    
+      requestBody:
+        description: Update an existent horse
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Horse'
+        required: true
+      responses:
+        200:
+          description: Update Successful
+        401:
+          description: Must be signed in
+        500:
+          description: Server Error
+    

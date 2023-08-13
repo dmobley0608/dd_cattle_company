@@ -14,7 +14,7 @@ const {expressjwt} = require('express-jwt')
 
 //App Config
 const app = express()
-const PORT = process.env.PORT || 5000   
+const PORT = process.env.PORT || 5000 
 
 
                                         //Middleware 
@@ -26,7 +26,7 @@ app.use((req, res, next)=>{  console.log(req.get('origin')); next()   },cors({
         if(whitelist.indexOf(origin) > -1){
             callback(null, true)
         }else{
-            callback(new Error(" Sorry You Do Not Have Permission To Access This Material"))
+            callback(new Error(" Sorry You Do Not Have Permission To Access This Material")) 
         }
        },
        'Access-Control-Allow-Credentials':true,   

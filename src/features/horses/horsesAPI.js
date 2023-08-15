@@ -1,11 +1,5 @@
-import axios from "axios";
+import { apiClient } from "../api";
 
-export const apiClient = axios.create(
-    {
-    baseURL: `/api/`
-        
-    }
-);
 
 export const getHorses = async () => await apiClient.get('horses');
 export const getHorseByName = async (name) => await apiClient.get(`horses/${name}`)

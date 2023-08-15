@@ -80,3 +80,8 @@ body{
  display:flex;
  flex-direction: column;  
 }
+
+/* Text Format */
+.text-start{
+  text-align: left;
+}

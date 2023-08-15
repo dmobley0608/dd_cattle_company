@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import Horses from "./features/horses/Horses";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -20,6 +20,7 @@ import AboutHorse from "./pages/horse/AboutHorse";
 import HorseGallery from "./pages/horse/HorseGallery";
 import HorseJournal from "./pages/horse/HorseJournal";
 import Horse from "./pages/horse/Horse";
+import Horses from "./pages/horse/Horses"
 
 const Authenticater = ({ children }) => {
   const dispatch = useDispatch();

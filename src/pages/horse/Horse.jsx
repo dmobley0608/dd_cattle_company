@@ -7,6 +7,7 @@ import styles from "./Horse.module.css";
 import Loading from "../../components/loading/Loading";
 import { selectIsLoading } from "../../features/horses/horsesSlice";
 
+
 export default function Horse() {
   let isLoading = useSelector(selectIsLoading);
   const { horseName } = useParams("horseName");

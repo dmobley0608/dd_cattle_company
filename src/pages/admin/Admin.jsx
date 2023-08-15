@@ -1,16 +1,15 @@
 
 import React, {  useEffect, useState } from 'react'
-import SideMenu from '../../components/admin/side-menu/SideMenu'
-import HorseForm from '../../components/admin/HorseForm'
-import AdminMedia from '../../components/admin/AdminMedia'
-import AdminRecords from '../../components/admin/AdminRecords'
+import AdminMedia from './AdminMedia'
+import AdminRecords from './AdminRecords'
+import HorseForm from './forms/HorseForm'
 import {  useSelector } from 'react-redux'
 import { selectUser } from '../../features/user/userSlice'
 import {  selectHorse } from '../../features/horses/horsesSlice'
 import './admin.styles.css'
 import { Tab, Tabs, ThemeProvider } from '@mui/material'
 import { whiteBlack } from '../../components/themes/themes'
-
+import SideMenu from './components/side-menu/SideMenu'
 
 
 export default function Admin() {    

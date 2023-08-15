@@ -26,18 +26,15 @@ export default function HorseGallery() {
   return (
     <div>  {/* Gallery */}
     
-      <div className={styles['gallery-container']}>
-        <h2>Gallery For {horse.name}</h2>
-        <h3>Images</h3>
+      <div className={styles['gallery-container']}>       
         <div id="images" className={styles['gallery']}>
-
           {images.map(image =>
             <div key={image.fileId} className={styles['imgContainer']}>
               <img  src={`${image.thumbnail}`} onClick={() => { imageClick(image) }} alt="horse" />
             </div>
           )}
         </div>
-        <h3>Videos</h3>
+        
         <div id="videos" className={styles["gallery"]}>
           {videos.map(vid =>
             <video controls key={vid.fileId} width="350px">

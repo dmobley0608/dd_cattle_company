@@ -13,21 +13,34 @@ html {
 .horse-page nav {
   width: 100%;
   max-width: 600px;
+  height: 30px;
   display: flex;
   position: fixed;
   justify-content: space-between;
   left: 50%;
   transform: translate(-50%, 0);
   background-color: saddlebrown;
-  padding:5px;
+  padding:5px 15px;
   border-radius: 5px;
   z-index: 3;
 }
 
-.horse-page nav a {
+.nav-link {
   text-decoration: none;
   font-size: 1.5em;
   color: inherit;
+}
+
+.nav-link:hover{
+    font-size: 1.55;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.active{
+    font-size: 1.55;
+    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    color:antiquewhite;
 }
 
 .two-col {
@@ -41,14 +54,18 @@ html {
 }
 
 .horse-container { 
-  max-width: 100%;
-  margin-top: 2.5em;
-  padding-right: 15px;
+  width: 100%;
+  margin: 2.5em auto;
+  padding-right: 15px;  
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .horse-container .two-col {
   max-width: 800px;
-  text-align: left;
+  text-align: left; 
+  margin:0 auto;
 }
 
 .main-horse-image {

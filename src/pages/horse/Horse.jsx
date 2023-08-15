@@ -12,14 +12,16 @@ export default function Horse() {
   const { horseName } = useParams("horseName");
   const horse = useSelector((state) => state.horses.horses[horseName]);
 
+  const activeStyle = ({isActive})=>isActive ? `${styles['active']} ${styles['nav-link']}` : styles['nav-link']
+
   return (
     <div className={styles["horse-page"] + " fade-in"}>
       {!isLoading && horse ? (
         <>
           <nav>
-            <NavLink className={'nav-link'} to="about">About</NavLink>
-            <Link to="gallery">Gallery</Link>
-            <Link to="journal">Riding Journal</Link>
+            <NavLink className={activeStyle}  to="about">About</NavLink>
+            <NavLink className={activeStyle} to="gallery">Gallery</NavLink>
+            <NavLink className={activeStyle} to="journal">Riding Journal</NavLink>
           </nav>
           <div className={styles['horse-container']}>
           <Outlet />

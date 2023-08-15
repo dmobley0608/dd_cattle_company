@@ -22,7 +22,7 @@ export default function HorseCard({ horse }) {
   }, [isLoading, horse.Media])
 
   return (
-    <Link className={styles['horse-card']} to={`/horses/${horse.name}`}>
+    <Link className={styles['horse-card']} to={`/horses/${horse.name}/about`}>
       <div className={styles['card-top']}>
         {image ? <img src={image} alt="horseImg" /> : <h3>Image Coming Soon</h3>}
       </div>

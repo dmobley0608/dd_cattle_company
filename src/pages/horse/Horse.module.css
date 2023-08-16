@@ -5,14 +5,13 @@ html {
 .horse-page {
   width: 100%;
   max-width: 1144px;
-  margin: 0 auto;
-  padding: 0 12px;
-  height: 100vh;
+  margin: 0 auto; 
+  padding: 0 12px; 
 }
 
 .horse-page nav {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
   height: 30px;
   display: flex;
   position: fixed;
@@ -55,11 +54,12 @@ html {
 
 .horse-container { 
   width: 100%;
-  margin: 2.5em auto;
+  margin: 0 auto;
   padding-right: 15px;  
   display:flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 }
 
 .horse-container .two-col {
@@ -81,13 +81,14 @@ html {
   text-shadow: 2px 2px 1px rgb(187, 187, 187);
   color: rgb(0, 0, 0);
 }
-
+.horse-page .about{
+  margin-top: 75px;
+}
 .horse-page .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  max-height: 650px;
-  overflow-y: scroll;
+  justify-content: center; 
+  margin-top: 150px;
 }
 .horse-page .gallery .imgContainer {
   width: 200px;
@@ -106,50 +107,6 @@ html {
   transform: translateY(-5px);
 }
 
-.horse-page .records {
-  width: 100%;
-  margin-bottom: 5em;
-}
-
-.horse-page .records table {
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  border-radius: 5px;
-  border-collapse: collapse;
-  position: relative;
-}
-
-.horse-page .records table thead {
-  background-color: black;
-  position: sticky;
-  top: 0;
-}
-
-.horse-page .records table tbody {
-  max-height: 600px;
-  overflow-y: hidden;
-}
-.horse-page .records table tbody tr {
-  height: 50px;
-  background-color: grey;
-  text-shadow: 1px 1px 1px black;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-
-.horse-page .records table tbody tr:hover {
-  transform: translateY(-3px);
-  box-shadow: 5px 5px 5px black;
-}
-
-.horse-page .records table tbody tr:nth-child(even) {
-  background-color: white;
-  color: black;
-  text-shadow: 1px 1px 1px white;
-}
-
 .mini-nav {
   display: flex;
   list-style: none;
@@ -165,7 +122,27 @@ html {
   text-decoration: none;
   color: inherit;
 }
-
+.sub-menu{
+  width:250px;
+  height:25px;
+  position: absolute;
+  top:38px;
+  left:50%;
+  transform: translate(-50%, 0);
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  border:1px solid black;
+  padding: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin:0;
+  background-color: black;
+  color: white;  
+  z-index: 1;
+  visibility: hidden;
+  
+}
 @media only screen and (max-width: 900px) {
   .two-col {
     display: flex;

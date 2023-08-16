@@ -46,7 +46,8 @@ const router = createBrowserRouter(
       <Route path="/horses" element={<Horses />} />
       <Route path="/horses/:horseName" element={<Horse />}>
         <Route path="about" element={<AboutHorse />} />
-        <Route path="gallery" element={<HorseGallery />} />
+        <Route path="gallery/:mediaType" element={<HorseGallery />} />
+         
         <Route path="journal" element={<HorseJournal />} />
       </Route>
       <Route

@@ -20,7 +20,7 @@ export default function AboutHorse() {
   }
 
   return (
-    <div>
+    <div className={styles['about']}>
          <h1>{horse.name}</h1>
      
       {/* General Information */}

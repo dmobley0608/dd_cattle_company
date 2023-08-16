@@ -12,8 +12,10 @@ export default function Root() {
     <>
       <Navbar />
       {isLoading ? <Loading/> :
-
-        <Outlet />
+        <div style={{marginTop:"120px", padding:'0'}}>
+             <Outlet  />
+        </div>
+       
       }
 
     </>

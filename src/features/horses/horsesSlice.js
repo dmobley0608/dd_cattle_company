@@ -42,10 +42,11 @@ export const horsesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loadHorses.pending, (state) => { state.isLoading = true })
-            .addCase(loadHorses.fulfilled, (state, { payload }) => { 
-                state.isLoading = false; 
+            .addCase(loadHorses.fulfilled, (state, { payload }) => {               
                 state.horses = {};
-                payload.forEach(horse => { state.horses[horse.name] = { ...horse} }) })
+                payload.forEach(horse => { state.horses[horse.name] = { ...horse} })
+                state.isLoading = false; 
+             })
 
             .addCase(getHorseById.pending,(state)=>{state.isLoading = true})
             .addCase(getHorseById.fulfilled, (state, {payload})=>{state.horse = payload})

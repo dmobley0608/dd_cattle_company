@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { useParams, Outlet, NavLink } from "react-router-dom";
@@ -30,7 +30,7 @@ export default function Horse() {
     
   }
   const activeStyle = ({ isActive }) => isActive ? `${styles['active']} ${styles['nav-link']}` : styles['nav-link']
-
+ 
   return (
     <div className={styles["horse-page"] + " fade-in"}>
       {!isLoading && horse ? (

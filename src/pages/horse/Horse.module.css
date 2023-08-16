@@ -83,6 +83,8 @@ html {
 }
 .horse-page .about{
   margin-top: 75px;
+  padding-right: 18px;
+  padding-left: 0;
 }
 .horse-page .gallery {
   display: flex;
@@ -91,7 +93,8 @@ html {
   margin-top: 150px;
 }
 .horse-page .gallery .imgContainer {
-  width: 200px;
+  width: 100%;
+  max-width: 300px;
   margin: 12px;
   transition: all 0.25s;
 }
@@ -107,21 +110,7 @@ html {
   transform: translateY(-5px);
 }
 
-.mini-nav {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.mini-nav li {
-  margin-right: 10px;
-  text-decoration: none;
-  font-size: 20px;
-}
-.mini-nav li a {
-  text-decoration: none;
-  color: inherit;
-}
+
 .sub-menu{
   width:250px;
   height:25px;

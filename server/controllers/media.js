@@ -31,7 +31,13 @@ exports.getMediaByHorseId = async (req, res) => {
     //     },async(err, result)=>{
     //         if(result.length > 0){
     //             for(let data of result){
-    //             await Media.create({horse_id:horse.id, thumbnail:data.thumbnailUrl, ...data}) 
+    //             await Media.create({
+    //                 horse_id:horse.id, 
+    //                 thumbnail:`https://ik.imagekit.io/7a4ad0swj/tr:n-black_thumb${data.filePath}`, 
+    //                 fileType:data.fileType,
+    //                 fileId:data.fileId
+    //             }) 
+                
     //             }
     //         }
 

@@ -60,10 +60,7 @@ const router = createBrowserRouter(
   )
 );
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadHorses());
-  }, [dispatch]);
+
 
   return (
     <div className="App">

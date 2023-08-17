@@ -6,12 +6,7 @@ const { MedicalRecord } = require("../model/medical_record")
 exports.getAllHorses = async(req, res)=>{
     try{
          
-        Horses.hasMany(Media, {
-            foreignKey:'horse_id'
-        })
-        Horses.hasMany(MedicalRecord, {
-            foreignKey:'horse_id'
-        })
+      
         const horses = await Horses.findAll({           
             include:[
                 Media, 
@@ -55,14 +50,12 @@ exports.getHorseById = async(req, res)=>{
 
 exports.getHorseByName = async(req, res)=>{
     try{
-        const name = req.params.name   
-        Horses.hasMany(Media, {
-            foreignKey:'horse_id'
-        })
-        Horses.hasMany(MedicalRecord, {
-            foreignKey:'horse_id'
-        })     
-        const horse = await Horses.find({where:{name:name}},{include:[Media, MedicalRecord], logging:false})
+        const name = req.params.name           
+        const horse = await Horses.findOne({
+            include:[Media, MedicalRecord],
+            where:{name:name},           
+             logging:false
+            })        
         if(!horse)return res.status(404).json('Horse not found')
         res.status(200).send(horse)
 

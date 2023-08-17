@@ -11,6 +11,9 @@ const multer = require('multer')
 const { sequelizeSync } = require('./utils/sequelize')
 const connectEnsureLogin = require('connect-ensure-login'); //authorization
 const passport = require('./utils/authentication');
+const { Horses } = require('./model/horses');
+const { Media } = require('./model/media');
+const { MedicalRecord } = require('./model/medical_record');
 
 
 const app = express();
@@ -66,6 +69,10 @@ app.use(passport.initialize())
 app.use(passport.authenticate('session')) 
 
 //Sequelize
+Horses.hasMany(Media, {foreignKey:'horse_id'})
+Media.belongsTo(Horses, {keyType:'horse_id'})
+Horses.hasMany(MedicalRecord, {foreignKey:'horse_id'})
+MedicalRecord.belongsTo(Horses, {keyType:'horse_id'})
 sequelizeSync();
 
                                         //Routes   

@@ -2,11 +2,11 @@ import React from "react";
 import styles from './Horse.module.css'
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { selectHorse } from "../../features/horses/horsesSlice";
 
 
-export default function AboutHorse() {
-    const { horseName } = useParams('horseName')
-    const horse = useSelector(state => state.horses.horses[horseName])
+export default function AboutHorse() {    
+    const horse = useSelector(selectHorse)
 
     
   //Random Image 

@@ -33,6 +33,7 @@ exports.getMediaByHorseId = async (req, res) => {
     //             for(let data of result){
     //             await Media.create({
     //                 horse_id:horse.id, 
+    //                 url: data.url,
     //                 thumbnail:`https://ik.imagekit.io/7a4ad0swj/tr:n-black_thumb${data.filePath}`, 
     //                 fileType:data.fileType,
     //                 fileId:data.fileId

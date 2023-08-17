@@ -7,17 +7,13 @@ import Loading from '../loading/Loading'
 
 
 export default function Root() {
-  const isLoading = useSelector(selectIsLoading)
+ 
   return (
     <>
-      <Navbar />
-      {isLoading ? <Loading/> :
+      <Navbar />      
         <div style={{marginTop:"120px", padding:'0'}}>
-             <Outlet  />
+          <Outlet/>    
         </div>
-       
-      }
-
     </>
   )
 }

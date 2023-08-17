@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getHorses, getMedicalRecordsByHorseId as ghmr, getHorseById as ghbid } from "./horsesAPI";
+import { getHorses, getMedicalRecordsByHorseId as ghmr, getHorseById as ghbid, getHorseByName as ghbn } from "./horsesAPI";
 
 
 
@@ -21,7 +21,13 @@ async(id)=>{
     return horse.data;
 })
 
-
+export const getHorseByName = createAsyncThunk("getHorseByName",
+async(name)=>{
+    const horse = await ghbn(name)
+    console.log(horse.data)
+    return horse.data
+}
+)
 //Get Horse Records By Name
 export const getHorseMedicalRecordsById = createAsyncThunk("horses/getHorseMedicalRecordsById",
     async (id) => {
@@ -47,9 +53,13 @@ export const horsesSlice = createSlice({
                 payload.forEach(horse => { state.horses[horse.name] = { ...horse} })
                 state.isLoading = false; 
              })
+             .addCase(loadHorses.rejected, (state=>state.hasError = true))
 
             .addCase(getHorseById.pending,(state)=>{state.isLoading = true})
             .addCase(getHorseById.fulfilled, (state, {payload})=>{state.horse = payload})
+
+            .addCase(getHorseByName.pending,(state)=>{state.isLoading = true})
+            .addCase(getHorseByName.fulfilled, (state, {payload})=>{state.horse = payload; state.isLoading = false})
 
             .addCase(getHorseMedicalRecordsById.pending, (state) => { state.hasError = false })
             .addCase(getHorseMedicalRecordsById.fulfilled, (state, { payload }) => { state.horses[payload[0].name].records = [...payload] })
@@ -60,7 +70,7 @@ export const horsesSlice = createSlice({
 //Selectors
 export const selectAllHorses = (state) => state.horses.horses
 export const selectHorse = (state)=>state.horses.horse
-export const selectIsLoading = state => state.isLoading
+export const selectIsLoading = (state) => state.horses.isLoading
 
 
 export default horsesSlice.reducer

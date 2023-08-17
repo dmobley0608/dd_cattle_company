@@ -9,7 +9,7 @@ const router = express.Router()
 router.get('/',  getAllHorses) 
 
 //Get Horse By Id
-router.get('/:id', getHorseById)
+// router.get('/:id', getHorseById)
 //Get Horse By Name
 router.get('/:name', getHorseByName)
 

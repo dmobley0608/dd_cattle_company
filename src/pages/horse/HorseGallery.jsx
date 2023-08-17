@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import ImageModal from '../../components/imageModal/ImageModal'
 import styles from './Horse.module.css'
 import { useSelector } from 'react-redux'
-import { NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { selectHorse } from '../../features/horses/horsesSlice'
 
 
-export default function HorseGallery() {
-  const { horseName } = useParams('horseName')
+export default function HorseGallery() {  
   const { mediaType } = useParams('type')
-  const horse = useSelector(state => state.horses.horses[horseName])
+  const horse = useSelector(selectHorse)
   const [media, setMedia] = useState([])
-
   const [activeImage, setActiveImage] = useState("")
 
   //Image Click
@@ -39,7 +38,7 @@ export default function HorseGallery() {
                 <img src={`${media.thumbnail}`} onClick={() => { imageClick(media) }} alt="horse" />
               </div>
               :
-              <video width="320" height="240" controls>
+              <video key={media.fileId} width="320" height="240" controls>
                 <source src={media.url}></source>
               </video>
             )

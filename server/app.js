@@ -93,7 +93,7 @@ app.get('/api/verify-user', (req, res, next) => {
 
 app.use('/*', (req,res)=>{
     res.sendFile("index.html", {root: path.join(__dirname,"../build")})
-})
+}) 
 
 
 

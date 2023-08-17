@@ -31,6 +31,7 @@ export default function Admin() {
     }
 
     const handleChange = (event, newValue) => {
+        
         setActiveScreen(newValue);
     };
 
@@ -54,6 +55,7 @@ export default function Admin() {
                         <Tab value='records' label="Records" >Medical Records</Tab>
                         <Tab value='media' label="Media">Media</Tab>
                     </Tabs>}
+                    {user.role === "guest" && <h3>You are logged in as a guest. You will not be able to alter data</h3>}
                     {isLoading ? <Loading/> :
                         activeScreen === 'about' ? <HorseForm />
                             :

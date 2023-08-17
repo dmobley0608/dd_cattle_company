@@ -24,6 +24,6 @@ exports.register = async (req, res)=>{
     let user = await User.findOne({where:{username:req.body.email}})
     if(user) return res.status(401).json("User Account already exists")
     const password = await hashPassword(req.body.password);
-    user= User.create({username:req.body.email, password:password})
+    user= User.create({username:req.body.email, password:password, role:'guest', createdAt: Date.now(), updatedAt:Date.now()})
     return res.status(200).json(user)
 }

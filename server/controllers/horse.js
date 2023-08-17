@@ -56,7 +56,7 @@ exports.getHorseByName = async(req, res)=>{
             where:{name:name},           
              logging:false
             })        
-        if(!horse)return res.status(404).json('Horse not found')
+        if(!horse)return res.status(404).json({})
         res.status(200).send(horse)
 
     }catch(err){

@@ -12,7 +12,7 @@ import Homepage from "./pages/homepage/Homepage";
 import { useDispatch, useSelector } from "react-redux";
 import { loadHorses } from "./features/horses/horsesSlice";
 import ErrorHandler from "./components/error-handler/ErrorHandler";
-import Login from "./features/user/Login";
+import Login from "./pages/user/Login";
 import { checkSession, selectUser } from "./features/user/userSlice";
 import Admin from "./pages/admin/Admin";
 import ScrollToTop from "react-scroll-to-top";
@@ -21,6 +21,7 @@ import HorseGallery from "./pages/horse/HorseGallery";
 import HorseJournal from "./pages/horse/HorseJournal";
 import Horse from "./pages/horse/Horse";
 import Horses from "./pages/horse/Horses"
+import Register from "./pages/user/Register";
 
 const Authenticater = ({ children }) => {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Homepage />} />
       <Route path="/admin" element={<Authenticater><Admin /></Authenticater>} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/horses" element={<Horses />} />
       <Route path="/horses/:horseName" element={<Horse />}>
         <Route path="about" element={<AboutHorse />} />

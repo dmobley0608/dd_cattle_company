@@ -44,7 +44,9 @@ export const horsesSlice = createSlice({
         isLoading: true,
         hasError: false,      
     },
-    reducers: {},
+    reducers: {
+        clearHorse: (state)=>{state.horse = {}}
+        },
     extraReducers: (builder) => {
         builder
             .addCase(loadHorses.pending, (state) => { state.isLoading = true })
@@ -66,6 +68,8 @@ export const horsesSlice = createSlice({
     }
 })
 
+//Actions
+export const {clearHorse} = horsesSlice.actions
 
 //Selectors
 export const selectAllHorses = (state) => state.horses.horses

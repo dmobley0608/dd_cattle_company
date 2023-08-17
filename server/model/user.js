@@ -26,9 +26,8 @@ exports.User = sequelize.define('User', {
 
 },
     {
-        tableName: 'user',  
-        createdAt: false,
-        updatedAt: false,              
+        tableName: 'users',   
+                    
         
     },
     

@@ -22,7 +22,7 @@ export default function SideMenu({ activeStyle }) {
      
           <select className="dropdown" onChange={(e) => dispatch(getHorseById(e.target.value))}>
             <option>Select Horse</option>
-            {Object.values(horses).map(horse => <option key={horse.id} value={horse.id}>{horse.name}</option>)}
+            {Object.values(horses).map(horse => <option key={horse.id} value={horse.name}>{horse.name}</option>)}
           </select>
           <Tabs id='side-menu' orientation='vertical' value={horse.name ? horse.name : null} onChange={(e, value) => { dispatch(getHorseByName(value)) }} indicatorColor='secondary' sx={{ m: 5, borderRight: 1, padding: 2 }}>
             <Tab className='menu' value={null} label="+ Add Horse" />

@@ -5,11 +5,11 @@ import { getHorseByName,  selectHorse, selectIsLoading } from "../../features/ho
 import JournalCard from './components/journalCard/JournalCard'
 import Loading from '../../components/loading/Loading'
 
-export default Journal = () => {
+export default function Journal() {
     const isLoading = useSelector(selectIsLoading)
     const { horseName } = useParams("horseName")
     const horse = useSelector(selectHorse)
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(getHorseByName(horseName))

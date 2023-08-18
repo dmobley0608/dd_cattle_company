@@ -1,6 +1,6 @@
 import React from "react";
 
-export default JournalCard = (journal) => {
+export default function JournalCard (journal) {
     return (
         <>
             <h2>{journal.title}</h2>

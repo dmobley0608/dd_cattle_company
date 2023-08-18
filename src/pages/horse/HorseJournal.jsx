@@ -1,17 +1,18 @@
-import React, { useEffect, useSelector, useDispatch } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
-import { loadHorse, selectIsLoading, selectHorse } from '../../features/horses/horsesSlice'
+import { getHorseByName,  selectHorse, selectIsLoading } from "../../features/horses/horsesSlice";
 import JournalCard from './components/journalCard/JournalCard'
 import Loading from '../../components/loading/Loading'
 
 export default Journal = () => {
     const isLoading = useSelector(selectIsLoading)
-    const { horseName } = useParams()
+    const { horseName } = useParams("horseName")
     const horse = useSelector(selectHorse)
     const dispath = useDispatch()
 
     useEffect(() => {
-        dispatchEvent(loadHorse())
+        dispatch(getHorseByName(horseName))
     }, [])
     return (
         <>

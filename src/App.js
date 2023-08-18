@@ -46,10 +46,10 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
       <Route path="horses" element={<Horses />} />
-      <Route path="horses/:horseName" element={<Horse />} errorElement={<ErrorHandler message={"Dang! You found a problem!"}/>}>
+      <Route path="horses/:horseName" element={<Horse />} >
         <Route path="about" element={<AboutHorse />} />
         <Route path="gallery/:mediaType" element={<HorseGallery />} />
-        <Route path="journal" element={<HorseJournal />} />
+        <Route path="journal" element={<HorseJournal />} errorElement={<ErrorHandler message={"Dang! You found a problem!"}/>}/>
       </Route>
       <Route path="/*" element={<ErrorHandler message="This Page is currently under construction" />} />
 

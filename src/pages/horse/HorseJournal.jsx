@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
-import { getHorseByName,  selectHorse, selectIsLoading } from "../../features/horses/horsesSlice";
+import { getHorseByName, selectHorse, selectIsLoading } from "../../features/horses/horsesSlice";
 import JournalCard from './components/journalCard/JournalCard'
 import Loading from '../../components/loading/Loading'
-
+import styles from './Horse.module.css'
+import CardContainer from '../../components/cardContainer/CardContainer';
 export default function Journal() {
     const isLoading = useSelector(selectIsLoading)
-    const { horseName } = useParams("horseName")
     const horse = useSelector(selectHorse)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        dispatch(getHorseByName(horseName))
-    }, [])
+
+
     return (
-        <>
+        <div className={styles['journal']}>
             <h1>Riding Journal For {horse.name}</h1>
             {isLoading ? <Loading /> :
-
-                horse.Journal.map(journal => (<JournalCard journal={journal} />))
+                <CardContainer>   
+                     {horse.RidingLogs.map(journal => (<JournalCard key={journal.id} journal={journal} />))}
+                </CardContainer>
             }
-        </>
+
+        </div>
     )
 }

@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const { sequelize } = require("../utils/sequelize");
 const { Horses } = require("./horses");
 
-const RidingLog = sequelize.define('RidingLog', {
+exports.RidingLog = sequelize.define('RidingLog', {
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,

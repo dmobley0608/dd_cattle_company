@@ -14,9 +14,10 @@ html {
   max-width: 400px;
   height: 30px;
   display: flex;
-  position: fixed;
+  position: absolute;
   justify-content: space-between;
   left: 50%;
+  top:120px;
   transform: translate(-50%, 0);
   background-color: saddlebrown;
   padding:5px 15px;
@@ -54,12 +55,12 @@ html {
 
 .horse-container { 
   width: 100%;
-  margin: 0 auto;
+  margin: 5em auto;
   padding-right: 15px;  
   display:flex;
   flex-direction: column;
-  justify-content: center;
-  position: relative;
+  justify-content: center;  
+  
 }
 
 .horse-container .two-col {
@@ -81,16 +82,14 @@ html {
   text-shadow: 2px 2px 1px rgb(187, 187, 187);
   color: rgb(0, 0, 0);
 }
-.horse-page .about{
-  margin-top: 75px;
+.horse-page .about{ 
   padding-right: 18px;
   padding-left: 0;
 }
 .horse-page .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
-  margin-top: 150px;
+  justify-content: center;  
 }
 .horse-page .gallery .imgContainer {
   width: 100%;

@@ -44,8 +44,7 @@ export default function Horse() {
           <nav onMouseLeave={handleExit}>
             <NavLink className={activeStyle} to="about">About</NavLink>
             <NavLink id='gallery-nav' onMouseOver={handleHover}   className={activeStyle } to="gallery/images">Gallery</NavLink>
-            <NavLink className={activeStyle} to="journal">Riding Journal</NavLink>
-            
+            <NavLink className={activeStyle} to="journal">Riding Journal</NavLink>            
               <div>
                 <ul className={styles["sub-menu"]} onMouseOver={handleHover} onMouseLeave={handleExit} >
                   <NavLink className={styles['nav-link']} to={`/horses/${horse.name}/gallery/images`}>Images</NavLink>

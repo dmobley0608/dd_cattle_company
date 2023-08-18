@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from './Horse.module.css'
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectHorse } from "../../features/horses/horsesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getHorseByName, selectHorse } from "../../features/horses/horsesSlice";
 
 
 export default function AboutHorse() {    
     const horse = useSelector(selectHorse)
-
+   
+    
     
   //Random Image 
   const getRandomImage = () => {
@@ -31,8 +32,9 @@ export default function AboutHorse() {
           {horse.hma && <p>Breed: {horse.breed}</p>}
           <p>Color: {horse.color}</p>
           <p>Sex: {horse.sex}</p>          
-          <p>
-            Age: {new Date().getFullYear() - horse.birth_date.split("-")[0]}{" "}
+          <p>Age: {!horse.birth_date ? "Retrieving Birth Date" :
+            new Date().getFullYear() - horse.birth_date.split("-")[0]
+            }
           </p>         
         </div>
         <div className={styles["col"]}>{getRandomImage()} </div>

@@ -1,6 +1,7 @@
 const { Horses } = require("../model/horses")
 const { Media } = require("../model/media")
 const { MedicalRecord } = require("../model/medical_record")
+const { RidingLog } = require("../model/riding_log")
 
 
 exports.getAllHorses = async(req, res)=>{
@@ -10,7 +11,8 @@ exports.getAllHorses = async(req, res)=>{
         const horses = await Horses.findAll({           
             include:[
                 Media, 
-                MedicalRecord
+                MedicalRecord,
+                RidingLog
             ], 
              order:[['name', 'ASC'],[MedicalRecord, 'date', 'DESC']], 
             logging:false
@@ -52,7 +54,7 @@ exports.getHorseByName = async(req, res)=>{
     try{
         const name = req.params.name           
         const horse = await Horses.findOne({
-            include:[Media, MedicalRecord],
+            include:[Media, MedicalRecord, RidingLog],
             where:{name:name},           
              logging:false
             })        

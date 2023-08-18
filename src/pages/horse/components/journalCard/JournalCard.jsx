@@ -1,13 +1,12 @@
 import React from "react";
-
-export default function JournalCard (journal) {
+import styles from './JournalCard.module.css'
+export default function JournalCard ({journal}) {   
     return (
-        <>
-            <h2>{journal.title}</h2>
-            <h3>{journal.date}</h3>
-            <h3>{journal.body}</h3>
+        <div className={styles['journal-card']}>                  
+            <h3>{new Date(journal.date).toDateString()}</h3>
+            <h3>{journal.notes}</h3>
             <h3>-{journal.user}</h3>
-        </>
+        </div>
     )
 }
 

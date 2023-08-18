@@ -23,8 +23,7 @@ async(id)=>{
 
 export const getHorseByName = createAsyncThunk("getHorseByName",
 async(name)=>{
-    const horse = await ghbn(name)
-    console.log(horse.data)
+    const horse = await ghbn(name)   
     return horse.data
 }
 )

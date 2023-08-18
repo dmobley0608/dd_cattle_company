@@ -14,7 +14,7 @@ const passport = require('./utils/authentication');
 const { Horses } = require('./model/horses');
 const { Media } = require('./model/media');
 const { MedicalRecord } = require('./model/medical_record');
-
+const {RidingLog} = require('./model/riding_log')
 
 const app = express();
 app.use(express.static(path.join(__dirname, "..", "build")));
@@ -73,6 +73,7 @@ Horses.hasMany(Media, {foreignKey:'horse_id'})
 Media.belongsTo(Horses, {keyType:'horse_id'})
 Horses.hasMany(MedicalRecord, {foreignKey:'horse_id'})
 MedicalRecord.belongsTo(Horses, {keyType:'horse_id'})
+Horses.hasMany(RidingLog, {foreignKey:"horse_id"})
 sequelizeSync();
 
                                         //Routes   

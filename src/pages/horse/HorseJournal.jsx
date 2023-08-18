@@ -1,6 +1,6 @@
 import React, { useEffect, useSelector, useDispatch } from 'react';
 import { useParams } from 'react-router-dom'
-import { loadHorse, selectIsLoading } from '../../features/horse/horseSlice'
+import { loadHorse, selectIsLoading, selectHorse } from '../../features/horses/horsesSlice'
 import JournalCard from './components/journalCard/JournalCard'
 import Loading from '../../components/loading/Loading'
 

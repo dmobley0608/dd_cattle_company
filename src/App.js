@@ -40,7 +40,7 @@ const Authenticater = ({ children }) => {
 //Create Router
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />}>
+    <Route path="/" element={<Root />} errorElement={<ErrorHandler message={"Dang! You found a problem!"}/>}>
       <Route path="/" element={<Homepage />} />
       <Route path="/admin" element={<Authenticater><Admin /></Authenticater>} />
       <Route path="/login" element={<Login />} />

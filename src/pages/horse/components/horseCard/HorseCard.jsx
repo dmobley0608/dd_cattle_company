@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './HorseCard.module.css'
-import { Link } from 'react-router-dom'
+import {  NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectIsLoading } from '../../../../features/horses/horsesSlice'
 
@@ -22,7 +22,7 @@ export default function HorseCard({ horse }) {
   }, [isLoading, horse.Media])
 
   return (
-    <Link className={styles['horse-card']} to={`/horses/${horse.name}/about`}>
+    <NavLink className={styles['horse-card']} to={`/horses/${horse.name}/about`}>
       <div className={styles['card-top']}>
         {image ? <img src={image} alt="horseImg" /> : <h3>Image Coming Soon</h3>}
       </div>
@@ -33,6 +33,6 @@ export default function HorseCard({ horse }) {
         <h3>Sex: {horse.sex}</h3>
         <h3>Foal Year: {horse.birth_date.split('-')[0]}</h3>
       </div>
-    </Link>
+    </NavLink>
   )
 }

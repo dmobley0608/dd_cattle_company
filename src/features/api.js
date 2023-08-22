@@ -8,6 +8,6 @@ const url = ()=>{
 }
 export const apiClient = axios.create(
     {
-    baseURL: `/api/`      
+    baseURL: url()      
     }
 );

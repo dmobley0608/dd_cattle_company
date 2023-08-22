@@ -9,8 +9,8 @@
     padding-top:105px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items:start;
+    justify-content: flex-start;
+    align-items:flex-start;
     overflow: hidden;
     font-family: 'Just Another Hand', cursive;   
 

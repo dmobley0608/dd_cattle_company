@@ -1,17 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from './Horse.module.css'
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getHorseByName, selectHorse } from "../../features/horses/horsesSlice";
+import {  useSelector } from "react-redux";
+import {  selectHorse } from "../../features/horses/horsesSlice";
 
 
 export default function AboutHorse() {    
-    const horse = useSelector(selectHorse)
-   
-    
+    const horse =  useSelector(selectHorse)   
     
   //Random Image 
-  const getRandomImage = () => {
+  const getRandomImage = () => {  
     let images = horse.Media.filter(img=>img.fileType === 'image')
     if (images.length >= 1) {
       const randomNumber = Math.floor(Math.random() * images.length)
@@ -19,6 +16,7 @@ export default function AboutHorse() {
     }
     return <h3>Image Coming Soon</h3>
   }
+
 
   return (
     <div className={styles['about']}>

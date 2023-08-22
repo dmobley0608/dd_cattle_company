@@ -11,9 +11,9 @@ import { getHorseByName,  selectHorse, selectIsLoading } from "../../features/ho
 
 export default function Horse() { 
   const isLoading = useSelector(selectIsLoading)
-  const { horseName } = useParams("horseName");   
-   const dispatch = useDispatch()
-   const horse = useSelector(selectHorse)
+  const { horseName } = useParams("horseName"); 
+  const horse = useSelector(selectHorse)
+  const dispatch = useDispatch()
   
 
  

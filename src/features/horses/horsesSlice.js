@@ -54,7 +54,7 @@ export const horsesSlice = createSlice({
                 payload.forEach(horse => { state.horses[horse.name] = { ...horse} })
                 state.isLoading = false; 
              })
-             .addCase(loadHorses.rejected, (state=>state.hasError = true))
+             .addCase(loadHorses.rejected, (state=>{state.hasError = true}))
 
             .addCase(getHorseById.pending,(state)=>{state.isLoading = true})
             .addCase(getHorseById.fulfilled, (state, {payload})=>{state.horse = payload})

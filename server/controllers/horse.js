@@ -7,7 +7,7 @@ const { RidingLog } = require("../model/riding_log")
 exports.getAllHorses = async(req, res)=>{
     try{
          
-      
+     
         const horses = await Horses.findAll({           
             include:[
                 Media, 
@@ -17,7 +17,7 @@ exports.getAllHorses = async(req, res)=>{
              order:[['name', 'ASC'],[MedicalRecord, 'date', 'DESC']], 
             logging:false
         })
-        
+       
         return res.status(200).json(horses)
     }catch(err){
         res.status(500).json(err.message)

@@ -1,7 +1,7 @@
 {
     "name": "client",
     "version": "0.1.0",
-    "private": true,    
+    "private": true,
     "dependencies": {
         "@emotion/react": "^11.11.1",
         "@emotion/styled": "^11.11.0",
@@ -13,6 +13,7 @@
         "@testing-library/jest-dom": "^5.17.0",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
+        "animate.css": "^4.1.1",
         "axios": "^1.4.0",
         "connect-pg-simple": "^9.0.0",
         "dayjs": "^1.11.8",
@@ -55,7 +56,7 @@
         ]
     },
     "devDependencies": {
-        "dotenv": "^16.3.1",
-        "@babel/plugin-proposal-private-property-in-object": "^7.21.0-placeholder-for-preset-env.2"
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.0-placeholder-for-preset-env.2",
+        "dotenv": "^16.3.1"
     }
 }

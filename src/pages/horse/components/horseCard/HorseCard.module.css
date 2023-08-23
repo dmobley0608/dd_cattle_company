@@ -1,15 +1,18 @@
 .horse-card{   
-    width:20em;
-    height:25em;
+    width:300px;
+    height:400px;
     margin:10px 1em;
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
     overflow: hidden;
-    background-color: antiquewhite;
+    background-color: antiquewhite;    
+    transition: transform .25s;
+}
+
+.horse-card a{
     text-decoration: none;
     color: inherit;
-    transition: transform .25s;
 }
 
 .horse-card:hover{

@@ -1,6 +1,6 @@
 import axios from "axios";
 const url = ()=>{
-    if(process.env.REACT_APP_API_BASE_URL === " production"){
+    if(process.env.REACT_APP_API_BASE_URL === "production"){
         return `/api/`
     }else{
         return "http://localhost:9000/api/"
@@ -8,6 +8,6 @@ const url = ()=>{
 }
 export const apiClient = axios.create(
     {
-    baseURL: url()      
+    baseURL: "http://localhost:9000/api/"     
     }
 );

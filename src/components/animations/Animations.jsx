@@ -1,14 +1,13 @@
 import 'animate.css'
-import { Fragment } from 'react'
 
-export const ZoomInEntranceAnimation = ({styles,children})=>(
-    <div className={`${styles} animate__animated animate__zoomIn`}>
+export const ZoomInEntranceAnimation = ({id,styles,children})=>(
+    <div id={id} className={`${styles} animate__animated animate__zoomIn`}>
         {children}
     </div>
 )
 
-export const HingeExit = ({styles, children})=>(
-    <div className={`${styles} animate__animated animate__hinge`}>
+export const HingeExit = ({id,styles, children})=>(
+    <div id={id} className={`${styles} animate__animated animate__hinge`}>
         {children}
     </div>
 )

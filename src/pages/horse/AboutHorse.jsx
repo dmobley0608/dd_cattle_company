@@ -23,7 +23,7 @@ export default function AboutHorse() {
 
 
   return (
-    <div className={styles['about']}>
+    <div className={'animate__animated animate__fadeIn '+styles['about']}>
       <h1>{horse.name}</h1>
 
       {/* General Information */}

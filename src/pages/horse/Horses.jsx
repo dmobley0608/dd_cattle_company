@@ -14,14 +14,14 @@ export default function Horses() {
 
   useEffect(() => {
     dispatch(loadHorses());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div >
       {isLoading ?
         <Loading />
         :
-        <CardContainer>{Object.values(horses).map(horse =>
+        <CardContainer id='card-container'>{Object.values(horses).map(horse =>
          
             <HorseCard key={horse.id} horse={horse} />
           

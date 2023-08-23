@@ -8,6 +8,6 @@ const url = ()=>{
 }
 export const apiClient = axios.create(
     {
-    baseURL: "http://localhost:9000/api/"     
+    baseURL: url()    
     }
 );

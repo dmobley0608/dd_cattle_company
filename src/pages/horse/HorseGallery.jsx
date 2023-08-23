@@ -29,7 +29,7 @@ export default function HorseGallery() {
 
   return (
     <div>  {/* Gallery */}      
-      <div className={styles['gallery-container']}>
+      <div className={'animate__animated animate__fadeIn '+styles['gallery-container']}>
         <div id="images" className={styles['gallery']}>
           {media.length > 0 ?
             media.map(media =>

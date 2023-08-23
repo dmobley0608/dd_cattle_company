@@ -13,7 +13,7 @@ export default function Journal() {
 
 
     return (
-        <div className={styles['journal']}>
+        <div className={'animate__animated animate__fadeIn '+styles['journal']}>
             <h1>Riding Journal For {horse.name}</h1>
             {isLoading ? <Loading /> :
                 <CardContainer>   

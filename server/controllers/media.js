@@ -23,32 +23,36 @@ exports.getMediaByHorseId = async (req, res) => {
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
-    // const horses = await Horses.findAll();
-
-    // for(let horse of horses){
+    // const horses = await Horses.findAll();   
+    // for (let horse of horses) {
     //     const media = ik.listFiles({
-    //         tags:horse.name
-    //     },async(err, result)=>{
-    //         if(result.length > 0){
-    //             for(let data of result){
-    //             await Media.create({
-    //                 horse_id:horse.id, 
-    //                 url: data.url,
-    //                 thumbnail:`https://ik.imagekit.io/7a4ad0swj/tr:n-black_thumb${data.filePath}`, 
-    //                 fileType:data.fileType,
-    //                 fileId:data.fileId
-    //             }) 
-                
-    //             }
+    //         tags: horse.name,
+    //         limit: 200
+    //     }, async (err, result) => {
+    //         if (result.length > 0) {
+
+    //             for (let data of result) {
+    //                 if (!Media.findAll({ where: { fileId: data.fileId } }))
+    //                     await Media.create({
+    //                         horse_id: horse.id,
+    //                         url: data.url,
+    //                         thumbnail: `https://ik.imagekit.io/7a4ad0swj/tr:n-black_thumb${data.filePath}`,
+    //                         fileType: data.fileType,
+    //                         fileId: data.fileId
+    //                     })
+    //                                }
     //         }
 
     //     })
     // }
-    res.json("finished")
+    // res.json("finished")
 }
 
 exports.uploadMedia = async (req, res) => {
-    const { horse_id, horse_name } = req.params
+   let { horse_id, horse_name } = req.params
+    if(horse_name.split(' ').length > 1){
+        horse_name = horse_name.replace(' ', '_')
+    }
     try {
 
         const fs = require('fs-extra')
@@ -58,6 +62,7 @@ exports.uploadMedia = async (req, res) => {
             if (err) throw err
             for (const file of files) {
                 fs.readFile(`${pathUrl}/${file}`, async (err, data) => {
+                    // ik.createFolder({folderName:horse_name, parentFolderPath:'ddc'})
                     ik.upload({
                         file: data,
                         fileName: file,

@@ -22,7 +22,7 @@ app.use(express.static("public"));
 
                                         //Middleware 
 //CORS
-const whitelist = ["localhost:3000", 'https://ddcattle.company', 'https://inspector.swagger.io','null']
+const whitelist = ['https://ddcattle.company']
 app.use((req, res, next)=>{  next()   },cors({    
    
     "Access-Control-Allow-Origin":(origin, callback)=>{        

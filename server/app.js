@@ -14,7 +14,8 @@ const passport = require('./utils/authentication');
 const { Horses } = require('./model/horses');
 const { Media } = require('./model/media');
 const { MedicalRecord } = require('./model/medical_record');
-const {RidingLog} = require('./model/riding_log')
+const {RidingLog} = require('./model/riding_log');
+const { login } = require('./controllers/user');
 
 const app = express();
 app.use(express.static(path.join(__dirname, "..", "build")));
@@ -90,6 +91,13 @@ app.get('/api/verify-user', (req, res, next) => {
     }
 
 });
+
+//google routes
+app.get('/login/google', passport.authenticate('google'))
+app.get('/oauth/google', passport.authenticate('google',{successRedirect:'/', failureRedirect:'/login'}),(req, res)=>{
+    const user = req.user  
+        res.status(200).json(user);
+})
 
 
 app.use('/*', (req,res)=>{

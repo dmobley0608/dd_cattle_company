@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadHorses } from "./features/horses/horsesSlice";
 import ErrorHandler from "./components/error-handler/ErrorHandler";
 import Login from "./pages/user/Login";
-import { checkSession, selectUser } from "./features/user/userSlice";
+import { checkSession, selectUser, verifyUser } from "./features/user/userSlice";
 import Admin from "./pages/admin/Admin";
 import ScrollToTop from "react-scroll-to-top";
 import AboutHorse from "./pages/horse/AboutHorse";
@@ -37,6 +37,8 @@ const Authenticater = ({ children }) => {
     return <ErrorHandler message={"You Must Be Logged In To View This Page!"} />;
   }
 };
+
+
 //Create Router
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,7 +59,10 @@ const router = createBrowserRouter(
   )
 );
 function App() {
-
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(verifyUser())
+  }, [])
 
   return (
     <div className="App">

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { checkUserSession, emailLogin, userLogout } from "./userApi";
+import { checkUserSession, emailLogin, userVarifaction, userLogout } from "./userApi";
 
 
 //Login
@@ -9,6 +9,11 @@ export const login = createAsyncThunk('login',
 
         return data;
     })
+export const verifyUser = createAsyncThunk('google-login',
+async()=>{
+    const res = await userVarifaction()
+   return res.data
+})
 // Check For Existing Session
 export const checkSession = createAsyncThunk('checkSession',
     async () => {
@@ -37,6 +42,10 @@ export const userSlice = createSlice({
             .addCase(login.pending, (state) => { state.isLoading = true; state.hasError = false })
             .addCase(login.fulfilled, (state, { payload }) => { state.username = payload.username; state.role = payload.role; state.isLoading = false })
             .addCase(login.rejected, (state) => { state.isLoading = false; state.hasError = true; })
+
+            .addCase(verifyUser.pending, (state) => { state.isLoading = true; state.hasError = false })
+            .addCase(verifyUser.fulfilled, (state, { payload }) => { state.username = payload.username; state.role = payload.role; state.isLoading = false })
+            .addCase(verifyUser.rejected, (state) => { state.isLoading = false; state.hasError = true; })
 
             .addCase(checkSession.pending, (state) => { state.isLoading = true; state.hasError = false })
             .addCase(checkSession.fulfilled, (state, { payload }) => { state.username = payload.username; state.role = payload.role; state.isLoading = false })

@@ -15,4 +15,5 @@ router.post('/login',upload.none(),  passport.authenticate('local'), login)
 router.get('/logout',upload.none(), logout) 
 
 
+
 module.exports = router 

@@ -5,6 +5,7 @@ const session = require('express-session')
 const horsesRouter = require('./routes/horsesRouter')
 const medicalRouter = require('./routes/medicalRecordsRouter')
 const mediaRouter = require('./routes/mediaRouter')
+const journalRouter = require('./routes/journalRouter')
 const cors = require('cors');
 const userRouter = require('./routes/userRouter')
 const multer = require('multer')
@@ -16,6 +17,7 @@ const { Media } = require('./model/media');
 const { MedicalRecord } = require('./model/medical_record');
 const {RidingLog} = require('./model/riding_log');
 const { login } = require('./controllers/user');
+const { User } = require('./model/user');
 
 const app = express();
 app.use(express.static(path.join(__dirname, "..", "build")));
@@ -81,6 +83,7 @@ sequelizeSync();
 app.use('/api/horses', upload.none(), horsesRouter)
 app.use('/api/medical-records', upload.none(), medicalRouter)
 app.use('/api/media', mediaRouter)
+app.use('/api/journal',upload.none(), journalRouter)  
 app.use('/api/user', upload.none(), userRouter)
 app.get('/api/verify-user', (req, res, next) => {
     const user = req.user
@@ -95,8 +98,8 @@ app.get('/api/verify-user', (req, res, next) => {
 //google routes
 app.get('/login/google', passport.authenticate('google'))
 app.get('/oauth/google', passport.authenticate('google',{successRedirect:'/', failureRedirect:'/login'}),(req, res)=>{
-    const user = req.user  
-        res.status(200).json(user);
+    const user = req.user   
+        res.status(200).json(user); 
 })
 
 

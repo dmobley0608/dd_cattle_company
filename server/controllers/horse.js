@@ -2,6 +2,7 @@ const { Horses } = require("../model/horses")
 const { Media } = require("../model/media")
 const { MedicalRecord } = require("../model/medical_record")
 const { RidingLog } = require("../model/riding_log")
+const { User } = require("../model/user")
 
 
 exports.getAllHorses = async(req, res)=>{
@@ -54,7 +55,8 @@ exports.getHorseByName = async(req, res)=>{
     try{
         const name = req.params.name           
         const horse = await Horses.findOne({
-            include:[Media, MedicalRecord, RidingLog],
+            include:[Media, MedicalRecord,RidingLog],
+            order:[[MedicalRecord, 'date', 'DESC'], [RidingLog, 'date', 'DESC']],
             where:{name:name},           
              logging:false
             })        

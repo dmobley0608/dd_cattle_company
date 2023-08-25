@@ -4,7 +4,7 @@ const { Session } = require("./session")
 
 exports.login = (req, res) => {
     try{       
-        res.status(200).json({username:req.user.username, role:req.user.role})
+        res.status(200).json({id:req.user.id, username:req.user.username, role:req.user.role})
     }catch(err){
         console.log(err)
     }

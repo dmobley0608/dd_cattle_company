@@ -9,6 +9,6 @@ exports.sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proc
 exports.sequelizeSync=async()=>{
     console.log('Connecting To DB')
     console.log('Syncing DB')
-    this.sequelize.sync({alter:true, logging:false})
+    await this.sequelize.sync({alter:true, logging:false})
     console.log('DB Successfully Connected and Synced')
 }

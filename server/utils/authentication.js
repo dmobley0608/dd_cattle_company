@@ -47,12 +47,12 @@ passport.use(new GoogleStrategy({
 passport.serializeUser(function (user, cb) {
  
     process.nextTick(() => {
-        cb(null, { username: user.username, role: user.role })
+        cb(null, {id:user.id, username: user.username, role: user.role })
     })
 });
 passport.deserializeUser(function (user, cb) {   
     process.nextTick(() => {
-        cb(null, { username: user.username, role: user.role })
+        cb(null, {id:user.id, username: user.username, role: user.role })
     })
 })
 

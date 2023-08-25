@@ -77,6 +77,7 @@ Media.belongsTo(Horses, {keyType:'horse_id'})
 Horses.hasMany(MedicalRecord, {foreignKey:'horse_id'})
 MedicalRecord.belongsTo(Horses, {keyType:'horse_id'})
 Horses.hasMany(RidingLog, {foreignKey:"horse_id"})
+
 sequelizeSync();
 
                                         //Routes   

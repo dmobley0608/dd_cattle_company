@@ -14,3 +14,6 @@ export const deleteRecordById = async(id, token)=>await apiClient.delete(`medica
 
 export const uploadImage = async(horse_id, horse_name,file, token)=>await apiClient.post(`/media/${horse_id}/${horse_name}`, file,  {headers:{'Authorization': `${token}`}})
 export const deleteImage = async(asset_id, token)=>await apiClient.delete(`/media/${asset_id}`, {headers:{'Authorization': `${token}`}})
+
+export const addRidingRecord = async(horse_id, ridingLog)=>await apiClient.post(`/journal/${horse_id}`, ridingLog)
+export const deleteRidingRecord = async(recordId)=>await apiClient.delete(`/journal/${recordId}`)

@@ -12,8 +12,8 @@
     justify-content: flex-start;
     align-items:flex-start;
     overflow: hidden;
-    font-family: 'Just Another Hand', cursive;   
-
+    font-family: 'Just Another Hand', cursive;     
+    position:relative;
 }
 
 
@@ -24,4 +24,12 @@
     margin: 0;
     margin-bottom: 3px;
     
+}
+
+.journal-card .deleteBtn{
+    position: absolute;
+    top:80px;
+    right:75px;
+    width:75px;
+    background-color: red;
 }

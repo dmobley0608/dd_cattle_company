@@ -1,7 +1,7 @@
 import React, {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHorseById, selectHorse } from '../../features/horses/horsesSlice'
-import './admin-components.styles.css'
+
 
 import { deleteRecordById, } from '../../features/horses/horsesAPI'
 import MedicalRecordForm from './forms/MedicalRecordForm'

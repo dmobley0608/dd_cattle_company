@@ -227,4 +227,7 @@
     .record-list .cell {
         font-size: 12px;
     }
+    form{
+        max-width: 95%;
+    }
 }

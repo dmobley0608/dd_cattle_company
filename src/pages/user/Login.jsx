@@ -43,17 +43,17 @@ export default function Login() {
 
   return (
 
-    <Box component="form" className={styles["login-form"]} onSubmit={handleSubmit} sx={{ width: '100%' }}>
+    <Box component="form" className={styles["login-form"]} onSubmit={handleSubmit} >
       <h1>Login</h1>
       {errors.map(error => <h4 key={error} className='error'>{error}</h4>)}
       <TextField id="email" label="Email" margin="normal" autoComplete='username' onChange={(e) => handleChange(e)} required />
       <TextField id='password' label="Password" margin="normal" type='password' autoComplete='current-password' onChange={(e) => handleChange(e)} required />
-      <LoadingButton variant='contained' type="submit" loading={isLoading}>Login</LoadingButton>
+      <LoadingButton variant='contained' type="submit" loading={isLoading} sx={{ marginBottom:'15px' }}>Login</LoadingButton>
 
       <Button variant='outlined' href="/register">Sign Up !</Button>
       <hr />
       <div>
-        <h4>Login with via Google</h4>
+        <h4>Login with Google</h4>
         <a href='https://ddcattle.company/login/google' >
           <img src={googleLogo} alt="google" width="50px" />
         </a>

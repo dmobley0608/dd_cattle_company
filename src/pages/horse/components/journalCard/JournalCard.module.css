@@ -2,11 +2,12 @@
     background: url("../../../../static/images/paper.png");
     background-repeat: none;
     background-size: cover;
-    height: 500px;
+    height:fit-content;    
     width: 300px;
     padding-left: 25px;
     padding-right: 5px;
     padding-top:105px;
+    padding-bottom: 150px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

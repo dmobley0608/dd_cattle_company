@@ -36,6 +36,9 @@ exports.Horses = sequelize.define('Horses',{
     price:{
         type:DataTypes.DECIMAL
     },
+    off_property_rides:{
+        type:DataTypes.BOOLEAN
+    }
    
     
 },{    

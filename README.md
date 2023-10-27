@@ -1,7 +1,7 @@
 
 # DD CATTLE COMPANY
   This is a simple front and backend project that allows the DD Cattle Company to display their animals and keep track of their records. This program can be easily modified to adapt with any business.
-  **UPDATED 8/12/2023 TO UTILIZE EXPRESS AND SERVE BACKEND WITH REACT STATIC BUILD FOLDER
+  **UPDATED 8/12/2023 TO UTILIZE EXPRESS AND SERVE FRONTEND WITH REACT STATIC BUILD FOLDER
 
 ## Installation
   **This project relies on a postgres database. Be sure to have a database already created. This project also utilizes ImageKit. A free account can be created [here](https://imagekit.io/).**

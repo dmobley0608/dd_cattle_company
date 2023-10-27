@@ -3,7 +3,7 @@ import React, {  useState } from 'react'
 import { useFormik } from 'formik'
 import { addMedicalRecord, updateMedicalRecord } from '../../../features/horses/horsesAPI'
 import { useDispatch, useSelector } from 'react-redux'
-import { getHorseById, selectHorse } from '../../../features/horses/horsesSlice'
+import { getHorseByName, selectHorse } from '../../../features/horses/horsesSlice'
 import { selectUser } from '../../../features/user/userSlice'
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
@@ -37,7 +37,7 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
 
                     if (res.status === 201) {
                         alert('Record Successflly Added')
-                        dispatch(getHorseById(horse.id))
+                        dispatch(getHorseByName(horse.name))
                         setRecord({})
                     } else {
                         alert('Error Adding Record')

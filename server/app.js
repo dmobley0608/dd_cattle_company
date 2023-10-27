@@ -20,23 +20,23 @@ const { login } = require('./controllers/user');
 const { User } = require('./model/user');
 
 const app = express();
-app.use(express.static(path.join(__dirname, "..", "build")));
+app.use(express.static(path.join(__dirname, "..", "build")));  
 app.use(express.static("public"));
 
                                         //Middleware 
 //CORS
 const whitelist = ['https://ddcattle.company']
-app.use((req, res, next)=>{  next()   },cors({    
-   
+app.use((req, res, next)=>{  next()   },cors({     
+    
     "Access-Control-Allow-Origin":(origin, callback)=>{        
         if(whitelist.indexOf(origin) > -1){
             callback(null, true)
         }else{
-            callback(new Error(" Sorry You Do Not Have Permission To Access This Material"))
+            callback(new Error(" Sorry You Do Not Have Permission To Access This Material"))  
         }
        },
-       'Access-Control-Allow-Credentials':true,   
-}))  
+       'Access-Control-Allow-Credentials':true,    
+}))    
 
 
 
@@ -45,7 +45,7 @@ app.use((req, res, next)=>{  next()   },cors({
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-//Multer
+//Multer 
 const upload = multer();
  
 

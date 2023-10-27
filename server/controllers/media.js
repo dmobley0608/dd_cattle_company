@@ -1,6 +1,5 @@
 const ImageKit = require("imagekit");
 const path = require("path")
-
 const { Horses } = require('../model/horses');
 const { Media } = require('../model/media');
 
@@ -27,7 +26,7 @@ exports.getMediaByHorseId = async (req, res) => {
     // for (let horse of horses) {
     //     const media = ik.listFiles({
     //         tags: horse.name,
-    //         limit: 200
+    //         limit: 200 
     //     }, async (err, result) => {
     //         if (result.length > 0) {
 

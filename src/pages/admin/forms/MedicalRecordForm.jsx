@@ -43,7 +43,9 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
                         alert('Error Adding Record')
                     }
                 })
+                setLoading(false)
             }
+
 
             }catch(err){
                 alert("You do not have valid permision to make or alter records!")

@@ -1,6 +1,6 @@
 import React, {  useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getHorseById, selectHorse } from '../../features/horses/horsesSlice'
+import { getHorseByName,getHorseById, selectHorse } from '../../features/horses/horsesSlice'
 
 
 import { deleteRecordById, } from '../../features/horses/horsesAPI'
@@ -21,7 +21,7 @@ export default function AdminRecords({ user }) {
   const handleDelete = async (id) => {
     await deleteRecordById(id, user.token).then(res => {
       alert('Record Deleted')
-      dispatch(getHorseById(horse.id))
+      dispatch(getHorseByName(horse.name))
     })
 
   }

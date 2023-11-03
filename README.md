@@ -1,6 +1,6 @@
 
 # DD CATTLE COMPANY
-  This is a simple front and backend project that allows the DD Cattle Company to display their animals and keep track of their records. This program can be easily modified to adapt with any business.
+  This is a fullstack project that allows the DD Cattle Company to display their animals and keep track of their records. This program can be easily modified to adapt with any business.
   **UPDATED 8/12/2023 TO UTILIZE EXPRESS AND SERVE FRONTEND WITH REACT STATIC BUILD FOLDER
 
 ## Installation

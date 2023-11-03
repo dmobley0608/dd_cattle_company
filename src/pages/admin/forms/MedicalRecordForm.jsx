@@ -90,6 +90,7 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
     return (
         <div>
             <form onSubmit={formik.handleSubmit} className='form' >
+                <h1>{horse.name}</h1> 
                 <div className='flex j-between mb-1'>
                     <Button  variant='contained' onClick={() => { setRecord(() => null) }}><BackspaceIcon />Clear Form</Button>
                     <Button  variant='contained' onClick={() => { setOpen(true) }}><NewspaperIcon />View Records</Button>
@@ -110,6 +111,9 @@ export default function MedicalRecordForm({ record, setRecord, setOpen }) {
                     <div className="column jc align-start">
                         <CheckBoxSlider label='Yearly Vaccines' name='yearly_vaccines' value={formik.values.yearly_vaccines || ''} onChange={formik.handleChange} />
                         <CheckBoxSlider label='rabies' name='rabies' value={formik.values.rabies || ''} onChange={formik.handleChange} />
+                    </div>
+                    <div className="column jc align-start">
+                        <CheckBoxSlider label='Trimmed Feet' name='trimmed' value={formik.values.trimmed || ''} onChange={formik.handleChange} />                      
                     </div>
                 </div>
                 <TextArea label="Notes" name="notes" value={formik.values.notes|| ''} onChange={formik.handleChange} />

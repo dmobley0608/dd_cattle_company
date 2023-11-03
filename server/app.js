@@ -17,8 +17,8 @@ const { Media } = require('./model/media');
 const { MedicalRecord } = require('./model/medical_record');
 const {RidingLog} = require('./model/riding_log');
 const { login } = require('./controllers/user');
-const { User } = require('./model/user');
-
+const { User } = require('./model/user');   
+ 
 const app = express();
 app.use(express.static(path.join(__dirname, "..", "build")));  
 app.use(express.static("public"));
@@ -26,7 +26,7 @@ app.use(express.static("public"));
                                         //Middleware 
 //CORS
 const whitelist = ['https://ddcattle.company']
-app.use((req, res, next)=>{  next()   },cors({     
+app.use((req, res, next)=>{  next()   },cors({       
     
     "Access-Control-Allow-Origin":(origin, callback)=>{        
         if(whitelist.indexOf(origin) > -1){
@@ -125,5 +125,5 @@ console.log('error')
 
 //Open Connection
 app.listen(process.env.PORT || 9000, ()=>{
-    console.log(`Running on Port: ${process.env.PORT || 9000}`)  
+    console.log(`Running on Port: ${process.env.PORT || 9000}`)   
 })

@@ -19,6 +19,7 @@ exports.MedicalRecord = sequelize.define('MedicalRecord', {
     coggins:DataTypes.BOOLEAN,
     rabies:DataTypes.BOOLEAN,
     yearly_vaccines:DataTypes.BOOLEAN,
+    trimmed:DataTypes.BOOLEAN,
     notes:DataTypes.TEXT,
     height:{
         type:DataTypes.DOUBLE,

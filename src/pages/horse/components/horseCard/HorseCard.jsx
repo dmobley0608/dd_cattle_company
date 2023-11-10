@@ -7,6 +7,7 @@ import { ZoomInEntranceAnimation } from '../../../../components/animations/Anima
 
 export default function HorseCard({ horse }) {
   const [image, setImage] = useState(null)
+  const [weight, setWeight] = useState(null)
   const isLoading = useSelector(selectIsLoading)
   const dispatch = useDispatch()
   const nav = useNavigate()
@@ -26,21 +27,26 @@ export default function HorseCard({ horse }) {
   }
 
 
-
+  const getHorseWeight = () =>{
+      const weightRecords = horse.MedicalRecords.filter(rec=> rec.weight > 0)
+      weightRecords.sort((a,b)=> a.id > b.id)    
+      return weightRecords[0] ?  ` ${weightRecords[0].weight} lbs` : null
+  }
 
 
 //Display random image
 useEffect(() => {
+  setWeight(getHorseWeight())
   if (!isLoading && horse.Media.length > 0) {
     let randNum = Math.floor(Math.random() * horse.Media.length)
     setImage(horse.Media[randNum].thumbnail)
 
   }
-}, [isLoading, horse.Media])
+}, [isLoading, horse.Media, weight])
 
 
 return (
-  <ZoomInEntranceAnimation id={horse.name} styles={'horse-card ' + styles['horse-card']} >
+  <ZoomInEntranceAnimation id={horse.name} styles={`${styles['horse-card']} card`  } >
     <NavLink onClick={(e) => exit(e, horse)}>
       <div className={styles['card-top']}>
         {image ? <img src={image} alt="horseImg" /> : <h3>Image Coming Soon</h3>}
@@ -51,6 +57,11 @@ return (
         {horse.hma && <h3>HMA: {horse.hma}</h3>}
         <h3>Sex: {horse.sex}</h3>
         <h3>Foal Year: {horse.birth_date.split('-')[0]}</h3>
+        <h3>Age: {new Date().getFullYear() - horse.birth_date.split('-')[0]}</h3>
+        {weight
+         ? <h3>Weight:{weight}</h3> : ''
+        }
+        
       </div>
     </NavLink>
   </ZoomInEntranceAnimation>

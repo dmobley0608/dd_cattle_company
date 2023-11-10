@@ -1,6 +1,7 @@
 .horse-card{   
-    width:300px;
-    height:400px;
+    width: 100%;
+    max-width:300px;  
+    min-height: 400px; 
     margin:10px 1em;
     padding: 10px;
     box-sizing: border-box;
@@ -49,4 +50,11 @@
 }
 .card-details{
     text-align: left;    
+}
+
+@media only screen and (max-width:702px) {
+    .horse-card{         
+       max-width: 90%;  
+    }
+   
 }

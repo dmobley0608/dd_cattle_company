@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, Outlet, NavLink } from "react-router-dom";
@@ -11,7 +11,7 @@ import MustangBrand from "./components/mustangBrand/MustangBrand";
 
 
 export default function Horse() {
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useSelector(selectIsLoading)  
   const { horseName } = useParams("horseName");
   const horse = useSelector(selectHorse)
   const dispatch = useDispatch()
@@ -34,9 +34,9 @@ export default function Horse() {
   }
   const activeStyle = ({ isActive }) => isActive ? `${styles['active']} ${styles['nav-link']}` : styles['nav-link']
 
-  useEffect(() => {
+  useEffect(() => {     
     dispatch(getHorseByName(horseName))
-  }, [dispatch, horseName])
+  }, [dispatch, horseName, horse.brand])
 
   return (
     <div className={styles["horse-page"] + " fade-in"}>

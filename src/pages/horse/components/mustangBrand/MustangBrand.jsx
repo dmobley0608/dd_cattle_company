@@ -17,7 +17,7 @@ export default function MustangBrand({ brand }) {
 
 
     const setBrandImage = useCallback(() => {
-        images[0] = brandU
+        images[0] = brandU        
         for (let i = 0; i < brand.length; i++) {
             if (brand[i] == 0) {
                 images[i + 2] = brand0
@@ -52,7 +52,7 @@ export default function MustangBrand({ brand }) {
         }
     }, [brand, images])
 
-    useEffect(() => {
+    useEffect(() => {       
         setBrandImage()
     }, [setBrandImage])
 

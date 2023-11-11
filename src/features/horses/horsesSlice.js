@@ -23,8 +23,17 @@ async(id)=>{
 
 export const getHorseByName = createAsyncThunk("getHorseByName",
 async(name)=>{
-    const horse = await ghbn(name)   
-    return horse.data
+    const result = await ghbn(name)  
+    const horse = result.data
+    if(horse.brand){
+        let zeros = 8-horse.brand.length
+        let brand = ''      
+        for(let i = zeros; i > 0; i--){
+            brand += '0'
+        }
+        horse.brand = brand + horse.brand
+    }
+    return horse
 }
 )
 //Get Horse Records By Name

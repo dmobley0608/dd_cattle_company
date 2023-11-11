@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import styles from './Horse.module.css'
 import { useSelector } from "react-redux";
 import { selectHorse } from "../../features/horses/horsesSlice";
+import MustangBrand from "./components/mustangBrand/MustangBrand";
 
 
 export default function AboutHorse() {
@@ -45,8 +46,7 @@ export default function AboutHorse() {
 
   return (
     <div className={'animate__animated animate__fadeIn ' + styles['about']}>
-      <h1>{horse.name}</h1>
-
+     
       {/* General Information */}
       <div className={styles["two-col"]}>
         <div className={`${styles["col"]} text-start`}>

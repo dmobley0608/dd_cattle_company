@@ -23,7 +23,7 @@ export default function Horses() {
         :
         <CardContainer id='card-container'>{Object.values(horses).map(horse =>
          
-            <HorseCard key={horse.id} horse={horse} />
+            <HorseCard key={horse.id} data={horse} />
           
         )}
         </CardContainer>

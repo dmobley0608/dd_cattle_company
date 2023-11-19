@@ -53,7 +53,8 @@ export const horsesSlice = createSlice({
         hasError: false,      
     },
     reducers: {
-        clearHorse: (state)=>{state.horse = {}}
+        clearHorse: (state)=>{state.horse = {}},
+        toggleIsLoading: (state)=>{state.isLoading = !state.isLoading}
         },
     extraReducers: (builder) => {
         builder
@@ -77,8 +78,7 @@ export const horsesSlice = createSlice({
 })
 
 //Actions
-export const {clearHorse} = horsesSlice.actions
-
+export const {clearHorse, toggleIsLoading} = horsesSlice.actions
 //Selectors
 export const selectAllHorses = (state) => state.horses.horses
 export const selectHorse = (state)=>state.horses.horse

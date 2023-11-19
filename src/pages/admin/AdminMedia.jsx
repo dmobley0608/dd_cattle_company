@@ -1,62 +1,64 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-import { deleteImage, uploadImage } from '../../features/horses/horsesAPI';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearHorse, getHorseById, getHorseByName, selectHorse, selectIsLoading } from '../../features/horses/horsesSlice';
+import { uploadImage } from '../../features/horses/horsesAPI';
+import {  useSelector } from 'react-redux';
+import { selectHorse} from '../../features/horses/horsesSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
 import UploadIcon from '@mui/icons-material/Upload';
 import { TextField } from '@mui/material';
+import { useAddMediaByHorseIdMutation, useDeleteMediaByIdMutation, useGetMediaByHorseIdQuery} from '../../features/horses/apiSlice';
 
 export default function AdminMedia({ user, setHorse }) {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading)
+   
   const horse = useSelector(selectHorse)
-
-
-
+  const [addMedia] = useAddMediaByHorseIdMutation()
+  const {data, isLoading:imageLoad, error} = useGetMediaByHorseIdQuery(horse.id)  
+ 
+  const [deleteMedia] = useDeleteMediaByIdMutation()
+ 
+  
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
+    e.preventDefault();  
+    //Axios image upload cleaner than redux toolkit 
     await uploadImage(horse.id, horse.name, e.target, user.token)
-      .then(async res => {
-        if (res.status === 200) {          
-          dispatch(getHorseByName(horse.name))
-          alert("Upload Successful")
-        } else {
-          alert("Error Uploading")
-        }
-      })
+    .then(async res => {
+      if (res.status === 200) {  
+        //Trigger for redux toolkit to refresh cache *** empty request        
+        addMedia({id:horse.id, name:horse.name, media:""})
+        alert("Upload Successful")
+      } else {
+        alert("Error Uploading")
+      }
+    })
 
   }
 
-  const handleDelete = async (fileId) => {
-    await deleteImage(fileId, user.token)    
-    dispatch(getHorseByName(horse.name))
+  const handleDelete = async (fileId) => {  
+      await deleteMedia(fileId, user.token)         
   }
-
-
 
 
   return (
     <div id="admin-media" >
-      {isLoading ? "loading" :
+      {error && "Error occurred"}
+      {imageLoad ? "loading" :
         <form onSubmit={handleSubmit} encType="multipart/form-data" accept="image/png, image/jpg, video/mp4">
           <TextField type='file' name='media' multiple='multiple' required />
-          <LoadingButton variant='contained' loading={isLoading} color='secondary' type='submit'><UploadIcon />Upload</LoadingButton>
+          <LoadingButton variant='contained' loading={imageLoad} color='secondary' type='submit'><UploadIcon />Upload</LoadingButton>
         </form>
       }
       <div id='media-container' >
-        {horse.Media.map(img =>
+        {(!imageLoad) ? data?.map(img =>
           <div className='media-card' key={img.fileId}>
             {img.fileType === "image" && <img src={img.thumbnail} alt="horse" />}
             {img.fileType !== "image" &&
               <video controls width='300px' height={200}>
                 <source src={`${img.url}.mp4`} />
               </video>}
-            <LoadingButton loading={isLoading} variant='contained' color='warning' type="submit" onClick={() => handleDelete(img.fileId)}>DELETE</LoadingButton>
+            <LoadingButton loading={imageLoad} variant='contained' color='warning' type="submit" onClick={() => handleDelete(img.fileId)}>DELETE</LoadingButton>
           </div>
 
-        )}
+        ):"Loading"}
       </div>
 
     </div>

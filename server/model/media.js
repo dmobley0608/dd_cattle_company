@@ -9,12 +9,13 @@ exports.Media = sequelize.define('Media', {
         type: DataTypes.STRING,
         primaryKey: true,       
     },
-    horse_id: {
+    horse_id:{
         type:DataTypes.INTEGER,
         references:{
-            model:Horses
+            model:Horses,
+            key:"id"
         }
-    },      
+    },
     url: {
         type: DataTypes.STRING
     },
@@ -22,8 +23,8 @@ exports.Media = sequelize.define('Media', {
         type: DataTypes.STRING
     },
     fileType: {
-        type: DataTypes.STRING 
-    },
+        type: DataTypes.STRING    
+    },  
     
    
    

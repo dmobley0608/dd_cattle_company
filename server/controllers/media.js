@@ -13,12 +13,10 @@ const ik = new ImageKit({
 
 exports.getMediaByHorseId = async (req, res) => {
     try {
-        const id = Number(req.params.id)
-        Horses.hasMany(Media, {
-            foreignKey: 'horse_id'
-        })
-        const media = Media.findAll({ where: { horse_id: id } })
-        return res.status(200).json(media)
+        console.log("fetching media")
+        const id = Number(req.params.id)       
+        const media = await  Media.findAll({where:{horse_id:id}})
+        res.status(200).json(media)
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
@@ -48,12 +46,14 @@ exports.getMediaByHorseId = async (req, res) => {
 }
 
 exports.uploadMedia = async (req, res) => {
+    console.log("uploading media")
+    console.log(req.body)
    let { horse_id, horse_name } = req.params
     if(horse_name.split(' ').length > 1){
         horse_name = horse_name.replace(' ', '_')
     }
     try {
-
+   
         const fs = require('fs-extra')
         const results = []
         const pathUrl = path.join(__dirname, '../uploads')
@@ -84,6 +84,7 @@ exports.uploadMedia = async (req, res) => {
         res.status(200).send(results)
 
     } catch (err) {
+        
         console.log(err)
         res.status(400).json({ error: err.message })
     }
@@ -91,15 +92,18 @@ exports.uploadMedia = async (req, res) => {
 
 exports.removeMedia = async (req, res) => {
     try {
+        console.log("removing media")
         //delete image from image kit
+        console.log(req.params.fileId)
         ik.deleteFile(req.params.fileId, async function (error, result) {
             if (error) console.log(error);
             else {
                 //delete image from database
                 await Media.destroy({ where: { fileId: req.params.fileId } })
+                .then(x=> res.status(200).json({message:"Successfully Deleted Image"}))
             };
         });
-        res.status(200).json("Successfully Deleted Image")
+       
     } catch (err) {
         res.status(500).json("Error Deleting Image")
     }

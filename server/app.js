@@ -73,7 +73,6 @@ app.use(passport.authenticate('session'))
 
 //Sequelize
 Horses.hasMany(Media, {foreignKey:'horse_id'})
-Media.belongsTo(Horses, {keyType:'horse_id'})
 Horses.hasMany(MedicalRecord, {foreignKey:'horse_id'})
 Horses.hasMany(RidingLog, {foreignKey:"horse_id"})
 

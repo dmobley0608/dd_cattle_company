@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useParams, Outlet, NavLink } from "react-router-dom";
@@ -36,7 +36,7 @@ export default function Horse() {
 
   useEffect(() => {     
     dispatch(getHorseByName(horseName))
-  }, [dispatch, horseName, horse.brand])
+  }, [dispatch, horseName])
 
   return (
     <div className={styles["horse-page"] + " fade-in"}>

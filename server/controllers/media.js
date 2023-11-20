@@ -2,7 +2,7 @@ const ImageKit = require("imagekit");
 const path = require("path")
 const { Horses } = require('../model/horses');
 const { Media } = require('../model/media');
-
+const fs = require('fs-extra')
 
 
 const ik = new ImageKit({
@@ -14,17 +14,17 @@ const ik = new ImageKit({
 exports.getMediaByHorseId = async (req, res) => {
     try {
         console.log("fetching media")
-        const id = Number(req.params.id)       
-        const media = await  Media.findAll({where:{horse_id:id}})
+        const id = Number(req.params.id)
+        const media = await Media.findAll({ where: { horse_id: id } })
         res.status(200).json(media)
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
-    // const horses = await Horses.findAll();   
+    // const horses = await Horses.findAll();
     // for (let horse of horses) {
     //     const media = ik.listFiles({
     //         tags: horse.name,
-    //         limit: 200 
+    //         limit: 200
     //     }, async (err, result) => {
     //         if (result.length > 0) {
 
@@ -37,24 +37,25 @@ exports.getMediaByHorseId = async (req, res) => {
     //                         fileType: data.fileType,
     //                         fileId: data.fileId
     //                     })
-    //                                }
+    //             }
     //         }
 
     //     })
     // }
     // res.json("finished")
+
 }
 
 exports.uploadMedia = async (req, res) => {
     console.log("uploading media")
-    console.log(req.body)
-   let { horse_id, horse_name } = req.params
-    if(horse_name.split(' ').length > 1){
+
+    let { horse_id, horse_name } = req.params
+    if (horse_name.split(' ').length > 1) {
         horse_name = horse_name.replace(' ', '_')
     }
     try {
-   
-        const fs = require('fs-extra')
+
+
         const results = []
         const pathUrl = path.join(__dirname, '../uploads')
         fs.readdir(pathUrl, async (err, files) => {
@@ -68,11 +69,13 @@ exports.uploadMedia = async (req, res) => {
                         tags: [horse_name],
                         folder: `ddc/${horse_name}`
                     }, (err, result) => {
-                        console.log(err)
+                       
                         if (!err) {
                             Media.create({ horse_id: horse_id, thumbnail: result.thumbnailUrl, ...result })
                             fs.rm(`./uploads/${file}`, () => { console.log(`Removing ${file}`) })
                             results.push(result)
+                        }else{
+                            console.log(err)
                         }
                     })
                 })
@@ -81,13 +84,24 @@ exports.uploadMedia = async (req, res) => {
             }
         })
 
-        res.status(200).send(results)
+        res.status(200).send(results) 
 
     } catch (err) {
-        
+
         console.log(err)
         res.status(400).json({ error: err.message })
     }
+}
+
+exports.emptyUploadsFolder = async (req, res, next) => {
+    const pathUrl = path.join(__dirname, '../uploads')
+    fs.readdir(pathUrl, async (err, files) => {
+        if (err) throw err
+        for (const file of files) {
+            fs.rm(`./uploads/${file}`, () => { console.log(`Removing ${file}`) })
+        }
+    }) 
+    next()
 }
 
 exports.removeMedia = async (req, res) => {
@@ -100,10 +114,10 @@ exports.removeMedia = async (req, res) => {
             else {
                 //delete image from database
                 await Media.destroy({ where: { fileId: req.params.fileId } })
-                .then(x=> res.status(200).json({message:"Successfully Deleted Image"}))
+                    .then(x => res.status(200).json({ message: "Successfully Deleted Image" }))
             };
         });
-       
+
     } catch (err) {
         res.status(500).json("Error Deleting Image")
     }

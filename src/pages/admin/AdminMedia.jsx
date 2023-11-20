@@ -1,15 +1,15 @@
 import React from 'react'
 
 import { uploadImage } from '../../features/horses/horsesAPI';
-import {  useSelector } from 'react-redux';
-import { selectHorse} from '../../features/horses/horsesSlice';
+import {  useDispatch, useSelector } from 'react-redux';
+import { selectHorse, toggleIsLoading} from '../../features/horses/horsesSlice';
 import LoadingButton from '@mui/lab/LoadingButton';
 import UploadIcon from '@mui/icons-material/Upload';
 import { TextField } from '@mui/material';
 import { useAddMediaByHorseIdMutation, useDeleteMediaByIdMutation, useGetMediaByHorseIdQuery} from '../../features/horses/apiSlice';
 
 export default function AdminMedia({ user, setHorse }) {
-   
+   const dispatch = useDispatch()
   const horse = useSelector(selectHorse)
   const [addMedia] = useAddMediaByHorseIdMutation()
   const {data, isLoading:imageLoad, error} = useGetMediaByHorseIdQuery(horse.id)  
@@ -19,7 +19,9 @@ export default function AdminMedia({ user, setHorse }) {
   
   const handleSubmit = async (e) => {
     e.preventDefault();  
-    //Axios image upload cleaner than redux toolkit 
+    dispatch(toggleIsLoading())
+  
+    // Axios image upload cleaner than redux toolkit 
     await uploadImage(horse.id, horse.name, e.target, user.token)
     .then(async res => {
       if (res.status === 200) {  
@@ -30,7 +32,7 @@ export default function AdminMedia({ user, setHorse }) {
         alert("Error Uploading")
       }
     })
-
+    dispatch(toggleIsLoading())
   }
 
   const handleDelete = async (fileId) => {  
@@ -41,7 +43,7 @@ export default function AdminMedia({ user, setHorse }) {
   return (
     <div id="admin-media" >
       {error && "Error occurred"}
-      {imageLoad ? "loading" :
+      {imageLoad ? "" :
         <form onSubmit={handleSubmit} encType="multipart/form-data" accept="image/png, image/jpg, video/mp4">
           <TextField type='file' name='media' multiple='multiple' required />
           <LoadingButton variant='contained' loading={imageLoad} color='secondary' type='submit'><UploadIcon />Upload</LoadingButton>

@@ -12,7 +12,7 @@ export const api = createApi({
                
             },),
         addMediaByHorseId: builder.mutation({
-            queryFn:({...body})=>({
+            query:({...body})=>({
                 url:`media/${body.id}/${body.name}`,
                 method:"POST",
                 invalidatesTags:['Media'],

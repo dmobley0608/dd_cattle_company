@@ -20,9 +20,10 @@ export default function HorseGallery() {
 
   useEffect(() => {
     if (mediaType === 'images') {
-      setMedia(() => horse.Media.filter(img => img.fileType === 'image'))
+      setMedia(() => horse.Media.filter(img => img.fileType === 'image').sort((a,b)=>(b.id - a.id)))
+      console.log(media)
     } else {
-      setMedia(() => horse.Media.filter(img => img.fileType !== 'image'))
+      setMedia(() => horse.Media.filter(img => img.fileType !== 'image').sort((a,b)=>(b.id - a.id)))
     }
 
   }, [mediaType, horse.Media])

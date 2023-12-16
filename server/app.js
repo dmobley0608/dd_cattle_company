@@ -18,7 +18,7 @@ const { MedicalRecord } = require('./model/medical_record');
 const {RidingLog} = require('./model/riding_log');
 const { login } = require('./controllers/user');
 const { User } = require('./model/user');   
- 
+  
 const app = express();
 app.use(express.static(path.join(__dirname, "..", "build")));  
 app.use(express.static("public"));

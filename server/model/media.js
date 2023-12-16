@@ -5,9 +5,13 @@ const { sequelize } = require("../utils/sequelize");
 const { Horses } = require("./horses");
 
 exports.Media = sequelize.define('Media', {
+
     fileId: {
         type: DataTypes.STRING,
         primaryKey: true,       
+    },
+    id:{
+        type:DataTypes.INTEGER,       
     },
     horse_id:{
         type:DataTypes.INTEGER,

@@ -15,7 +15,7 @@ exports.getAllHorses = async(req, res)=>{
                 MedicalRecord,
                 RidingLog
             ], 
-             order:[['name', 'ASC'],[MedicalRecord, 'date', 'DESC']], 
+             order:[['name', 'ASC'],[MedicalRecord, 'date', 'DESC'],[Media, 'id', 'DESC']], 
             logging:false
         })
        
@@ -39,7 +39,7 @@ exports.getHorseById = async(req, res)=>{
                 Media, 
                 MedicalRecord
             ], 
-             order:[[MedicalRecord, 'date', 'DESC']], 
+             order:[[MedicalRecord, 'date', 'DESC'],[Media, 'id', 'DESC']],  
             logging:false
         })
         if(!horse)return res.status(404).json('Horse not found')

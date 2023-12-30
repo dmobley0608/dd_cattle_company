@@ -15,15 +15,15 @@ export default function HorseCard({ data }) {
   const exit = (e, horse) => {
     const selectedCard = document.querySelector(`#${horse.name}`)
     selectedCard.classList.remove('animate__animated', 'animate__zoomIn')
-    selectedCard.classList.add('animate__animated', 'animate__hinge')
+    selectedCard.classList.add('animate__animated', 'animate__rotateOut','animate__fadeOut')
     setTimeout(() => {
       document.querySelector('#card-container')
         .classList.add('animate__animated', 'animate__fadeOut')
-    }, 1800)
+    }, 500)
     setTimeout(() => {
       dispatch(getHorseByName(horse.name))
       nav(`${horse.name}/about`)
-    }, 2500)
+    }, 600)
   }
 
 

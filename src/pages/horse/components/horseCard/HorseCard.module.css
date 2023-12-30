@@ -9,6 +9,7 @@
     overflow: hidden;
     background-color: antiquewhite;    
     transition: transform .25s;
+    box-shadow: 5px 5px 5px black;
 }
 
 .horse-card a{
@@ -54,7 +55,7 @@
 
 @media only screen and (max-width:702px) {
     .horse-card{         
-       max-width: 90%;  
+       max-width: 100%;  
     }
    
 }

@@ -4,7 +4,7 @@
     flex-wrap: wrap;   
     justify-content: flex-start;
     padding: 0 12px;
-    max-width: 1144px;     
+    max-width: 1144px;       
 }
 
 @media only screen and (max-width:1050px) {
@@ -17,14 +17,13 @@
 
 @media only screen and (max-width:702px) {
     .card-container{       
-       width: 100%;    
+       max-width: 100%;    
     }
   
 }
 
 @media only screen and (max-width:678px) {
-    .card-container{  
-        width: 100%;        
+    .card-container{                 
        justify-content: center;  
     }
     

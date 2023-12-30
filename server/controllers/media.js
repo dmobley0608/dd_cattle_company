@@ -95,7 +95,7 @@ const emptyUploadsFolder = async (req, res, next) => {
     fs.readdir(pathUrl, async (err, files) => {
         if (err) throw err
         for (const file of files) {
-            fs.rm(`./uploads/${file}`, () => { console.log(`Removing ${file}`) })
+           fs.rm(`../uploads/${file}`, () => { console.log(`Removing ${file}`) })
         }
     })
   

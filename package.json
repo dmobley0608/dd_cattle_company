@@ -31,6 +31,7 @@
     "scripts": {
         "heroku-prebuild": "npm install && cd server && npm install",
         "start-client": "react-scripts start",
+        "start-server": "cd server && nodemon app.js",
         "start": "npm run build && cd server && npm start",
         "dev": "npm run build && cd server && npm install && nodemon app.js",
         "build": "react-scripts build",

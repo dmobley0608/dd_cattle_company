@@ -47,15 +47,13 @@ exports.getMediaByHorseId = async (req, res) => {
 }
 
 exports.uploadMedia = async (req, res) => {
-    console.log("uploading media")
-
+    console.log("uploading media")    
     let { horse_id, horse_name } = req.params
     if (horse_name.split(' ').length > 1) {
         horse_name = horse_name.replace(' ', '_')
     }
     try {
-
-
+        await emptyUploadsFolder()
         const results = []
         const pathUrl = path.join(__dirname, '../uploads')
         fs.readdir(pathUrl, async (err, files) => {
@@ -69,12 +67,12 @@ exports.uploadMedia = async (req, res) => {
                         tags: [horse_name],
                         folder: `ddc/${horse_name}`
                     }, (err, result) => {
-                       
+
                         if (!err) {
                             Media.create({ horse_id: horse_id, thumbnail: result.thumbnailUrl, ...result })
                             fs.rm(`./uploads/${file}`, () => { console.log(`Removing ${file}`) })
                             results.push(result)
-                        }else{
+                        } else {
                             console.log(err)
                         }
                     })
@@ -84,24 +82,23 @@ exports.uploadMedia = async (req, res) => {
             }
         })
 
-        res.status(200).send(results) 
-
+        res.status(200).send(results)
     } catch (err) {
-
         console.log(err)
         res.status(400).json({ error: err.message })
     }
 }
 
-exports.emptyUploadsFolder = async (req, res, next) => {
+const emptyUploadsFolder = async (req, res, next) => {
+    console.log("deleting content from uploads folder")
     const pathUrl = path.join(__dirname, '../uploads')
     fs.readdir(pathUrl, async (err, files) => {
         if (err) throw err
         for (const file of files) {
             fs.rm(`./uploads/${file}`, () => { console.log(`Removing ${file}`) })
         }
-    }) 
-    next()
+    })
+  
 }
 
 exports.removeMedia = async (req, res) => {

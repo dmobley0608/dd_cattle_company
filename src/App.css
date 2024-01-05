@@ -77,7 +77,13 @@ body{
  flex-direction: column;  
 }
 
+.btn-container{
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Text Format */
 .text-start{
   text-align: left;
 }
+

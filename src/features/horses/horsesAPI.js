@@ -17,3 +17,4 @@ export const deleteImage = async(asset_id, token)=>await apiClient.delete(`/medi
 
 export const addRidingRecord = async(horse_id, ridingLog)=>await apiClient.post(`/journal/${horse_id}`, ridingLog)
 export const deleteRidingRecord = async(recordId)=>await apiClient.delete(`/journal/${recordId}`)
+export const editRidingRecord = async(recordId, ridingLog)=>await apiClient.put(`/journal/${recordId}`, ridingLog)

@@ -23,6 +23,25 @@ exports.addRidingLog = async(req, res)=>{
     }
 }
 
+exports.editRidingLog = async(req, res)=>{    
+    try{
+        if(req.user){
+        const record = await RidingLog.findByPk(req.params.id)
+        if(!record) return res.status(404).json("record not found")
+        if(record.author === req.user.username || req.user.role === 'admin'){           
+            await RidingLog.update({...record, notes:req.body.notes}, {where:{id:req.params.id}})
+            res.status(200).json("Record updated successfully")
+        }else{
+            res.status(403).json("You do not have permission to edit this record")
+        }
+    }else{
+        res.status(403).json("You must be the record owner or an admin to edit this record.")
+    }
+    }catch(err){
+        res.status(500).json(err.message)
+    }
+}
+
 exports.deleteRidingLog = async(req, res)=>{    
     try{
         if(req.user){

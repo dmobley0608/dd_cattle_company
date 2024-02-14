@@ -6,12 +6,15 @@ import styles from "./Horse.module.css";
 import Loading from "../../components/loading/Loading";
 import { getHorseByName, selectHorse, selectIsLoading } from "../../features/horses/horsesSlice";
 import MustangBrand from "./components/mustangBrand/MustangBrand";
+import AboutHorse from "./AboutHorse";
+import HorseGallery from "./HorseGallery";
+import HorseJournal from "./HorseJournal";
 
 
 
 
 export default function Horse() {
-  const isLoading = useSelector(selectIsLoading)  
+  const isLoading = useSelector(selectIsLoading)
   const { horseName } = useParams("horseName");
   const horse = useSelector(selectHorse)
   const dispatch = useDispatch()
@@ -34,7 +37,7 @@ export default function Horse() {
   }
   const activeStyle = ({ isActive }) => isActive ? `${styles['active']} ${styles['nav-link']}` : styles['nav-link']
 
-  useEffect(() => {     
+  useEffect(() => {
     dispatch(getHorseByName(horseName))
   }, [dispatch, horseName])
 
@@ -42,21 +45,13 @@ export default function Horse() {
     <div className={styles["horse-page"] + " fade-in"}>
       {!isLoading ? (
         <>
-          <nav onMouseLeave={handleExit}>
-            <NavLink className={activeStyle} to="about">About</NavLink>
-            <NavLink id='gallery-nav' onMouseOver={handleHover} className={activeStyle} to="gallery/images">Gallery</NavLink>
-            <NavLink className={activeStyle} to="journal">Riding Journal</NavLink>
-            <div>
-              <ul className={styles["sub-menu"]} onMouseOver={handleHover} onMouseLeave={handleExit} >
-                <NavLink className={styles['nav-link']} to={`/horses/${horse.name}/gallery/images`}>Images</NavLink>
-                <NavLink className={styles['nav-link']} to={`/horses/${horse.name}/gallery/videos`}>Videos</NavLink>
-              </ul>
-            </div>
-          </nav>
           <div className={styles['horse-container']}>
             <h1>{horse.name}</h1>
             {horse.brand && <MustangBrand brand={horse.brand} />}
-            <Outlet />
+            <AboutHorse />
+            <hr/>
+            <HorseGallery horse={horse}/>
+            <HorseJournal />
           </div>
 
         </>
